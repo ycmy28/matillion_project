@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interactions Pipeline Documentation</title>
+<style>
+body { font-family: Arial, Helvetica, sans-serif; line-height: 1.5; margin: 40px auto; max-width: 1100px; padding: 0 24px; color: #1f2937; }
+h1, h2, h3 { color: #0f172a; }
+h1 { border-bottom: 3px solid #cbd5e1; padding-bottom: 12px; }
+h2 { margin-top: 36px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+pre { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; overflow-x: auto; white-space: pre-wrap; }
+code { font-family: Menlo, Consolas, monospace; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 24px; font-size: 14px; }
+th, td { border: 1px solid #d1d5db; text-align: left; padding: 10px; vertical-align: top; }
+th { background: #f3f4f6; }
+ul { margin: 8px 0 16px 24px; }
+p { margin: 10px 0; }
+hr { border: 0; border-top: 1px solid #d1d5db; margin: 28px 0; }
+</style>
+</head>
+<body>
+<h1>Interactions Data Pipeline Documentation</h1><p>End-to-End Pipeline: DCE2 Interaction Harmonization to Snowflake Presentation Layer</p>
+<h2>Table of Contents</h2><p>1. Pipeline Overview</p><p>2. Architecture</p><p>3. Master Pipeline</p><p>4. Ingestion Layer</p><p>5. Integration Layer (INT)</p><p>6. MDE Transformation Logic</p><p>7. TDE Transformation Logic</p><p>8. Presentation Layer (PL)</p><p>9. Data Flow</p><p>10. Configuration</p><p>11. Error Handling</p><p>12. Tables and Views</p><p>13. Business Use Cases</p><p>14. Dependencies</p><p>15. Maintenance and Operations</p><p>16. Contact and Support</p>
+<hr>
+<h2>Pipeline Overview</h2>
+<p>Pipeline Name: orc_master_e2e_dce2_lz_pipeline</p><p>Source System: DCE2 interaction data in Snowflake staging</p><p>Target System: Snowflake presentation layer</p><p>Data Domain: Consumer interactions / engagement events</p>
+<h3>Purpose</h3><p>This pipeline harmonizes DCE2 interaction data from staging into curated integration views and presentation-layer tables. The documented scope covers interaction facts plus related detail entities used to analyze how consumers engage across channels and supporting interaction objects.</p>
+<p>The pipeline produces:</p><ul><li>A consolidated interaction table for TDE reporting</li><li>Interaction detail tables for MDE analysis:</li><li>Device</li><li>Flavour</li><li>Product</li><li>Voucher</li><li>Unit-test orchestration jobs for each published object</li></ul>
+<h3>Pipeline Scope Captured in the Export</h3><p>The Interactions_matillion.json export clearly includes:</p><ul><li>The master orchestration entry point</li><li>Integration transformation jobs</li><li>Presentation harmonization jobs</li><li>Unit-test jobs</li></ul>
+<p>The export does not expose the same level of ingestion internals as the Google Analytics package, so the ingestion section below is intentionally documented at a higher level.</p>
+<hr>
+<h2>Architecture</h2>
+<h3>Layer Structure</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                    MASTER PIPELINE                              │
+│                orc_master_e2e_dce2_lz_pipeline                  │
+└──────────────────────┬──────────────────────────────────────────┘
+                       │
+        ┌──────────────┴──────────────┐
+        │                             │
+        ▼                             ▼
+┌───────────────────┐      ┌──────────────────────────┐
+│  INGESTION FLOW   │      │   HARMONIZATION LAYER    │
+│  (LZ/STG load)    │      │   (INT -&gt; PL)            │
+└───────────────────┘      └──────────────────────────┘
+                                      │
+                          ┌───────────┴───────────┐
+                          │                       │
+                          ▼                       ▼
+                    ┌────────────┐         ┌────────────┐
+                    │INTEGRATION │         │PRESENTATION│
+                    │   (INT)    │         │   (PL)     │
+                    └────────────┘         └────────────┘</code></pre>
+<h3>Data Layers</h3>
+<table><tr><th>Layer</th><th>Database</th><th>Schema</th><th>Purpose</th></tr><tr><td>Staging</td><td>${ev_database_10_staging}</td><td>STG_DCE2</td><td>Raw interaction objects loaded for processing</td></tr><tr><td>Integration</td><td>${ev_database_20_integration}</td><td>${ev_data_foundation_schema_20_integration}</td><td>Standardized interaction views</td></tr><tr><td>Presentation</td><td>${ev_database_30_presentation}</td><td>PL_INTERACTION</td><td>Business-ready SCD2-style curated tables</td></tr><tr><td>DQ Support</td><td>${ev_database_30_presentation}</td><td>PL_COMMON_LAYER_DQ</td><td>Data-quality companion targets referenced by create-table jobs</td></tr></table>
+<hr>
+<h2>Master Pipeline</h2>
+<h3>File Location</h3>
+<pre><code>ROOT/01_PIPELINE_ORC/01_MASTER_PIPELINE/CONS_DCE2_LZ_PIPELINE/
+└── orc_master_e2e_dce2_lz_pipeline.ORCHESTRATION</code></pre>
+<h3>Pipeline Flow</h3>
+<pre><code>Start
+  │
+  ├─► Query Tag Start
+  │     └─ ALTER SESSION SET query_tag = &#x27;${job_name}-${run_history_id}&#x27;
+  │
+  ├─► DISP Ingestion - CONS 1
+  │     ├─ jv_source_name = dce2
+  │     ├─ jv_output_tenant_name = edp_consumer
+  │     └─ triggers downstream harmonization based on ingestion outcomes
+  │
+  ├─► orc_harmonization_rde_bridge_consumer_rls 0
+  │     └─ additional harmonization/bridge step referenced by the master job
+  │
+  └─► Task History Load
+        └─ logs execution status and completes the run</code></pre>
+<h3>Key Observations</h3>
+<ul><li>The master job sets a Snowflake query tag for traceability.</li><li>It dispatches ingestion through a reusable orchestrator component.</li><li>It finishes with task-history logging.</li><li>The detailed per-table ingestion logic is not fully expanded in this export, unlike the Google Analytics export.</li></ul>
+<hr>
+<h2>Ingestion Layer</h2>
+<h3>What Is Visible in the Export</h3>
+<p>The master orchestration contains a component named DISP Ingestion - CONS 1 with:</p><ul><li>jv_source_name = dce2</li><li>jv_output_tenant_name = edp_consumer</li><li>jv_process_table available for scoped execution</li><li>gv_trigger_harmonization as a downstream trigger grid</li></ul>
+<h3>Inferred Ingestion Role</h3>
+<p>Based on the orchestration metadata, the ingestion layer appears to:</p><ul><li>Load DCE2 interaction entities into staging</li><li>Drive harmonization by passing downstream orchestration mappings</li><li>Support selective processing by source table or object</li></ul>
+<h3>Staging Objects Used by the Interactions Package</h3>
+<p>The integration transformations read from these staging tables in STG_DCE2:</p><ul><li>T_DCE2_INTERACTION</li><li>T_DCE2_INTERACTION_DEVICE</li><li>T_DCE2_INTERACTION_FLAVOUR</li><li>T_DCE2_INTERACTION_PRODUCT</li><li>T_DCE2_INTERACTION_VOUCHER</li></ul>
+<hr>
+<h2>Integration Layer (INT)</h2>
+<h3>File Location</h3>
+<pre><code>ROOT/02_DATA_WAREHOUSE/02_INTEGRATION/DCE2/INTERACTIONS/
+├── MDE/
+│   ├── trn_v_int_mde_consumer_interaction_device.TRANSFORMATION
+│   ├── trn_v_int_mde_consumer_interaction_flavour.TRANSFORMATION
+│   ├── trn_v_int_mde_consumer_interaction_product.TRANSFORMATION
+│   └── trn_v_int_mde_consumer_interaction_voucher.TRANSFORMATION
+└── TDE/
+    └── trn_v_int_tde_consumer_interaction.TRANSFORMATION</code></pre>
+<h3>Integration Job Inventory</h3>
+<table><tr><th>Category</th><th>Transformation Job</th><th>Staging Source</th><th>Integration Output</th></tr><tr><td>MDE</td><td>trn_v_int_mde_consumer_interaction_device</td><td>STG_DCE2.T_DCE2_INTERACTION_DEVICE</td><td>V_INT_MDE_CONSUMER_INTERACTION_DEVICE</td></tr><tr><td>MDE</td><td>trn_v_int_mde_consumer_interaction_flavour</td><td>STG_DCE2.T_DCE2_INTERACTION_FLAVOUR</td><td>V_INT_MDE_CONSUMER_INTERACTION_FLAVOUR</td></tr><tr><td>MDE</td><td>trn_v_int_mde_consumer_interaction_product</td><td>STG_DCE2.T_DCE2_INTERACTION_PRODUCT</td><td>V_INT_MDE_CONSUMER_INTERACTION_PRODUCT</td></tr><tr><td>MDE</td><td>trn_v_int_mde_consumer_interaction_voucher</td><td>STG_DCE2.T_DCE2_INTERACTION_VOUCHER</td><td>V_INT_MDE_CONSUMER_INTERACTION_VOUCHER</td></tr><tr><td>TDE</td><td>trn_v_int_tde_consumer_interaction</td><td>STG_DCE2.T_DCE2_INTERACTION</td><td>V_INT_TDE_CONSUMER_INTERACTION</td></tr></table>
+<h3>Common Transformation Pattern</h3>
+<p>All five interaction transformations follow the same core pattern:</p>
+<pre><code>Staging Table Input
+  │
+  ├─► Filter - Bad Data Quality
+  ├─► Add Tmp Columns for Historization
+  ├─► Calculator - column transformations
+  ├─► Select Column
+  └─► View creation in integration schema</code></pre>
+<h3>Shared Transformation Controls</h3>
+<p>Each transformation uses:</p><ul><li>Scalar variable: jv_source_table</li><li>Grid variables:</li><li>gv_calculator</li><li>gv_table_input_column_list</li></ul>
+<p>This indicates a metadata-driven pattern where column lists and output mappings are controlled through Matillion grids rather than hard-coded component definitions.</p>
+<h3>PowerDesigner-Aligned Transformation Rules</h3>
+<p>The PowerDesigner physical model adds several implementation details that are only implicit in the Matillion JSON:</p><ul><li>Source staging tables are documented as physical inputs under DB_CONS_STG_PRD.STG_DCE2</li><li>All five published objects are modeled as SCD2</li><li>All five published objects are documented with Load type: DELTA</li><li>Every object applies a timestamp quality rule before publication:</li><li>TRY_TO_TIMESTAMP_NTZ(date_time) &lt;= __LOAD_TS OR TRY_TO_TIMESTAMP_NTZ(date_time) IS NULL</li><li>Every object derives VALID_FROM with the same general rule:</li><li>use INTERACTION_DATETIME when it is present and the row is the surviving duplicate candidate</li><li>otherwise fall back to __LOAD_TS</li><li>Every object uses duplicate handling based on:</li><li>COUNT(*) OVER (...) AS dup_cnt</li><li>ROW_NUMBER() OVER (... ORDER BY __load_ts ASC) AS rn_by_load_ts</li></ul>
+<h3>Historization and Deduplication Logic</h3>
+<p>The model shows a consistent historization pattern across all interaction entities:</p>
+<pre><code>1. Read from staging table in STG_DCE2
+2. Parse interaction timestamp with TRY_TO_TIMESTAMP_NTZ(date_time)
+3. Exclude records where business timestamp is after ingestion timestamp
+4. Partition by object business keys plus interaction timestamp
+5. Compute duplicate count and earliest-load row number
+6. Set VALID_FROM to interaction timestamp when usable
+7. Otherwise set VALID_FROM to __LOAD_TS
+8. Publish as SCD2-ready output with VALID_FROM / VALID_TO / ACTIVE_FLAG</code></pre>
+<h3>Row-Level Security Pattern</h3>
+<p>The PowerDesigner report also documents an RLS pattern for the presentation objects:</p><ul><li>RLS is implemented through country-based filtering</li><li>RLS uses MDE_GIGYA_CONSUMER as the consumer alignment object</li><li>The join condition aligns records by IDENTITY_UNIQUE_IDENTIFIER_BK and validity window</li><li>Access is granted when either the consumer country or the interaction country matches #RLS_LIST_OF_COUNTRIES</li></ul>
+<hr>
+<h2>MDE Transformation Logic</h2>
+<p>The MDE layer publishes interaction detail entities that enrich the primary interaction event with lower-grain supporting attributes.</p>
+<h3>1. Device Interaction View</h3>
+<p>Job: trn_v_int_mde_consumer_interaction_device</p><p>Output: V_INT_MDE_CONSUMER_INTERACTION_DEVICE</p>
+<p>PowerDesigner model details:</p><ul><li>Physical source: DB_CONS_STG_PRD.STG_DCE2.T_DCE2_INTERACTION_DEVICE</li><li>Source-to-target key mapping:</li><li>identity_unique_identifier -&gt; IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>interaction_id -&gt; INTERACTION_IDENTIFIER_BK</li><li>devices_device_id -&gt; DEVICE_IDENTIFIER_BK</li><li>Duplicate partition:</li><li>identity_unique_identifier, interaction_id, devices_device_id, date_time</li><li>Historization type: SCD2</li><li>Load type: DELTA</li><li>Target schema: PL_INTERACTION</li></ul>
+<p>Key mapped columns include:</p><ul><li>DEVICE_IDENTIFIER_BK</li><li>IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>INTERACTION_IDENTIFIER_BK</li><li>BRAND_FAMILY_NAME</li><li>COUNTRY_CODE</li><li>DEVICE_DESCRIPTION</li><li>DEVICE_TYPE</li><li>DEVICE_VERSION</li><li>INTERACTION_DATETIME</li><li>VALID_FROM</li><li>VALID_TO</li><li>ACTIVE_FLAG</li></ul>
+<p>Additional model-backed notes:</p><ul><li>INTERACTION_DATETIME is derived from TRY_TO_TIMESTAMP_NTZ(d.date_time)</li><li>VALID_FROM uses INTERACTION_DATETIME when the row is valid and selected as the surviving duplicate, otherwise d.__load_ts</li><li>The physical table is modeled with a non-enforced primary key on DEVICE_IDENTIFIER_BK, IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK</li></ul>
+<h3>2. Flavour Interaction View</h3>
+<p>Job: trn_v_int_mde_consumer_interaction_flavour</p><p>Output: V_INT_MDE_CONSUMER_INTERACTION_FLAVOUR</p>
+<p>PowerDesigner model details:</p><ul><li>Physical source: DB_CONS_STG_PRD.STG_DCE2.T_DCE2_INTERACTION_FLAVOUR</li><li>Source-to-target key mapping:</li><li>identity_unique_identifier -&gt; IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>interaction_id -&gt; INTERACTION_IDENTIFIER_BK</li><li>flavours_flavour_refcode -&gt; FLAVOUR_REFERENCE_CODE_BK</li><li>Duplicate partition:</li><li>identity_unique_identifier, interaction_id, flavours_flavour_refcode, date_time</li><li>Historization type: SCD2</li><li>Load type: DELTA</li><li>Target schema: PL_INTERACTION</li></ul>
+<p>Key mapped columns include:</p><ul><li>FLAVOUR_REFERENCE_CODE_BK</li><li>IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>INTERACTION_IDENTIFIER_BK</li><li>COUNTRY_CODE</li><li>FLAVOUR_REFERENCE_NAME</li><li>INTERACTION_DATETIME</li><li>VALID_FROM</li><li>VALID_TO</li><li>ACTIVE_FLAG</li></ul>
+<p>Additional model-backed notes:</p><ul><li>FLAVOUR_REFERENCE_NAME comes from flavours_flavour_refname</li><li>VALID_FROM uses the shared timestamp-or-load-ts rule</li><li>The physical table is modeled with a non-enforced primary key on FLAVOUR_REFERENCE_CODE_BK, IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK</li></ul>
+<h3>3. Product Interaction View</h3>
+<p>Job: trn_v_int_mde_consumer_interaction_product</p><p>Output: V_INT_MDE_CONSUMER_INTERACTION_PRODUCT</p>
+<p>PowerDesigner model details:</p><ul><li>Physical source: DB_CONS_STG_PRD.STG_DCE2.T_DCE2_INTERACTION_PRODUCT</li><li>Source-to-target key mapping:</li><li>identity_unique_identifier -&gt; IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>interaction_id -&gt; INTERACTION_IDENTIFIER_BK</li><li>products_product_id -&gt; PRODUCT_IDENTIFIER_BK</li><li>Duplicate partition:</li><li>identity_unique_identifier, interaction_id, products_product_id, date_time</li><li>Historization type: SCD2</li><li>Load type: DELTA</li><li>Target schema: PL_INTERACTION</li></ul>
+<p>Key mapped columns include:</p><ul><li>IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>INTERACTION_IDENTIFIER_BK</li><li>PRODUCT_IDENTIFIER_BK</li><li>COUNTRY_CODE</li><li>INTERACTION_DATETIME</li><li>PRODUCT_NAME</li><li>VALID_FROM</li><li>VALID_TO</li><li>ACTIVE_FLAG</li></ul>
+<p>Additional model-backed notes:</p><ul><li>PRODUCT_NAME comes from products_product_name</li><li>PRODUCT_IDENTIFIER_BK is documented in the model as a derived asset identifier that can align with product code usage in downstream reporting</li><li>The physical table is modeled with a non-enforced primary key on IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK, PRODUCT_IDENTIFIER_BK</li></ul>
+<h3>4. Voucher Interaction View</h3>
+<p>Job: trn_v_int_mde_consumer_interaction_voucher</p><p>Output: V_INT_MDE_CONSUMER_INTERACTION_VOUCHER</p>
+<p>PowerDesigner model details:</p><ul><li>Physical source: DB_CONS_STG_PRD.STG_DCE2.T_DCE2_INTERACTION_VOUCHER</li><li>Source-to-target key mapping:</li><li>identity_unique_identifier -&gt; IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>interaction_id -&gt; INTERACTION_IDENTIFIER_BK</li><li>vouchers_voucher_id -&gt; VOUCHER_IDENTIFIER_BK</li><li>Duplicate partition:</li><li>identity_unique_identifier, interaction_id, vouchers_voucher_id, date_time</li><li>Historization type: SCD2</li><li>Load type: DELTA</li><li>Target schema: PL_INTERACTION</li></ul>
+<p>Key mapped columns include:</p><ul><li>IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>INTERACTION_IDENTIFIER_BK</li><li>VOUCHER_IDENTIFIER_BK</li><li>COUNTRY_CODE</li><li>INTERACTION_DATETIME</li><li>VOUCHER_AMOUNT</li><li>VOUCHER_NAME</li><li>VALID_FROM</li><li>VALID_TO</li><li>ACTIVE_FLAG</li></ul>
+<p>Additional model-backed notes:</p><ul><li>VOUCHER_AMOUNT is physically modeled as DECIMAL(38,5)</li><li>The model documents a left join variant to MDE_GIGYA_CONSUMER in the voucher RLS section</li><li>The physical table is modeled with a non-enforced primary key on IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK, VOUCHER_IDENTIFIER_BK</li></ul>
+<h3>Shared MDE Security Pattern</h3>
+<p>The physical model documents an RLS sharing pattern for MDE outputs:</p><ul><li>DEVICE, FLAVOUR, and PRODUCT use an inner join to MDE_GIGYA_CONSUMER</li><li>VOUCHER uses a left join in the documented sharing script</li><li>Validity alignment is based on VALID_FROM &gt;= c.VALID_FROM and VALID_FROM &lt; c.VALID_TO</li><li>Country filtering checks both consumer country and object country</li></ul>
+<hr>
+<h2>TDE Transformation Logic</h2>
+<h3>Core Interaction View</h3>
+<p>Job: trn_v_int_tde_consumer_interaction</p><p>Output: V_INT_TDE_CONSUMER_INTERACTION</p>
+<p>This transformation creates the consolidated interaction view used by the presentation-layer interaction fact-like table.</p>
+<p>PowerDesigner model details:</p><ul><li>Physical source: DB_CONS_STG_PRD.STG_DCE2.T_DCE2_INTERACTION</li><li>Source-to-target key mapping:</li><li>identity_unique_identifier -&gt; IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>interaction_id -&gt; INTERACTION_IDENTIFIER_BK</li><li>Duplicate partition:</li><li>identity_unique_identifier, interaction_id, date_time</li><li>Historization type: SCD2</li><li>Load type: DELTA</li><li>Target schema: PL_INTERACTION</li></ul>
+<p>Representative output columns include:</p><ul><li>IDENTITY_UNIQUE_IDENTIFIER_BK</li><li>INTERACTION_IDENTIFIER_BK</li><li>AGENT_IDENTIFIER</li><li>AGE_VERIFICATION_STATUS</li><li>APPOINTMENT_IDENTIFIER</li><li>BRAND_FAMILY_NAME</li><li>CAMPAIGN_IDENTIFIER</li><li>CASE_IDENTIFIER</li><li>CASE_TYPE</li><li>CHANNEL_REFERENCE_CODE</li><li>COACH_IDENTIFIER</li><li>CONTRACT_IDENTIFIER</li><li>CORRELATION_IDENTIFIER</li><li>COUNTRY_CODE</li><li>CURRENCY_CODE</li><li>DOCUMENT_TYPE</li><li>EVENT_IDENTIFIER</li><li>EXTERNAL_REFERENCE</li><li>FINAL_RESULT</li><li>INTERACTION_DATETIME</li><li>INTERACTION_REASON</li><li>INTERACTION_REASON_IDENTIFIER</li><li>INTERACTION_TYPE_REFERENCE_CODE</li><li>IP_ADDRESS</li><li>MARKET_CODE</li><li>ORDER_AMOUNT</li><li>ORDER_IDENTIFIER</li><li>PAYMENT_METHOD</li><li>PLATFORM_BRAND</li><li>PREFERRED_PLATFORM</li><li>PRODUCT_CATEGORY</li><li>PRODUCT_CODE</li><li>RETAILER_IDENTIFIER</li><li>RETAILER_NAME</li><li>SOURCE_SYSTEM_IDENTIFIER</li><li>VENDOR_NAME</li><li>VALID_FROM</li><li>VALID_TO</li><li>ACTIVE_FLAG</li></ul>
+<p>Additional PowerDesigner-mapped fields include:</p><ul><li>COUNTRY_REFERENCE_CODE</li><li>LOCATION_ADDRESS_COUNTRY_REFERENCE_CODE</li><li>MARKET_REFERENCE_CODE</li><li>TECH_PARTITION_YEAR</li><li>TECH_PARTITION_MONTH</li></ul>
+<p>Selected source-to-target examples from the model:</p><ul><li>agent_id -&gt; AGENT_IDENTIFIER</li><li>channel_refcode -&gt; CHANNEL_REFERENCE_CODE</li><li>reason_refcode -&gt; INTERACTION_REASON_REFERENCE_CODE</li><li>sap_id -&gt; INTERACTION_SAP_IDENTIFIER</li><li>session_id -&gt; INTERACTION_SESSION_IDENTIFIER</li><li>state_id -&gt; AGE_VERIFICATION_STATUS</li><li>subscription_id -&gt; PARENT_ORDER_CODE</li></ul>
+<h3>Transformation Characteristics</h3>
+<ul><li>Applies a bad-data-quality filter before publication</li><li>Adds historization support columns</li><li>Standardizes output through a calculator grid</li><li>Publishes the result as an integration-layer view</li><li>The physical table is modeled with a non-enforced primary key on IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK</li><li>ORDER_AMOUNT is modeled as DECIMAL(38,5)</li></ul>
+<h3>TDE Row-Level Security Pattern</h3>
+<p>The physical model documents TDE sharing through:</p><ul><li>a join from TDE_CONSUMER_INTERACTION to MDE_GIGYA_CONSUMER</li><li>validity-window alignment on VALID_FROM</li><li>country-based filtering using #RLS_LIST_OF_COUNTRIES</li></ul>
+<hr>
+<h2>Presentation Layer (PL)</h2>
+<h3>File Location</h3>
+<pre><code>ROOT/02_DATA_WAREHOUSE/03_PRESENTATION/DCE2/INTERACTIONS/
+├── MDE/
+│   ├── orc_harmonization_mde_consumer_interaction_device.ORCHESTRATION
+│   ├── orc_harmonization_mde_consumer_interaction_flavour.ORCHESTRATION
+│   ├── orc_harmonization_mde_consumer_interaction_product.ORCHESTRATION
+│   └── orc_harmonization_mde_consumer_interaction_voucher.ORCHESTRATION
+└── TDE/
+    └── orc_harmonization_tde_consumer_interaction.ORCHESTRATION</code></pre>
+<h3>Harmonization Pattern</h3>
+<p>Each presentation orchestration follows a similar flow:</p>
+<pre><code>Start
+  │
+  ├─► Get Staging Column List
+  ├─► Retry - Initial
+  ├─► Create Table - &lt;target presentation object&gt;
+  │     └─ Loading type = SCD2_DELTA_V3
+  ├─► trn_v_int_&lt;...&gt;
+  ├─► Truncate Table &lt;target&gt;
+  ├─► Delete Transient table 3
+  ├─► Delete Tables 0
+  └─► On failure: Send an Email with HTML Body type</code></pre>
+<h3>Presentation Objects</h3>
+<table><tr><th>Category</th><th>Harmonization Job</th><th>Source Integration View</th><th>Target Table</th><th>Schema</th><th>Primary Business Keys</th></tr><tr><td>MDE</td><td>orc_harmonization_mde_consumer_interaction_device</td><td>V_INT_MDE_CONSUMER_INTERACTION_DEVICE</td><td>MDE_CONSUMER_INTERACTION_DEVICE</td><td>PL_INTERACTION</td><td>DEVICE_IDENTIFIER_BK, IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK</td></tr><tr><td>MDE</td><td>orc_harmonization_mde_consumer_interaction_flavour</td><td>V_INT_MDE_CONSUMER_INTERACTION_FLAVOUR</td><td>MDE_CONSUMER_INTERACTION_FLAVOUR</td><td>PL_INTERACTION</td><td>FLAVOUR_REFERENCE_CODE_BK, IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK</td></tr><tr><td>MDE</td><td>orc_harmonization_mde_consumer_interaction_product</td><td>V_INT_MDE_CONSUMER_INTERACTION_PRODUCT</td><td>MDE_CONSUMER_INTERACTION_PRODUCT</td><td>PL_INTERACTION</td><td>IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK, PRODUCT_IDENTIFIER_BK</td></tr><tr><td>MDE</td><td>orc_harmonization_mde_consumer_interaction_voucher</td><td>V_INT_MDE_CONSUMER_INTERACTION_VOUCHER</td><td>MDE_CONSUMER_INTERACTION_VOUCHER</td><td>PL_INTERACTION</td><td>IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK, VOUCHER_IDENTIFIER_BK</td></tr><tr><td>TDE</td><td>orc_harmonization_tde_consumer_interaction</td><td>V_INT_TDE_CONSUMER_INTERACTION</td><td>TDE_CONSUMER_INTERACTION</td><td>PL_INTERACTION</td><td>IDENTITY_UNIQUE_IDENTIFIER_BK, INTERACTION_IDENTIFIER_BK</td></tr></table>
+<h3>Table Descriptions</h3>
+<ul><li>TDE_CONSUMER_INTERACTION</li><li>Consolidated overview of consumer engagements across channels in the DCE2 ecosystem.</li><li>MDE_CONSUMER_INTERACTION_DEVICE</li><li>Device-level context for interactions such as onboarding, troubleshooting, replacement, and usage.</li><li>MDE_CONSUMER_INTERACTION_FLAVOUR</li><li>Flavour-level context supporting consumer preference and product-usage analysis.</li><li>MDE_CONSUMER_INTERACTION_PRODUCT</li><li>Product or asset context linked to each consumer interaction.</li><li>MDE_CONSUMER_INTERACTION_VOUCHER</li><li>Voucher usage details supporting promotional and discount analysis.</li></ul>
+<h3>Unit Test Jobs</h3>
+<p>The package also includes a unit-test orchestration per published object:</p><ul><li>orc_unit_test_mde_consumer_interaction_device</li><li>orc_unit_test_mde_consumer_interaction_flavour</li><li>orc_unit_test_mde_consumer_interaction_product</li><li>orc_unit_test_mde_consumer_interaction_voucher</li><li>orc_unit_test_tde_consumer_interaction</li></ul>
+<p>The unit-test jobs share a common structure:</p><ul><li>Start</li><li>Query Result To Grid</li><li>Compare Tests Numbers</li><li>If</li><li>End Success</li><li>End Failure</li></ul>
+<hr>
+<h2>Data Flow</h2>
+<pre><code>DCE2 Source / Landing Data
+  │
+  ▼
+Snowflake Staging
+STG_DCE2.T_DCE2_INTERACTION*
+  │
+  ├─► trn_v_int_tde_consumer_interaction
+  │     └─► V_INT_TDE_CONSUMER_INTERACTION
+  │             └─► TDE_CONSUMER_INTERACTION
+  │
+  ├─► trn_v_int_mde_consumer_interaction_device
+  │     └─► V_INT_MDE_CONSUMER_INTERACTION_DEVICE
+  │             └─► MDE_CONSUMER_INTERACTION_DEVICE
+  │
+  ├─► trn_v_int_mde_consumer_interaction_flavour
+  │     └─► V_INT_MDE_CONSUMER_INTERACTION_FLAVOUR
+  │             └─► MDE_CONSUMER_INTERACTION_FLAVOUR
+  │
+  ├─► trn_v_int_mde_consumer_interaction_product
+  │     └─► V_INT_MDE_CONSUMER_INTERACTION_PRODUCT
+  │             └─► MDE_CONSUMER_INTERACTION_PRODUCT
+  │
+  └─► trn_v_int_mde_consumer_interaction_voucher
+        └─► V_INT_MDE_CONSUMER_INTERACTION_VOUCHER
+                └─► MDE_CONSUMER_INTERACTION_VOUCHER</code></pre>
+<hr>
+<h2>Configuration</h2>
+<h3>Environment Variables Referenced</h3>
+<table><tr><th>Variable</th><th>Purpose</th></tr><tr><td>ev_database_10_staging</td><td>Staging database</td></tr><tr><td>ev_database_20_integration</td><td>Integration database</td></tr><tr><td>ev_data_foundation_schema_20_integration</td><td>Integration schema</td></tr><tr><td>ev_database_30_presentation</td><td>Presentation database</td></tr></table>
+<h3>Common Orchestration Variables and Grids</h3>
+<table><tr><th>Name</th><th>Type</th><th>Purpose</th></tr><tr><td>jv_transient_has_count_check</td><td>Scalar</td><td>Transient row-count / load control flag</td></tr><tr><td>gv_transient_column_list</td><td>Grid</td><td>Captures column metadata from staging</td></tr><tr><td>gv_primary_key_configuration</td><td>Grid</td><td>Defines business-key columns for target tables</td></tr><tr><td>gv_column_classification_configuration</td><td>Grid</td><td>Metadata-driven classification controls</td></tr><tr><td>gv_column_description_configuration</td><td>Grid</td><td>Metadata-driven descriptions for published columns</td></tr></table>
+<h3>Transformation Variables and Grids</h3>
+<table><tr><th>Name</th><th>Type</th><th>Purpose</th></tr><tr><td>jv_source_table</td><td>Scalar</td><td>Source table identifier</td></tr><tr><td>gv_calculator</td><td>Grid</td><td>Output column calculations and type casting</td></tr><tr><td>gv_table_input_column_list</td><td>Grid</td><td>Input column metadata for dynamic table reads</td></tr></table>
+<hr>
+<h2>Error Handling</h2>
+<p>The presentation orchestration jobs include explicit failure-handling patterns:</p><ul><li>Retry - Initial components before the main create/load step</li><li>End Failure - Presentation table terminal path</li><li>Send an Email with HTML Body type notification component</li><li>Delete Transient table 3 cleanup component</li></ul>
+<p>Additional controls visible in the export:</p><ul><li>Unit-test gates validate row-count or test-result expectations</li><li>Query tagging supports troubleshooting in Snowflake history</li><li>Task history loading supports operational monitoring</li></ul>
+<hr>
+<h2>Tables and Views</h2>
+<h3>Staging Tables</h3>
+<ul><li>STG_DCE2.T_DCE2_INTERACTION</li><li>STG_DCE2.T_DCE2_INTERACTION_DEVICE</li><li>STG_DCE2.T_DCE2_INTERACTION_FLAVOUR</li><li>STG_DCE2.T_DCE2_INTERACTION_PRODUCT</li><li>STG_DCE2.T_DCE2_INTERACTION_VOUCHER</li></ul>
+<h3>Integration Views</h3>
+<ul><li>V_INT_TDE_CONSUMER_INTERACTION</li><li>V_INT_MDE_CONSUMER_INTERACTION_DEVICE</li><li>V_INT_MDE_CONSUMER_INTERACTION_FLAVOUR</li><li>V_INT_MDE_CONSUMER_INTERACTION_PRODUCT</li><li>V_INT_MDE_CONSUMER_INTERACTION_VOUCHER</li></ul>
+<h3>Presentation Tables</h3>
+<ul><li>PL_INTERACTION.TDE_CONSUMER_INTERACTION</li><li>PL_INTERACTION.MDE_CONSUMER_INTERACTION_DEVICE</li><li>PL_INTERACTION.MDE_CONSUMER_INTERACTION_FLAVOUR</li><li>PL_INTERACTION.MDE_CONSUMER_INTERACTION_PRODUCT</li><li>PL_INTERACTION.MDE_CONSUMER_INTERACTION_VOUCHER</li></ul>
+<h3>DQ Companion Targets Referenced by the Loader Pattern</h3>
+<ul><li>PL_COMMON_LAYER_DQ.TDE_CONSUMER_INTERACTION_DQ</li><li>Equivalent DQ targets are implied for other interaction objects by the same loader framework, though not all names are explicitly surfaced in the high-level job tree.</li></ul>
+<hr>
+<h2>Business Use Cases</h2>
+<ul><li>Analyze consumer interaction journeys across channels</li><li>Enrich interactions with device, flavour, product, and voucher context</li><li>Support reporting on service events, commerce events, and engagement activity</li><li>Track operational performance by market, channel, and interaction type</li><li>Enable downstream data products that need historized interaction records</li></ul>
+<hr>
+<h2>Dependencies</h2>
+<h3>Upstream Dependencies</h3>
+<ul><li>DCE2 ingestion into STG_DCE2</li><li>Snowflake environment variables and database schemas</li><li>Master-pipeline dispatch logic through DISP Ingestion - CONS 1</li></ul>
+<h3>Internal Dependencies</h3>
+<ul><li>Integration views must be created before presentation harmonization runs</li><li>Presentation tables depend on loader metadata grids and primary-key configuration</li><li>Unit tests depend on successful publication of the presentation tables</li></ul>
+<hr>
+<h2>Maintenance and Operations</h2>
+<h3>Operational Notes</h3>
+<ul><li>Use the query tag ${job_name}-${run_history_id} to trace pipeline execution in Snowflake.</li><li>Validate task-history records after each run.</li><li>Review unit-test results before promoting changes.</li><li>Keep the gv_primary_key_configuration grids aligned with business-key definitions.</li></ul>
+<h3>Change Impact Areas</h3>
+<p>Changes to the following areas are likely to affect downstream consumers:</p><ul><li>Staging table structures in STG_DCE2</li><li>Calculator grid expressions in integration transformations</li><li>Primary-key configuration in harmonization jobs</li><li>SCD2 loading behavior in the presentation loader framework</li></ul>
+<hr>
+<h2>Contact and Support</h2>
+<p>Recommended ownership areas for support:</p><ul><li>Matillion orchestration and transformation logic</li><li>Snowflake schema and table-management framework</li><li>DCE2 source-system ingestion and landing processes</li><li>Data-quality and unit-test ownership for interaction datasets</li></ul>
+</body>
+</html>
