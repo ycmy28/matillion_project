@@ -1,0 +1,3912 @@
+{
+    "dbEnvironment": "snowflake",
+    "version": "1.75.32",
+    "jobsTree": {
+        "id": 3433162,
+        "name": "ROOT",
+        "children": [],
+        "jobs": [
+            {
+                "id": 3434222,
+                "name": "orc_harmonization_$$target_table_lower$$",
+                "description": "",
+                "type": "ORCHESTRATION",
+                "tag": "b6284edf-f0a0-4100-8b8f-7ad6e7279437"
+            },
+            {
+                "id": 3434788,
+                "name": "trn_v_int_$$target_table_lower$$",
+                "description": "",
+                "type": "TRANSFORMATION",
+                "tag": "c7a3156f-1e93-4c4d-b9ec-88a5bcd21c0b"
+            }
+        ]
+    },
+    "orchestrationJobs": [
+        {
+            "id": 3434222,
+            "revision": 11,
+            "created": 1758082870347,
+            "timestamp": 1758082870347,
+            "components": {
+                "3434201": {
+                    "id": 3434201,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -1128542701,
+                    "x": 880,
+                    "y": 560,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434259
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [
+                        3434262
+                    ],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Send an Email with HTML Body type - $$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "gv_email_to_recipients",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_harmonization_email_recipient}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "jv_email_subject",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Harmonization Pipeline Check has failed for table $$target_table$$ in PRESENTATION layer!"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "jv_email_text",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "<p><strong>Pipeline name:</strong> ${job_name}</p><p><strong>Table/View name: </strong>$$target_table$$</p><p><strong>Layer: </strong>PRESENTATION</p><p><strong>History id: </strong>${run_history_id}</p><p><strong>Environment: </strong>${ev_default_system_env}</p><p><strong>Message: </strong></p><p>Harmonization Pipeline fails - Please check the result!</p>"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434202": {
+                    "id": 3434202,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": 1914517793,
+                    "x": 560,
+                    "y": 592,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Create Table - $$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "jv_source_object",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "V_INT_$$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "jv_loading_type",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "SCD2_DELTA_V3"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "jv_source_schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_data_foundation_schema_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "jv_target_object",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "jv_target_schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_schema$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "7": {
+                            "slot": 7,
+                            "name": "jv_source_database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "8": {
+                            "slot": 8,
+                            "name": "jv_target_database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_30_presentation}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "9": {
+                            "slot": 9,
+                            "name": "jv_dsh_target_table",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_table$$_DQ"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "10": {
+                            "slot": 10,
+                            "name": "jv_dsh_target_schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "PL_COMMON_LAYER_DQ"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "11": {
+                            "slot": 11,
+                            "name": "jv_dsh_target_database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_30_presentation}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "12": {
+                            "slot": 12,
+                            "name": "jv_process_column_statement",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "*"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "13": {
+                            "slot": 13,
+                            "name": "gv_primary_keys",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "gv_primary_key_configuration"
+                                        }
+                                    }
+                                },
+                                "2": {
+                                    "slot": 2,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "column_name"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "14": {
+                            "slot": 14,
+                            "name": "jv_view_full_metadata_flag",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "true"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "15": {
+                            "slot": 15,
+                            "name": "jv_business_key_null_handling_flag",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "FALSE"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "16": {
+                            "slot": 16,
+                            "name": "jv_apply_primary_key_constraint",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "FALSE"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "17": {
+                            "slot": 17,
+                            "name": "jv_default_collate",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "en-ci"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "18": {
+                            "slot": 18,
+                            "name": "jv_table_description",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$table_description$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "19": {
+                            "slot": 19,
+                            "name": "gv_column_description",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "gv_column_description_configuration"
+                                        }
+                                    }
+                                },
+                                "2": {
+                                    "slot": 2,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "column_name"
+                                        },
+                                        "2": {
+                                            "slot": 2,
+                                            "type": "GRID",
+                                            "value": "column_description"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "20": {
+                            "slot": 20,
+                            "name": "jv_dsh_callback_url",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "21": {
+                            "slot": 21,
+                            "name": "jv_deletion_key",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "22": {
+                            "slot": 22,
+                            "name": "jv_deletion_object",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "23": {
+                            "slot": 23,
+                            "name": "jv_deletion_schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "24": {
+                            "slot": 24,
+                            "name": "jv_deletion_database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "25": {
+                            "slot": 25,
+                            "name": "gv_column_classification_and_domain",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "gv_column_classification_configuration"
+                                        }
+                                    }
+                                },
+                                "2": {
+                                    "slot": 2,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "column_name"
+                                        },
+                                        "2": {
+                                            "slot": 2,
+                                            "type": "GRID",
+                                            "value": "column_classification"
+                                        },
+                                        "3": {
+                                            "slot": 3,
+                                            "type": "GRID",
+                                            "value": "column_domain"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": [
+                        3434268
+                    ]
+                },
+                "3434203": {
+                    "id": 3434203,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "ZERO",
+                    "connectorHint": "UNCONDITIONAL",
+                    "executionHint": "FLOW",
+                    "implementationID": 515156205,
+                    "x": 1280,
+                    "y": 480,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434283
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "End Failure - Transformation pipeline"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434204": {
+                    "id": 3434204,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -1128542701,
+                    "x": 880,
+                    "y": 480,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434258
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [
+                        3434281
+                    ],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Send an Email with HTML Body type - V_INT_$$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "gv_email_to_recipients",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_harmonization_email_recipient}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "jv_email_subject",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Harmonization Pipeline Check has failed for view V_INT_$$target_table$$ in INTEGRATION layer!"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "jv_email_text",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "<p><strong>Pipeline name:</strong> ${job_name}</p><p><strong>Table/View name: </strong> V_INT_$$target_table$$</p><p><strong>Layer: </strong>INTEGRATION</p><p><strong>History id: </strong>${run_history_id}</p><p><strong>Environment: </strong>${ev_default_system_env}</p><p><strong>Message: </strong>Harmonization Pipeline fails - Please check the result!</p>"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434205": {
+                    "id": 3434205,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": 1155583855,
+                    "x": 400,
+                    "y": 240,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434277
+                    ],
+                    "outputSuccessConnectorIDs": [
+                        3434279
+                    ],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Query Result To Grid"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Basic / Advanced",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Advanced"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "[Environment Default]"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Target Table",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "Table Columns",
+                            "elements": {},
+                            "visible": false
+                        },
+                        "7": {
+                            "slot": 7,
+                            "name": "SQL Query",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "/* Note: this query will be run as a subquery for the purposes of sampling the data.\n   As such it will be restricted by any subquery limitations specified by the current platform. */\n   \nSELECT\n\tCASE \n    \tWHEN COUNT(*) >= 1 THEN TRUE\n        ELSE FALSE\n    END AS HAS_COUNT\nFROM (\n    SELECT 1 AS CNT \n    FROM ${ev_database_20_integration}.${ev_data_foundation_schema_20_integration}.TRANSIENT_$$target_table$$_DELTA\n)"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "8": {
+                            "slot": 8,
+                            "name": "Grid Variable",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "gv_transient_has_count_check"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "9": {
+                            "slot": 9,
+                            "name": "Grid Variable Mapping",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "HAS_COUNT"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "10": {
+                            "slot": 10,
+                            "name": "Limit",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "INTEGER",
+                                            "value": "100"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        },
+                        "11": {
+                            "slot": 11,
+                            "name": "Order By",
+                            "elements": {},
+                            "visible": false
+                        },
+                        "12": {
+                            "slot": 12,
+                            "name": "Sort",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Ascending"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        },
+                        "13": {
+                            "slot": 13,
+                            "name": "Filter Conditions",
+                            "elements": {},
+                            "visible": false
+                        },
+                        "14": {
+                            "slot": 14,
+                            "name": "Combine Conditions",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "AND"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        },
+                        "20": {
+                            "slot": 20,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "[Environment Default]"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434206": {
+                    "id": 3434206,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -1128542701,
+                    "x": 656,
+                    "y": 64,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434257
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [
+                        3434261
+                    ],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Send an Email with HTML Body type - TRANSIENT_$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "gv_email_to_recipients",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_harmonization_email_recipient}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "jv_email_subject",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Harmonization Pipeline Check has failed for table TRANSIENT_$$target_table$$_DELTA in INTEGRATION layer!"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "jv_email_text",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "<p><strong>Pipeline name:</strong> ${job_name}</p><p><strong>Table/View name: </strong> TRANSIENT_$$target_table$$_DELTA</p><p><strong>Layer: </strong>INTEGRATION</p><p><strong>History id: </strong>${run_history_id}</p><p><strong>Environment: </strong>${ev_default_system_env}</p><p><strong>Message: </strong>Transient Table Creation Failed - Please check the result!</p>"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434207": {
+                    "id": 3434207,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -1291941950,
+                    "x": 1040,
+                    "y": 480,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434281
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [
+                        3434283
+                    ],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Delete Transient table 2"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_data_foundation_schema_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Target Table",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "TRANSIENT_$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Ignore Missing",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Yes"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "",
+                            "elements": {},
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434216": {
+                    "id": 3434216,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -1773186829,
+                    "x": 560,
+                    "y": 240,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434279
+                    ],
+                    "outputSuccessConnectorIDs": [
+                        3434275
+                    ],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Python Script - Update jv_transient_has_count_check"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Script",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "###\n# Variables are directly accessible: \n#   print (myvar)\n# Updating a variable:\n#   context.updateVariable('myvar', 'new-value')\n# Grid Variables are accessible via the context:\n#   print (context.getGridVariable('mygridvar'))\n# Updating a grid variable:\n#   context.updateGridVariable('mygridvar', [['list','of'],['lists','!']])\n# A database cursor can be accessed from the context (Jython only):\n#   cursor = context.cursor()\n#   cursor.execute('select count(*) from mytable')\n#   rowcount = cursor.fetchone()[0]\n###\n\ntransient_has_count_check = context.getGridVariable('gv_transient_has_count_check')\ntransient_has_count_check = transient_has_count_check[0][0].lower()\n\ncontext.updateVariable('jv_transient_has_count_check', transient_has_count_check)\nprint(jv_transient_has_count_check)"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Interpreter",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Python 3"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Timeout",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "INTEGER",
+                                            "value": "360"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "User",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Restricted"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434217": {
+                    "id": 3434217,
+                    "inputCardinality": "MANY",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "UNCONDITIONAL",
+                    "executionHint": "FLOW",
+                    "implementationID": -1343684451,
+                    "x": 560,
+                    "y": 720,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434272,
+                        3434274
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [
+                        3434371
+                    ],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Or"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434218": {
+                    "id": 3434218,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -377483579,
+                    "x": 1088,
+                    "y": 240,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434273
+                    ],
+                    "outputSuccessConnectorIDs": [
+                        3434274
+                    ],
+                    "outputFailureConnectorIDs": [
+                        3434256
+                    ],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Check Table If Exists - $$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_30_presentation}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_schema$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Table Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Table Metadata",
+                            "elements": {},
+                            "visible": true
+                        },
+                        "100": {
+                            "slot": 100,
+                            "name": "Exists",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Yes"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "101": {
+                            "slot": 101,
+                            "name": "Row Count Comparison Type",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Equal To"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "102": {
+                            "slot": 102,
+                            "name": "Row Count Value",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "BIGINT",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "103": {
+                            "slot": 103,
+                            "name": "Lower Value",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "BIGINT",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        },
+                        "104": {
+                            "slot": 104,
+                            "name": "Upper Value",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "BIGINT",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434288": {
+                    "id": 3434288,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -1773186829,
+                    "x": 880,
+                    "y": 240,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434285
+                    ],
+                    "outputSuccessConnectorIDs": [
+                        3434273
+                    ],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Python Script - Print information of zero row counts found"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Script",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "###\n# Variables are directly accessible: \n#   print (myvar)\n# Updating a variable:\n#   context.updateVariable('myvar', 'new-value')\n# Grid Variables are accessible via the context:\n#   print (context.getGridVariable('mygridvar'))\n# Updating a grid variable:\n#   context.updateGridVariable('mygridvar', [['list','of'],['lists','!']])\n# A database cursor can be accessed from the context (Jython only):\n#   cursor = context.cursor()\n#   cursor.execute('select count(*) from mytable')\n#   rowcount = cursor.fetchone()[0]\n###\n\nprint('No row counts found in the transient table, skipping process for transformation and table creation/update...')"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Interpreter",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Python 3"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Timeout",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "INTEGER",
+                                            "value": "360"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "User",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Restricted"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434289": {
+                    "id": 3434289,
+                    "inputCardinality": "ZERO",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "UNCONDITIONAL",
+                    "executionHint": "FLOW",
+                    "implementationID": 444132438,
+                    "x": 240,
+                    "y": 64,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [
+                        3434286,
+                        3434280
+                    ],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Start",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Start"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434290": {
+                    "id": 3434290,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -1291941950,
+                    "x": 80,
+                    "y": 64,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434286
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Delete Tables 0"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_30_presentation}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_schema$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Target Table",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Ignore Missing",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Yes"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "",
+                            "elements": {},
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "DISABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434291": {
+                    "id": 3434291,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -1291941950,
+                    "x": 816,
+                    "y": 64,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434261
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [
+                        3434263
+                    ],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Delete Transient table 1"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_data_foundation_schema_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Target Table",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "TRANSIENT_$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Ignore Missing",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Yes"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "",
+                            "elements": {},
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434292": {
+                    "id": 3434292,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "CONDITIONAL",
+                    "executionHint": "FLOW",
+                    "implementationID": -1357378929,
+                    "x": 720,
+                    "y": 240,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434275
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [
+                        3434284
+                    ],
+                    "outputFalseConnectorIDs": [
+                        3434285
+                    ],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "If"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Mode",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Simple"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Condition",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "jv_transient_has_count_check"
+                                        },
+                                        "2": {
+                                            "slot": 2,
+                                            "type": "STRING",
+                                            "value": "Is"
+                                        },
+                                        "3": {
+                                            "slot": 3,
+                                            "type": "STRING",
+                                            "value": "Equal to"
+                                        },
+                                        "4": {
+                                            "slot": 4,
+                                            "type": "STRING",
+                                            "value": "true"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Combine Conditions",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "And"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Condition",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434293": {
+                    "id": 3434293,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": 1221273751,
+                    "x": 400,
+                    "y": 64,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434280
+                    ],
+                    "outputSuccessConnectorIDs": [
+                        3434276
+                    ],
+                    "outputFailureConnectorIDs": [
+                        3434257
+                    ],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "TRANSIENT_$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "jv_source_object",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$source_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "jv_source_schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$source_schema$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "jv_target_object",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "jv_source_database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_10_staging}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "jv_process_column_statement",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$column_list$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "7": {
+                            "slot": 7,
+                            "name": "jv_delta_column",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "8": {
+                            "slot": 8,
+                            "name": "jv_orchestration_name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "orc_harmonization_$$target_table_lower$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "9": {
+                            "slot": 9,
+                            "name": "jv_where_condition",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "10": {
+                            "slot": 10,
+                            "name": "jv_initial_check_database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_30_presentation}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "11": {
+                            "slot": 11,
+                            "name": "jv_initial_check_object",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "12": {
+                            "slot": 12,
+                            "name": "jv_initial_check_schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "$$target_schema$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "13": {
+                            "slot": 13,
+                            "name": "jv_default_delta_function_flag",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "TRUE"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "14": {
+                            "slot": 14,
+                            "name": "jv_run_task_history_flag",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "FALSE"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "15": {
+                            "slot": 15,
+                            "name": "jv_target_schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_data_foundation_schema_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434294": {
+                    "id": 3434294,
+                    "inputCardinality": "MANY",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "UNCONDITIONAL",
+                    "executionHint": "FLOW",
+                    "implementationID": -1343684451,
+                    "x": 560,
+                    "y": 384,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434256,
+                        3434284
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [
+                        3434287
+                    ],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Or - Check"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434295": {
+                    "id": 3434295,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "TRANSFORM",
+                    "implementationID": 1896325668,
+                    "x": 560,
+                    "y": 480,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434287
+                    ],
+                    "outputSuccessConnectorIDs": [
+                        3434278
+                    ],
+                    "outputFailureConnectorIDs": [
+                        3434258
+                    ],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "trn_v_int_$$target_table_lower$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Transformation Job",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "trn_v_int_$$target_table_lower$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "",
+                            "elements": {},
+                            "visible": false
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Set Scalar Variables",
+                            "elements": {},
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Set Grid Variables",
+                            "elements": {
+                                "2": {
+                                    "slot": 2,
+                                    "elements": {
+                                        "1": {
+                                            "slot": 1,
+                                            "values": {
+                                                "1": {
+                                                    "slot": 1,
+                                                    "type": "GRID",
+                                                    "value": "gv_transient_column_list"
+                                                }
+                                            }
+                                        },
+                                        "2": {
+                                            "slot": 2,
+                                            "values": {
+                                                "1": {
+                                                    "slot": 1,
+                                                    "type": "GRID",
+                                                    "value": "column_name"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "gv_table_input_column_list"
+                                        },
+                                        "2": {
+                                            "slot": 2,
+                                            "type": "STRING",
+                                            "value": "grid"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434296": {
+                    "id": 3434296,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "ZERO",
+                    "connectorHint": "UNCONDITIONAL",
+                    "executionHint": "FLOW",
+                    "implementationID": 515156205,
+                    "x": 1280,
+                    "y": 560,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434260
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "End Failure - Presentation table"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434297": {
+                    "id": 3434297,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": -1291941950,
+                    "x": 1040,
+                    "y": 560,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434262
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [
+                        3434260
+                    ],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Delete Transient table 3"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_data_foundation_schema_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Target Table",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "TRANSIENT_$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Ignore Missing",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Yes"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "",
+                            "elements": {},
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434298": {
+                    "id": 3434298,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "ZERO",
+                    "connectorHint": "UNCONDITIONAL",
+                    "executionHint": "FLOW",
+                    "implementationID": 515156205,
+                    "x": 1088,
+                    "y": 64,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434263
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "End Failure - Transient table"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434299": {
+                    "id": 3434299,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": 356330947,
+                    "x": 398,
+                    "y": 148,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434276
+                    ],
+                    "outputSuccessConnectorIDs": [
+                        3434277
+                    ],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Get Column List"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_data_foundation_schema_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Grid Variable",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "gv_transient_column_list"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "Grid Variable Mapping",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Name"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "7": {
+                            "slot": 7,
+                            "name": "Target Table",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "TRANSIENT_$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434300": {
+                    "id": 3434300,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "ITERATE",
+                    "implementationID": -158614544,
+                    "x": 560,
+                    "y": 560,
+                    "width": 32,
+                    "height": 16,
+                    "inputConnectorIDs": [
+                        3434278
+                    ],
+                    "outputSuccessConnectorIDs": [
+                        3434272
+                    ],
+                    "outputFailureConnectorIDs": [
+                        3434259
+                    ],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Retry - Initial"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Number of Retries",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "INTEGER",
+                                            "value": "0"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Retry Delay",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Retry immediately"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Retry Interval",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "INTEGER",
+                                            "value": "1"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Retry Time Unit",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Second"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": false
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [
+                        3434268
+                    ],
+                    "inputIterationConnectorIDs": []
+                },
+                "3434370": {
+                    "id": 3434370,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "connectorHint": "SUCCESS_FAIL",
+                    "executionHint": "EXECUTE",
+                    "implementationID": 237373210,
+                    "x": 880,
+                    "y": 720,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434371
+                    ],
+                    "outputSuccessConnectorIDs": [],
+                    "outputFailureConnectorIDs": [],
+                    "outputUnconditionalConnectorIDs": [],
+                    "outputTrueConnectorIDs": [],
+                    "outputFalseConnectorIDs": [],
+                    "exportMappings": {},
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Truncate TRANSIENT table"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "4": {
+                            "slot": 4,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_data_foundation_schema_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Target Table",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "TRANSIENT_$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "Warehouse",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "[Environment Default]"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED",
+                    "outputIterationConnectorIDs": [],
+                    "inputIterationConnectorIDs": []
+                }
+            },
+            "successConnectors": {
+                "3434272": {
+                    "id": 3434272,
+                    "sourceID": 3434300,
+                    "targetID": 3434217
+                },
+                "3434273": {
+                    "id": 3434273,
+                    "sourceID": 3434288,
+                    "targetID": 3434218
+                },
+                "3434274": {
+                    "id": 3434274,
+                    "sourceID": 3434218,
+                    "targetID": 3434217
+                },
+                "3434275": {
+                    "id": 3434275,
+                    "sourceID": 3434216,
+                    "targetID": 3434292
+                },
+                "3434276": {
+                    "id": 3434276,
+                    "sourceID": 3434293,
+                    "targetID": 3434299
+                },
+                "3434277": {
+                    "id": 3434277,
+                    "sourceID": 3434299,
+                    "targetID": 3434205
+                },
+                "3434278": {
+                    "id": 3434278,
+                    "sourceID": 3434295,
+                    "targetID": 3434300
+                },
+                "3434279": {
+                    "id": 3434279,
+                    "sourceID": 3434205,
+                    "targetID": 3434216
+                }
+            },
+            "failureConnectors": {
+                "3434256": {
+                    "id": 3434256,
+                    "sourceID": 3434218,
+                    "targetID": 3434294
+                },
+                "3434257": {
+                    "id": 3434257,
+                    "sourceID": 3434293,
+                    "targetID": 3434206
+                },
+                "3434258": {
+                    "id": 3434258,
+                    "sourceID": 3434295,
+                    "targetID": 3434204
+                },
+                "3434259": {
+                    "id": 3434259,
+                    "sourceID": 3434300,
+                    "targetID": 3434201
+                }
+            },
+            "unconditionalConnectors": {
+                "3434260": {
+                    "id": 3434260,
+                    "sourceID": 3434297,
+                    "targetID": 3434296
+                },
+                "3434261": {
+                    "id": 3434261,
+                    "sourceID": 3434206,
+                    "targetID": 3434291
+                },
+                "3434262": {
+                    "id": 3434262,
+                    "sourceID": 3434201,
+                    "targetID": 3434297
+                },
+                "3434263": {
+                    "id": 3434263,
+                    "sourceID": 3434291,
+                    "targetID": 3434298
+                },
+                "3434280": {
+                    "id": 3434280,
+                    "sourceID": 3434289,
+                    "targetID": 3434293
+                },
+                "3434281": {
+                    "id": 3434281,
+                    "sourceID": 3434204,
+                    "targetID": 3434207
+                },
+                "3434283": {
+                    "id": 3434283,
+                    "sourceID": 3434207,
+                    "targetID": 3434203
+                },
+                "3434286": {
+                    "id": 3434286,
+                    "sourceID": 3434289,
+                    "targetID": 3434290
+                },
+                "3434287": {
+                    "id": 3434287,
+                    "sourceID": 3434294,
+                    "targetID": 3434295
+                },
+                "3434371": {
+                    "id": 3434371,
+                    "sourceID": 3434217,
+                    "targetID": 3434370
+                }
+            },
+            "trueConnectors": {
+                "3434284": {
+                    "id": 3434284,
+                    "sourceID": 3434292,
+                    "targetID": 3434294
+                }
+            },
+            "falseConnectors": {
+                "3434285": {
+                    "id": 3434285,
+                    "sourceID": 3434292,
+                    "targetID": 3434288
+                }
+            },
+            "iterationConnectors": {
+                "3434268": {
+                    "id": 3434268,
+                    "sourceID": 3434300,
+                    "targetID": 3434202
+                }
+            },
+            "noteConnectors": {},
+            "canUndo": true,
+            "undoCommand": "Set Parameter",
+            "undoCreated": 1758082845690,
+            "canRedo": false,
+            "redoCommand": "",
+            "redoCreated": -1,
+            "notes": {
+                "3434223": {
+                    "id": 3434223,
+                    "x": 332,
+                    "y": 182,
+                    "width": 872,
+                    "height": 120,
+                    "text": "Validate if the TRANSIENT table created has data.",
+                    "colour": "e6e63c"
+                }
+            },
+            "variables": {
+                "jv_transient_has_count_check": {
+                    "definition": {
+                        "name": "jv_transient_has_count_check",
+                        "type": "TEXT",
+                        "scope": "TASKBATCH",
+                        "description": "",
+                        "visibility": "PUBLIC"
+                    },
+                    "value": ""
+                }
+            },
+            "grids": {
+                "gv_transient_column_list": {
+                    "definition": {
+                        "name": "gv_transient_column_list",
+                        "scope": "TASKBATCH",
+                        "definitions": [
+                            {
+                                "name": "column_name",
+                                "type": "TEXT"
+                            }
+                        ],
+                        "description": "",
+                        "visibility": "PUBLIC"
+                    },
+                    "values": []
+                },
+                "gv_primary_key_configuration": {
+                    "definition": {
+                        "name": "gv_primary_key_configuration",
+                        "scope": "BRANCH",
+                        "definitions": [
+                            {
+                                "name": "column_name",
+                                "type": "TEXT"
+                            }
+                        ],
+                        "description": "",
+                        "visibility": "PRIVATE"
+                    },
+                    "values": []
+                },
+                "gv_transient_has_count_check": {
+                    "definition": {
+                        "name": "gv_transient_has_count_check",
+                        "scope": "BRANCH",
+                        "definitions": [
+                            {
+                                "name": "HAS_COUNT",
+                                "type": "TEXT"
+                            }
+                        ],
+                        "description": "",
+                        "visibility": "PRIVATE"
+                    },
+                    "values": []
+                },
+                "gv_column_description_configuration": {
+                    "definition": {
+                        "name": "gv_column_description_configuration",
+                        "scope": "BRANCH",
+                        "definitions": [
+                            {
+                                "name": "column_name",
+                                "type": "TEXT"
+                            },
+                            {
+                                "name": "column_description",
+                                "type": "TEXT"
+                            }
+                        ],
+                        "description": "",
+                        "visibility": "PUBLIC"
+                    },
+                    "values": [
+                        {
+                            "values": [
+                                "test_column_name",
+                                "test_column_description"
+                            ]
+                        }
+                    ]
+                },
+                "gv_column_classification_configuration": {
+                    "definition": {
+                        "name": "gv_column_classification_configuration",
+                        "scope": "BRANCH",
+                        "definitions": [
+                            {
+                                "name": "column_name",
+                                "type": "TEXT"
+                            },
+                            {
+                                "name": "column_classification",
+                                "type": "TEXT"
+                            },
+                            {
+                                "name": "column_domain",
+                                "type": "TEXT"
+                            }
+                        ],
+                        "description": "",
+                        "visibility": "PUBLIC"
+                    },
+                    "values": [
+                        {
+                            "values": [
+                                "test_col",
+                                "test_classification",
+                                "test_domain"
+                            ]
+                        },
+                        {
+                            "values": [
+                                "test_col2",
+                                "test_class2",
+                                "test_domain2"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "transformationJobs": [
+        {
+            "id": 3434788,
+            "revision": 2,
+            "created": 1758082971062,
+            "timestamp": 1758082971062,
+            "components": {
+                "3434784": {
+                    "id": 3434784,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "implementationID": 128170095,
+                    "x": 784,
+                    "y": 316,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434786
+                    ],
+                    "outputConnectorIDs": [
+                        3434787
+                    ],
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Select Column"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Column Mapping",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "gv_calculator"
+                                        }
+                                    }
+                                },
+                                "2": {
+                                    "slot": 2,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "calculation_name"
+                                        },
+                                        "2": {
+                                            "slot": 2,
+                                            "type": "GRID",
+                                            "value": "calculation_name"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Include Input Columns",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "No"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "exportMappings": {},
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED"
+                },
+                "3434789": {
+                    "id": 3434789,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "ZERO",
+                    "implementationID": -319648201,
+                    "x": 1104,
+                    "y": 320,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434787
+                    ],
+                    "outputConnectorIDs": [],
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "View creation - V_INT_$$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_data_foundation_schema_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "View Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "V_INT_$$target_table$$"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "Secure View",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "No"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "7": {
+                            "slot": 7,
+                            "name": "View Type",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Standard"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "exportMappings": {},
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED"
+                },
+                "3434790": {
+                    "id": 3434790,
+                    "inputCardinality": "ZERO",
+                    "outputCardinality": "MANY",
+                    "implementationID": 1354890871,
+                    "x": 240,
+                    "y": 320,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [],
+                    "outputConnectorIDs": [
+                        3434785
+                    ],
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "TRANSIENT_$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Target Table",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "TRANSIENT_$$target_table$$_DELTA"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Column Names",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "gv_table_input_column_list"
+                                        }
+                                    }
+                                },
+                                "2": {
+                                    "slot": 2,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "column_name"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "5": {
+                            "slot": 5,
+                            "name": "Schema",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_data_foundation_schema_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "6": {
+                            "slot": 6,
+                            "name": "Database",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "${ev_database_20_integration}"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "7": {
+                            "slot": 7,
+                            "name": "Offset",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "INTEGER",
+                                            "value": ""
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "exportMappings": {},
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED"
+                },
+                "3434791": {
+                    "id": 3434791,
+                    "inputCardinality": "ONE",
+                    "outputCardinality": "MANY",
+                    "implementationID": 1716658327,
+                    "x": 496,
+                    "y": 320,
+                    "width": 32,
+                    "height": 32,
+                    "inputConnectorIDs": [
+                        3434785
+                    ],
+                    "outputConnectorIDs": [
+                        3434786
+                    ],
+                    "parameters": {
+                        "1": {
+                            "slot": 1,
+                            "name": "Name",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Calculator - column transformations"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "2": {
+                            "slot": 2,
+                            "name": "Include Input Columns",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "STRING",
+                                            "value": "Yes"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        },
+                        "3": {
+                            "slot": 3,
+                            "name": "Calculations",
+                            "elements": {
+                                "1": {
+                                    "slot": 1,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "gv_calculator"
+                                        }
+                                    }
+                                },
+                                "2": {
+                                    "slot": 2,
+                                    "values": {
+                                        "1": {
+                                            "slot": 1,
+                                            "type": "GRID",
+                                            "value": "calculation"
+                                        },
+                                        "2": {
+                                            "slot": 2,
+                                            "type": "GRID",
+                                            "value": "calculation_name"
+                                        }
+                                    }
+                                }
+                            },
+                            "visible": true
+                        }
+                    },
+                    "exportMappings": {},
+                    "expectedFailure": null,
+                    "activationStatus": "ENABLED"
+                }
+            },
+            "connectors": {
+                "3434785": {
+                    "id": 3434785,
+                    "sourceID": 3434790,
+                    "targetID": 3434791
+                },
+                "3434786": {
+                    "id": 3434786,
+                    "sourceID": 3434791,
+                    "targetID": 3434784
+                },
+                "3434787": {
+                    "id": 3434787,
+                    "sourceID": 3434784,
+                    "targetID": 3434789
+                }
+            },
+            "canUndo": false,
+            "undoCommand": "",
+            "undoCreated": -1,
+            "canRedo": false,
+            "redoCommand": "",
+            "redoCreated": -1,
+            "notes": {},
+            "noteConnectors": {},
+            "variables": {
+                "jv_source_table": {
+                    "definition": {
+                        "name": "jv_source_table",
+                        "type": "TEXT",
+                        "scope": "TASKBATCH",
+                        "description": "",
+                        "visibility": "PUBLIC"
+                    },
+                    "value": ""
+                }
+            },
+            "grids": {
+                "gv_calculator": {
+                    "definition": {
+                        "name": "gv_calculator",
+                        "scope": "TASKBATCH",
+                        "definitions": [
+                            {
+                                "name": "calculation_name",
+                                "type": "TEXT"
+                            },
+                            {
+                                "name": "calculation",
+                                "type": "TEXT"
+                            }
+                        ],
+                        "description": "",
+                        "visibility": "PUBLIC"
+                    },
+                    "values": []
+                },
+                "gv_table_input_column_list": {
+                    "definition": {
+                        "name": "gv_table_input_column_list",
+                        "scope": "TASKBATCH",
+                        "definitions": [
+                            {
+                                "name": "column_name",
+                                "type": "TEXT"
+                            }
+                        ],
+                        "description": "",
+                        "visibility": "PUBLIC"
+                    },
+                    "values": []
+                }
+            }
+        }
+    ],
+    "variables": [],
+    "environments": []
+}
