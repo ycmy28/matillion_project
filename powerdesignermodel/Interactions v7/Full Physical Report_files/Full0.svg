@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="635mm" xmlns="http://www.w3.org/2000/svg" height="557mm" version="1.1" viewBox="0 0 2403 2109" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <rect x="1784" y="16" fill="#757575" width="604" height="379" stroke="#757575" stroke-width="1"/>
+   <rect x="1784" y="16" fill="#e5e5e5" width="602" height="377" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="1785" y="17" fill="#9b9b9b" width="602" height="377" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="1785" y="17" fill="#d2d2d2" width="600" height="375" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="1786" y="18" fill="#ffffff" width="600" height="375" stroke="#000000" stroke-width="1"/>
+   <rect x="1784" y="15" fill="#757575" width="604" height="72" stroke="#757575" stroke-width="1"/>
+   <rect x="1784" y="15" fill="#e5e5e5" width="602" height="70" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="1785" y="16" fill="#9b9b9b" width="602" height="70" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="1785" y="16" fill="#d2d2d2" width="600" height="68" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="1786" y="17" fill="#ffffff" width="600" height="68" stroke="#000000" stroke-width="1"/>
+   <text x="2086" y="59" fill="#000000" font-size="24" font-family="'Arial Unicode MS','Arial'" font-weight="bold" text-anchor="middle">DCE2- Interactions Logical Data Diagram</text>
+   <rect x="1819" y="174" fill="#caffca" width="30" height="30" stroke="#808040" stroke-width="1"/>
+   <text x="1867" y="195" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Transactional Data Entity</text>
+   <text x="1867" y="157" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Reference Data Entity</text>
+   <rect x="1819" y="136" fill="#c1ebff" width="30" height="30" stroke="#808040" stroke-width="1"/>
+   <text x="1867" y="120" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Master Data Entity</text>
+   <rect x="1819" y="99" fill="#ffffa8" width="30" height="30" stroke="#808040" stroke-width="1"/>
+   <rect x="1784" y="357" fill="#757575" width="304" height="34" stroke="#757575" stroke-width="1"/>
+   <rect x="1784" y="357" fill="#e5e5e5" width="302" height="32" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="1785" y="358" fill="#9b9b9b" width="302" height="32" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="1785" y="358" fill="#d2d2d2" width="300" height="30" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="1786" y="359" fill="#ffffff" width="300" height="30" stroke="#000000" stroke-width="1"/>
+   <text x="1795" y="380" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Author</text>
+   <rect x="1784" y="324" fill="#757575" width="304" height="35" stroke="#757575" stroke-width="1"/>
+   <rect x="1784" y="324" fill="#e5e5e5" width="302" height="33" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="1785" y="325" fill="#9b9b9b" width="302" height="33" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="1785" y="325" fill="#d2d2d2" width="300" height="31" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="1786" y="326" fill="#ffffff" width="300" height="31" stroke="#000000" stroke-width="1"/>
+   <text x="1795" y="347" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Domain</text>
+   <rect x="2084" y="357" fill="#757575" width="304" height="34" stroke="#757575" stroke-width="1"/>
+   <rect x="2084" y="357" fill="#e5e5e5" width="302" height="32" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="2085" y="358" fill="#9b9b9b" width="302" height="32" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="2085" y="358" fill="#d2d2d2" width="300" height="30" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="2086" y="359" fill="#ffffff" width="300" height="30" stroke="#000000" stroke-width="1"/>
+   <text x="2095" y="380" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">A. Gralek</text>
+   <rect x="2084" y="324" fill="#757575" width="304" height="35" stroke="#757575" stroke-width="1"/>
+   <rect x="2084" y="324" fill="#e5e5e5" width="302" height="33" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="2085" y="325" fill="#9b9b9b" width="302" height="33" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="2085" y="325" fill="#d2d2d2" width="300" height="31" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="2086" y="326" fill="#ffffff" width="300" height="31" stroke="#000000" stroke-width="1"/>
+   <text x="2095" y="347" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Consumer DCE2</text>
+   <rect x="1784" y="422" fill="#757575" width="304" height="35" stroke="#757575" stroke-width="1"/>
+   <rect x="1784" y="422" fill="#e5e5e5" width="302" height="33" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="1785" y="423" fill="#9b9b9b" width="302" height="33" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="1785" y="423" fill="#d2d2d2" width="300" height="31" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="1786" y="424" fill="#ffffff" width="300" height="31" stroke="#000000" stroke-width="1"/>
+   <text x="1795" y="445" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Publication Date</text>
+   <rect x="1784" y="390" fill="#757575" width="304" height="34" stroke="#757575" stroke-width="1"/>
+   <rect x="1784" y="390" fill="#e5e5e5" width="302" height="32" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="1785" y="391" fill="#9b9b9b" width="302" height="32" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="1785" y="391" fill="#d2d2d2" width="300" height="30" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="1786" y="392" fill="#ffffff" width="300" height="30" stroke="#000000" stroke-width="1"/>
+   <text x="1795" y="413" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Version</text>
+   <rect x="2084" y="422" fill="#757575" width="304" height="35" stroke="#757575" stroke-width="1"/>
+   <rect x="2084" y="422" fill="#e5e5e5" width="302" height="33" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="2085" y="423" fill="#9b9b9b" width="302" height="33" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="2085" y="423" fill="#d2d2d2" width="300" height="31" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="2086" y="424" fill="#ffffff" width="300" height="31" stroke="#000000" stroke-width="1"/>
+   <text x="2095" y="445" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">24.02.2026</text>
+   <rect x="2084" y="390" fill="#757575" width="304" height="34" stroke="#757575" stroke-width="1"/>
+   <rect x="2084" y="390" fill="#e5e5e5" width="302" height="32" stroke="#e5e5e5" stroke-width="1"/>
+   <rect x="2085" y="391" fill="#9b9b9b" width="302" height="32" stroke="#9b9b9b" stroke-width="1"/>
+   <rect x="2085" y="391" fill="#d2d2d2" width="300" height="30" stroke="#d2d2d2" stroke-width="1"/>
+   <rect x="2086" y="392" fill="#ffffff" width="300" height="30" stroke="#000000" stroke-width="1"/>
+   <text x="2095" y="413" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">1.0</text>
+   <text x="1819" y="243" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">&lt;M&gt;</text>
+   <text x="1867" y="243" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Mandatory information</text>
+   <rect x="2085" y="99" fill="#ffffff" width="30" height="30" stroke="#000000" stroke-width="2" stroke-dasharray="16,8"/>
+   <text x="2132" y="120" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Other Domain Entity</text>
+   <rect x="2085" y="136" fill="#ffffff" width="30" height="30" stroke="#808040" stroke-width="1"/>
+   <text x="2132" y="157" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">To be detailed or investigat</text>
+   <text x="1819" y="274" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">Attribu</text>
+   <text x="1899" y="274" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Primary identifier</text>
+   <text x="1819" y="306" fill="#000000" font-size="18" font-style="italic" font-family="'Arial Unicode MS','Arial'" text-anchor="start">FK</text>
+   <text x="1899" y="306" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Link to other entity</text>
+   <text x="2142" y="212" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Dimension Table</text>
+   <rect x="2084" y="193" fill="#f1dfb4" width="30" height="30" stroke="#000000" stroke-width="1"/>
+   <text x="2139" y="259" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Fact Table</text>
+   <rect x="2085" y="238" fill="#eedfff" width="30" height="30" stroke="#000000" stroke-width="1"/>
+   <rect x="2085" y="281" fill="#e8a417" width="30" height="30" stroke="#000000" stroke-width="1"/>
+   <text x="2139" y="301" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Bridge Table</text>
+   <rect x="720" y="65" rx="27" ry="27" fill="#ffffff" width="422" height="222" stroke="#0000ff" stroke-width="1"/>
+   <text x="933" y="80" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Physical Data Model</text>
+   <text x="724" y="117" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Model: Dce2_Interactions</text>
+   <text x="724" y="154" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Package: DCE2_Interactions</text>
+   <text x="724" y="191" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Diagram: Dce2_Interactions</text>
+   <text x="724" y="228" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Author: agralek</text>
+   <text x="1142" y="228" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="end">Date: 3/25/2026 </text>
+   <text x="724" y="265" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Version: </text>
+   <line x1="720" x2="1142" y1="250" y2="250" stroke="#0000ff" stroke-width="1"/>
+   <line x1="720" x2="1142" y1="213" y2="213" stroke="#0000ff" stroke-width="1"/>
+   <line x1="720" x2="1142" y1="176" y2="176" stroke="#0000ff" stroke-width="1"/>
+   <line x1="720" x2="1142" y1="139" y2="139" stroke="#0000ff" stroke-width="1"/>
+   <line x1="720" x2="1142" y1="102" y2="102" stroke="#0000ff" stroke-width="1"/>
+   <a target="_parent" xlink:href="Full27.htm#388">
+      <rect x="940" y="673" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="940" y="673" fill="#caffca" width="594" height="1421" stroke="#0080c0" stroke-width="1"/>
+      <text x="1237" y="688" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">[Transactional Data]</text>
+      <text x="1237" y="713" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">TDE_CONSUMER_INTERACTION</text>
+      <line x1="940" x2="1534" y1="722" y2="722" stroke="#0080c0" stroke-width="1"/>
+      <text x="945" y="739" fill="#000000" font-size="18" font-family="'Arial Unicode MS','FR'" text-anchor="start" text-decoration="underline">IDENTITY_UNIQUE_IDENTIFIER_BK</text>
+      <text x="945" y="761" fill="#000000" font-size="18" font-family="'Arial Unicode MS','FR'" text-anchor="start" text-decoration="underline">INTERACTION_IDENTIFIER_BK</text>
+      <text x="945" y="783" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COUNTRY_CODE</text>
+      <text x="945" y="806" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">AGENT_IDENTIFIER</text>
+      <text x="945" y="829" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">APPOINTMENT_IDENTIFIER</text>
+      <text x="945" y="852" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">BRAND_FAMILY_NAME</text>
+      <text x="945" y="875" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CAMPAIGN_IDENTIFIER</text>
+      <text x="945" y="898" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CASE_IDENTIFIER</text>
+      <text x="945" y="921" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CASE_TYPE</text>
+      <text x="945" y="944" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">PRODUCT_CATEGORY</text>
+      <text x="945" y="967" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CHANNEL_REFERENCE_CODE</text>
+      <text x="945" y="990" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COACH_IDENTIFIER</text>
+      <text x="945" y="1013" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CONTRACT_IDENTIFIER</text>
+      <text x="945" y="1036" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CORRELATION_IDENTIFIER</text>
+      <text x="945" y="1059" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CURRENCY_CODE</text>
+      <text x="945" y="1082" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DOCUMENT_TYPE</text>
+      <text x="945" y="1105" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DTE_RETAILER_IDENTIFIER</text>
+      <text x="945" y="1128" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">EVENT_IDENTIFIER</text>
+      <text x="945" y="1151" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">EXTERNAL_REFERENCE</text>
+      <text x="945" y="1174" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">FINAL_RESULT</text>
+      <text x="945" y="1197" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">FRIEND_IDENTIFIER</text>
+      <text x="945" y="1220" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_TYPE_REFERENCE_CODE</text>
+      <text x="945" y="1243" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">IFRAME_CONFIGURATION_IDENTIFIER</text>
+      <text x="945" y="1266" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">IP_ADDRESS</text>
+      <text x="945" y="1289" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">LOCATION_ADDRESS</text>
+      <text x="945" y="1312" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">LOCATION_ADDRESS_CITY</text>
+      <text x="945" y="1335" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">LOCATION_ADDRESS_COUNTRY_REFERENCE_CODE</text>
+      <text x="945" y="1358" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">LOCATION_ADDRESS_FIRST_LINE</text>
+      <text x="945" y="1381" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">LOCATION_ADDRESS_ZIP_CODE</text>
+      <text x="945" y="1404" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">LOCATION_DESCRIPTION</text>
+      <text x="945" y="1427" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">LOCATION_IDENTIFIER</text>
+      <text x="945" y="1450" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">LOCATION_NAME</text>
+      <text x="945" y="1473" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">LOCATION_TYPE_REFERENCE_CODE</text>
+      <text x="945" y="1496" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">MARKET_CODE</text>
+      <text x="945" y="1519" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">ORDER_AMOUNT</text>
+      <text x="945" y="1542" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">ORDER_IDENTIFIER</text>
+      <text x="945" y="1565" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">PAYMENT_METHOD</text>
+      <text x="945" y="1588" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">PLATFORM_BRAND</text>
+      <text x="945" y="1611" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">PREFERRED_PLATFORM</text>
+      <text x="945" y="1634" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">PRODUCT_CODE</text>
+      <text x="945" y="1657" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_REASON</text>
+      <text x="945" y="1680" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_REASON_DESCRIPTION</text>
+      <text x="945" y="1703" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_REASON_IDENTIFIER</text>
+      <text x="945" y="1726" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_REASON_REFERENCE_CODE</text>
+      <text x="945" y="1749" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">RETAILER_IDENTIFIER</text>
+      <text x="945" y="1772" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">RETAILER_NAME</text>
+      <text x="945" y="1795" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_SAP_IDENTIFIER</text>
+      <text x="945" y="1818" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_SESSION_IDENTIFIER</text>
+      <text x="945" y="1841" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">AGE_VERIFICATION_STATUS</text>
+      <text x="945" y="1864" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VENDOR_NAME</text>
+      <text x="945" y="1887" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">PARENT_ORDER_CODE</text>
+      <text x="945" y="1910" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">SOURCE_SYSTEM_IDENTIFIER</text>
+      <text x="945" y="1933" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_DATETIME</text>
+      <text x="945" y="1956" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_FROM</text>
+      <text x="945" y="1979" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_TO</text>
+      <text x="945" y="2002" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="1350" y="739" fill="#000000" font-size="18" font-family="'Arial Unicode MS','FR'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="1350" y="761" fill="#000000" font-size="18" font-family="'Arial Unicode MS','FR'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="1350" y="783" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="806" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="829" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="852" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="875" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="898" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="921" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="944" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="967" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="990" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1013" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1036" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1059" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1082" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1105" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1128" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1151" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1174" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1197" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1220" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1243" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1266" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1289" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1312" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1335" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1358" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1381" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1404" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1427" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1450" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1473" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1496" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1519" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DECIMAL(38,5)</text>
+      <text x="1350" y="1542" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1565" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1588" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1611" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1634" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1657" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1680" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1703" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1726" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1749" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1772" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1795" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1818" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1841" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1864" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1887" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1910" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="1350" y="1933" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="1350" y="1956" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="1350" y="1979" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="1350" y="2002" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">BOOLEAN</text>
+      <text x="1477" y="739" fill="#000000" font-size="18" font-family="'Arial Unicode MS','FR'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+      <text x="1477" y="761" fill="#000000" font-size="18" font-family="'Arial Unicode MS','FR'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full23.htm#8">
+      <rect x="68" y="744" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="68" y="744" fill="#ffffa8" width="482" height="340" stroke="#0080c0" stroke-width="1"/>
+      <text x="309" y="759" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">[Master Data]</text>
+      <text x="309" y="784" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">MDE_CONSUMER_INTERACTION_DEVICE</text>
+      <line x1="68" x2="550" y1="793" y2="793" stroke="#0080c0" stroke-width="1"/>
+      <text x="73" y="810" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">IDENTITY_UNIQUE_IDENTIFIER_BK</text>
+      <text x="73" y="833" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">INTERACTION_IDENTIFIER_BK</text>
+      <text x="73" y="856" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">DEVICE_IDENTIFIER_BK</text>
+      <text x="73" y="879" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COUNTRY_CODE</text>
+      <text x="73" y="902" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DEVICE_VERSION</text>
+      <text x="73" y="925" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DEVICE_TYPE</text>
+      <text x="73" y="948" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DEVICE_DESCRIPTION</text>
+      <text x="73" y="971" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">BRAND_FAMILY_NAME</text>
+      <text x="73" y="994" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_DATETIME</text>
+      <text x="73" y="1017" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_FROM</text>
+      <text x="73" y="1040" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_TO</text>
+      <text x="73" y="1063" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="349" y="810" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="349" y="833" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="349" y="856" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="349" y="879" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="349" y="902" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="349" y="925" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="349" y="948" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="349" y="971" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="349" y="994" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="349" y="1017" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="349" y="1040" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="349" y="1063" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">BOOLEAN</text>
+      <text x="431" y="810" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+      <text x="431" y="833" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+      <text x="431" y="856" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full24.htm#117">
+      <rect x="15" y="1457" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="15" y="1457" fill="#ffffa8" width="537" height="356" stroke="#0080c0" stroke-width="1"/>
+      <text x="283" y="1472" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">[Master Data]</text>
+      <text x="283" y="1497" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">MDE_CONSUMER_INTERACTION_FLAVOUR</text>
+      <line x1="15" x2="552" y1="1506" y2="1506" stroke="#0080c0" stroke-width="1"/>
+      <text x="20" y="1523" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">IDENTITY_UNIQUE_IDENTIFIER_BK</text>
+      <text x="20" y="1546" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">INTERACTION_IDENTIFIER_BK</text>
+      <text x="20" y="1569" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">FLAVOUR_REFERENCE_CODE_BK</text>
+      <text x="20" y="1592" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COUNTRY_CODE</text>
+      <text x="20" y="1615" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">FLAVOUR_REFERENCE_NAME</text>
+      <text x="20" y="1638" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_DATETIME</text>
+      <text x="20" y="1661" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_FROM</text>
+      <text x="20" y="1684" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_TO</text>
+      <text x="20" y="1707" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="296" y="1523" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="296" y="1546" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="296" y="1569" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="296" y="1592" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="296" y="1615" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="296" y="1638" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="296" y="1661" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="296" y="1684" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="296" y="1707" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">BOOLEAN</text>
+      <text x="378" y="1523" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+      <text x="378" y="1546" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+      <text x="378" y="1569" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full25.htm#205">
+      <rect x="1873" y="680" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="1873" y="680" fill="#ffffa8" width="500" height="376" stroke="#0080c0" stroke-width="1"/>
+      <text x="2123" y="695" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">[Master Data]</text>
+      <text x="2123" y="720" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">MDE_CONSUMER_INTERACTION_PRODUCT</text>
+      <line x1="1873" x2="2373" y1="729" y2="729" stroke="#0080c0" stroke-width="1"/>
+      <text x="1878" y="746" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">IDENTITY_UNIQUE_IDENTIFIER_BK</text>
+      <text x="1878" y="769" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">INTERACTION_IDENTIFIER_BK</text>
+      <text x="1878" y="792" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">PRODUCT_IDENTIFIER_BK</text>
+      <text x="1878" y="815" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COUNTRY_CODE</text>
+      <text x="1878" y="838" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">PRODUCT_NAME</text>
+      <text x="1878" y="861" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_DATETIME</text>
+      <text x="1878" y="884" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_FROM</text>
+      <text x="1878" y="907" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_TO</text>
+      <text x="1878" y="930" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="2154" y="746" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="2154" y="769" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="2154" y="792" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="2154" y="815" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="2154" y="838" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="2154" y="861" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="2154" y="884" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="2154" y="907" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="2154" y="930" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">BOOLEAN</text>
+      <text x="2236" y="746" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+      <text x="2236" y="769" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+      <text x="2236" y="792" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full26.htm#293">
+      <rect x="1854" y="1491" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="1854" y="1491" fill="#ffffa8" width="510" height="290" stroke="#0080c0" stroke-width="1"/>
+      <text x="2109" y="1506" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">[Master Data]</text>
+      <text x="2109" y="1531" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">MDE_CONSUMER_INTERACTION_VOUCHER</text>
+      <line x1="1854" x2="2364" y1="1540" y2="1540" stroke="#0080c0" stroke-width="1"/>
+      <text x="1858" y="1557" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">IDENTITY_UNIQUE_IDENTIFIER_BK</text>
+      <text x="1858" y="1580" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">INTERACTION_IDENTIFIER_BK</text>
+      <text x="1858" y="1603" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">VOUCHER_IDENTIFIER_BK</text>
+      <text x="1858" y="1626" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COUNTRY_CODE</text>
+      <text x="1858" y="1649" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VOUCHER_NAME</text>
+      <text x="1858" y="1672" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VOUCHER_AMOUNT</text>
+      <text x="1858" y="1695" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">INTERACTION_DATETIME</text>
+      <text x="1858" y="1718" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_FROM</text>
+      <text x="1858" y="1741" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VALID_TO</text>
+      <text x="1858" y="1764" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="2134" y="1557" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="2134" y="1580" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="2134" y="1603" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">TEXT</text>
+      <text x="2134" y="1626" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="2134" y="1649" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TEXT</text>
+      <text x="2134" y="1672" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DECIMAL(38,5)</text>
+      <text x="2134" y="1695" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="2134" y="1718" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="2134" y="1741" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATE</text>
+      <text x="2134" y="1764" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">BOOLEAN</text>
+      <text x="2261" y="1557" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+      <text x="2261" y="1580" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+      <text x="2261" y="1603" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+</svg>

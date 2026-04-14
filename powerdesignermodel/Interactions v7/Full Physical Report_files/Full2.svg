@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="800mm" xmlns="http://www.w3.org/2000/svg" height="592mm" version="1.1" viewBox="0 0 3027 2241" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <polyline fill="none" points="1172,631 1001,631" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1001,631 1014,628 1014,634" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="2459,645 2116,645" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="2116,645 2129,642 2129,648" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1575,645 1843,645" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1843,645 1830,648 1830,642" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1325,116 1325,152" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1325,152 1322,139 1328,139" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1325,432 1325,214" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1325,214 1328,227 1322,227" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1172,456 811,456" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="811,456 825,453 825,459" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="665,159 665,425" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="665,425 662,412 668,412" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1927,128 1927,310" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1927,310 1924,297 1930,297" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1390,432 1390,335 1790,335" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1790,335 1777,338 1777,332" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="2459,491 2266,491" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="2266,491 2279,488 2279,494" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1575,491 1993,491" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1993,491 1980,494 1980,488" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1575,827 1947,827" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1947,827 1934,830 1934,824" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="2677,827 2292,827" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="2292,827 2306,824 2306,830" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1374,1429 1374,1576 1108,1576" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1108,1576 1121,1573 1121,1579" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="806,2125 806,1614" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="806,1614 809,1627 803,1627" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="395,1260 1172,1260" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1172,1260 1159,1263 1159,1257" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="190,1304 190,1805" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="190,1805 187,1792 193,1792" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="2238,1039 2149,1039" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="2149,1039 2162,1036 2162,1042" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1575,1039 1786,1039" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1786,1039 1773,1042 1773,1036" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1390,1429 1390,1718" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1390,1718 1387,1704 1393,1704" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1567,1429 1567,1664" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1567,1664 1564,1650 1570,1650" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="970,2159 1258,2159 1258,1793" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1258,1793 1261,1806 1255,1806" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1172,963 1057,963 1057,885 883,885" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="883,885 896,882 896,888" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="970,2175 1665,2175 1665,1739" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1665,1739 1668,1752 1662,1752" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1358,1429 1358,1511 612,1511" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="612,1511 625,1508 625,1514" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="673,2159 657,2159 657,930" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="657,930 660,943 654,943" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1483,1429 1483,1991" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1483,1991 1480,1977 1486,1977" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="673,2175 459,2175 459,1548" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="459,1548 462,1562 456,1562" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1575,1253 2587,1253" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="2587,1253 2574,1256 2574,1250" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="970,2191 2741,2191 2741,1291" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="2741,1291 2744,1304 2738,1304" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="1172,1160 972,1160" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="972,1160 985,1157 985,1163" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="838,2125 838,2002 1329,2002" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="1329,2002 1316,2005 1316,1999" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <polyline fill="none" points="725,2125 725,1214" stroke="#0080c0" stroke-width="1"/>
+   <polygon fill="#0080c0" points="725,1214 728,1227 722,1227" stroke="#0080c0" stroke-width="1" stroke-linejoin="miter"/>
+   <a target="_parent" xlink:href="Full144.htm#3046">
+      <rect x="722" y="594" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient1" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="722" y="594" fill="url(#Gradient1)" width="279" height="75" stroke="#0080c0" stroke-width="1"/>
+      <text x="861" y="605" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="861" y="622" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_GLOSSARY_ASSET_</text>
+      <text x="861" y="632" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">ASSIGNMENT</text>
+      <line x1="722" x2="1001" y1="639" y2="639" stroke="#0080c0" stroke-width="1"/>
+      <text x="727" y="649" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="727" y="662" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_GLOSSARY_ASSET_KEY</text>
+      <text x="885" y="649" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="885" y="662" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="960" y="649" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="960" y="662" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full119.htm#1398">
+      <rect x="1172" y="432" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient2" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1172" y="432" fill="url(#Gradient2)" width="403" height="997" stroke="#0080c0" stroke-width="1"/>
+      <text x="1373" y="443" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="1373" y="458" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_PHYSICAL_ASSET</text>
+      <line x1="1172" x2="1575" y1="464" y2="464" stroke="#0080c0" stroke-width="1"/>
+      <text x="1177" y="474" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="1177" y="487" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PHYSICAL_ASSET_GUID_BK</text>
+      <text x="1177" y="500" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PHYSICAL_ASSET_QUALIFIED_NAME_BK</text>
+      <text x="1177" y="513" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PHYSICAL_ASSET_NAME</text>
+      <text x="1177" y="526" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PHYSICAL_ASSET_ALIAS</text>
+      <text x="1177" y="539" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PHYSICAL_ASSET_TYPE</text>
+      <text x="1177" y="552" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PHYSICAL_ASSET_DESCRIPTION</text>
+      <text x="1177" y="565" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">LAST_30_DAYS_QUERY_COUNT</text>
+      <text x="1177" y="578" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">LAST_30_DAYS_USER_COUNT</text>
+      <text x="1177" y="591" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">CERTIFICATION_STATUS</text>
+      <text x="1177" y="604" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">CERTIFIER_NAME</text>
+      <text x="1177" y="617" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ANNOUNCEMENT_TYPE</text>
+      <text x="1177" y="630" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">CREATOR_IDENTITY</text>
+      <text x="1177" y="643" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">MODIFIER_IDENTITY</text>
+      <text x="1177" y="656" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_CREATION_TIMESTAMP</text>
+      <text x="1177" y="669" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_MODIFICATION_TIMESTAMP</text>
+      <text x="1177" y="682" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">CONNECTION_NAME</text>
+      <text x="1177" y="695" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">LAST_QUERY_EXECUTION_TIMESTAMP</text>
+      <text x="1177" y="708" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">LAST_SOURCE_SYSTEM_UPDATE_TIMESTAMP</text>
+      <text x="1177" y="721" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">SOURCE_SYSTEM_MODIFIER_IDENTITY</text>
+      <text x="1177" y="734" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_DOCUMENTATION_NOTE</text>
+      <text x="1177" y="747" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_STORAGE_SIZE</text>
+      <text x="1177" y="760" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">CONNECTOR_NAME</text>
+      <text x="1177" y="773" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_SUB_TYPE</text>
+      <text x="1177" y="786" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_USER_DEFINED_TYPE</text>
+      <text x="1177" y="799" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BUSINESS_DOMAIN_NAME</text>
+      <text x="1177" y="811" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BUSINESS_DOMAIN_PATH</text>
+      <text x="1177" y="824" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BUSINESS_METADATA_TYPE</text>
+      <text x="1177" y="837" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BUSINESS_METADATA_CDE</text>
+      <text x="1177" y="850" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BUSINESS_METADATA_EXPECTED_VALUE</text>
+      <text x="1177" y="863" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_ADDITIONAL_</text>
+      <text x="1177" y="873" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">COMMENTS</text>
+      <text x="1177" y="889" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_RETENTION_PERIOD</text>
+      <text x="1177" y="902" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_DEFAULT_VALUE</text>
+      <text x="1177" y="915" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_ENCRYPTION_TYPE</text>
+      <text x="1177" y="928" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_REGEX_FORMAT</text>
+      <text x="1177" y="941" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_ID_LOOKUP</text>
+      <text x="1177" y="954" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_LEGAL_STATEMENTS</text>
+      <text x="1177" y="967" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_MANDATORY</text>
+      <text x="1177" y="980" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_MAX_LENGTH</text>
+      <text x="1177" y="993" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_MIN_DOC_DATE</text>
+      <text x="1177" y="1006" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_MIN_DOC_VERSION</text>
+      <text x="1177" y="1019" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_LINEAGE_MODEL</text>
+      <text x="1177" y="1032" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_PICK_LIST</text>
+      <text x="1177" y="1045" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_PRECISION</text>
+      <text x="1177" y="1058" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_REFERENCE_DATA</text>
+      <text x="1177" y="1071" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_SUB_DATA_TYPE</text>
+      <text x="1177" y="1084" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_UNIQUE</text>
+      <text x="1177" y="1097" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_VALUE_LIST</text>
+      <text x="1177" y="1110" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_WRITE_ACCESS</text>
+      <text x="1177" y="1123" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_QUERY_AS</text>
+      <text x="1177" y="1136" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">API_COLUMN_ATTRIBUTES_NULLABLE</text>
+      <text x="1177" y="1149" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_STATUS</text>
+      <text x="1177" y="1162" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_LATEST_DQ_SCORE</text>
+      <text x="1177" y="1175" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_LATEST_DQ_</text>
+      <text x="1177" y="1185" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALIDATION_RUN</text>
+      <text x="1177" y="1201" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_DETAILS</text>
+      <text x="1177" y="1214" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_ACCEPTED_</text>
+      <text x="1177" y="1224" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">THRESHOLD</text>
+      <text x="1177" y="1240" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_RULES_DEFINED</text>
+      <text x="1177" y="1253" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_FAILED_RECORDS</text>
+      <text x="1177" y="1266" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_DASHBOARD_LINK</text>
+      <text x="1177" y="1279" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">OWNERSHIP_METADATA_DATA_ARCHITECT</text>
+      <text x="1177" y="1292" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">OWNERSHIP_METADATA_DATA_STEWARD</text>
+      <text x="1177" y="1305" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">OWNERSHIP_METADATA_BUSINESS_SME</text>
+      <text x="1177" y="1318" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">OWNERSHIP_METADATA_EXECUTIVE_DATA_OWNER</text>
+      <text x="1177" y="1331" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">OWNERSHIP_METADATA_DATA_OWNER</text>
+      <text x="1177" y="1344" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">OWNERSHIP_METADATA_DATA_CUSTODIAN</text>
+      <text x="1177" y="1357" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">OWNERSHIP_METADATA_DATA_ENGINEER</text>
+      <text x="1177" y="1370" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">OWNERSHIP_METADATA_DATA_GOVERNANCE_</text>
+      <text x="1177" y="1380" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">MANAGER</text>
+      <text x="1177" y="1396" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="1177" y="1409" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="1177" y="1422" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="1454" y="474" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1454" y="487" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="500" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="513" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="526" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="539" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="552" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="565" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="578" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="591" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="604" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="617" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="630" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="643" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="656" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="669" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="682" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="695" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="708" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="721" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="734" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="747" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="760" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="773" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="786" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="799" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="811" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="824" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="837" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="850" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="863" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="889" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="902" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="915" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="928" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="941" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="954" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="967" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="980" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="993" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1006" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1019" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1032" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1045" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1058" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1071" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1084" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1097" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1110" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1123" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1136" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1149" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1162" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1175" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1201" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1214" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1240" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1253" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1266" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1279" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1292" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1305" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1318" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1331" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1344" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1357" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1370" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1454" y="1396" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="1454" y="1409" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="1454" y="1422" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="1541" y="474" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full157.htm#3570">
+      <rect x="1843" y="614" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient3" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1843" y="614" fill="url(#Gradient3)" width="273" height="62" stroke="#0080c0" stroke-width="1"/>
+      <text x="1979" y="625" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="1979" y="640" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_TAG_ASSIGNMENT</text>
+      <line x1="1843" x2="2116" y1="646" y2="646" stroke="#0080c0" stroke-width="1"/>
+      <text x="1848" y="656" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="1848" y="669" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_TAG_KEY</text>
+      <text x="2000" y="656" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2000" y="669" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2075" y="656" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="2075" y="669" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full108.htm#206">
+      <rect x="2459" y="591" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient4" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="2459" y="591" fill="url(#Gradient4)" width="249" height="101" stroke="#0080c0" stroke-width="1"/>
+      <text x="2583" y="602" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="2583" y="617" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_ASSET_TAG</text>
+      <line x1="2459" x2="2708" y1="623" y2="623" stroke="#0080c0" stroke-width="1"/>
+      <text x="2464" y="633" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_TAG_KEY</text>
+      <text x="2464" y="646" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_TAG_NAME_BK</text>
+      <text x="2464" y="659" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="2464" y="672" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="2464" y="685" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="2591" y="633" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2591" y="646" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="2591" y="659" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="2591" y="672" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="2591" y="685" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="2678" y="633" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full145.htm#3085">
+      <rect x="1173" y="152" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient5" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1173" y="152" fill="url(#Gradient5)" width="303" height="62" stroke="#0080c0" stroke-width="1"/>
+      <text x="1324" y="163" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="1324" y="178" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_GROUP_OWNER</text>
+      <line x1="1173" x2="1476" y1="184" y2="184" stroke="#0080c0" stroke-width="1"/>
+      <text x="1178" y="194" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="1178" y="207" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_GROUP_OWNER_KEY</text>
+      <text x="1360" y="194" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1360" y="207" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1435" y="194" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="1435" y="207" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full105.htm#8">
+      <rect x="1178" y="15" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient6" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1178" y="15" fill="url(#Gradient6)" width="305" height="101" stroke="#0080c0" stroke-width="1"/>
+      <text x="1330" y="26" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="1330" y="41" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_ASSET_GROUP_OWNER</text>
+      <line x1="1178" x2="1483" y1="47" y2="47" stroke="#0080c0" stroke-width="1"/>
+      <text x="1183" y="57" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_GROUP_OWNER_KEY</text>
+      <text x="1183" y="70" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_GROUP_OWNER_BK</text>
+      <text x="1183" y="83" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="1183" y="96" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="1183" y="109" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="1365" y="57" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1365" y="70" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1365" y="83" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="1365" y="96" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="1365" y="109" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="1452" y="57" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full158.htm#3609">
+      <rect x="518" y="425" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient7" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="518" y="425" fill="url(#Gradient7)" width="293" height="62" stroke="#0080c0" stroke-width="1"/>
+      <text x="664" y="436" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="664" y="451" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_USER_OWNER</text>
+      <line x1="518" x2="811" y1="457" y2="457" stroke="#0080c0" stroke-width="1"/>
+      <text x="522" y="467" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="522" y="480" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_USER_OWNER_KEY</text>
+      <text x="695" y="467" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="695" y="480" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="770" y="467" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="770" y="480" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full109.htm#272">
+      <rect x="593" y="58" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient8" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="593" y="58" fill="url(#Gradient8)" width="295" height="101" stroke="#0080c0" stroke-width="1"/>
+      <text x="740" y="69" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="740" y="84" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_ASSET_USER_OWNER</text>
+      <line x1="593" x2="888" y1="90" y2="90" stroke="#0080c0" stroke-width="1"/>
+      <text x="597" y="100" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_USER_OWNER_KEY</text>
+      <text x="597" y="113" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_USER_OWNER_BK</text>
+      <text x="597" y="126" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="597" y="139" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="597" y="152" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="770" y="100" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="770" y="113" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="770" y="126" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="770" y="139" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="770" y="152" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="857" y="100" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full146.htm#3124">
+      <rect x="1790" y="310" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient9" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1790" y="310" fill="url(#Gradient9)" width="273" height="62" stroke="#0080c0" stroke-width="1"/>
+      <text x="1926" y="321" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="1926" y="336" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_LABEL</text>
+      <line x1="1790" x2="2063" y1="342" y2="342" stroke="#0080c0" stroke-width="1"/>
+      <text x="1795" y="352" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="1795" y="365" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_LABEL_KEY</text>
+      <text x="1947" y="352" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1947" y="365" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2022" y="352" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="2022" y="365" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full106.htm#74">
+      <rect x="1847" y="27" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient10" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1847" y="27" fill="url(#Gradient10)" width="255" height="101" stroke="#0080c0" stroke-width="1"/>
+      <text x="1974" y="38" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="1974" y="53" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_ASSET_LABEL</text>
+      <line x1="1847" x2="2102" y1="59" y2="59" stroke="#0080c0" stroke-width="1"/>
+      <text x="1851" y="69" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_LABEL_KEY</text>
+      <text x="1851" y="82" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_LABEL_BK</text>
+      <text x="1851" y="95" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="1851" y="108" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="1851" y="121" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="1985" y="69" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1985" y="82" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="1985" y="95" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="1985" y="108" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="1985" y="121" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="2072" y="69" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full107.htm#140">
+      <rect x="2459" y="431" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient11" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="2459" y="431" fill="url(#Gradient11)" width="245" height="101" stroke="#0080c0" stroke-width="1"/>
+      <text x="2581" y="442" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="2581" y="457" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_ASSET_LINK</text>
+      <line x1="2459" x2="2704" y1="463" y2="463" stroke="#0080c0" stroke-width="1"/>
+      <text x="2463" y="473" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_LINK_KEY</text>
+      <text x="2463" y="486" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_LINK_BK</text>
+      <text x="2463" y="499" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="2463" y="512" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="2463" y="525" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="2587" y="473" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2587" y="486" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="2587" y="499" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="2587" y="512" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="2587" y="525" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="2674" y="473" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full148.htm#3219">
+      <rect x="1993" y="460" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient12" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1993" y="460" fill="url(#Gradient12)" width="273" height="62" stroke="#0080c0" stroke-width="1"/>
+      <text x="2129" y="471" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="2129" y="486" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_LINK</text>
+      <line x1="1993" x2="2266" y1="492" y2="492" stroke="#0080c0" stroke-width="1"/>
+      <text x="1998" y="502" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="1998" y="515" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_ASSET_LINK_KEY</text>
+      <text x="2150" y="502" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2150" y="515" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2225" y="502" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="2225" y="515" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full110.htm#338">
+      <rect x="1947" y="757" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient13" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1947" y="757" fill="url(#Gradient13)" width="345" height="140" stroke="#0080c0" stroke-width="1"/>
+      <text x="2119" y="768" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="2119" y="783" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_BRIDGE_PHYSICAL_ASSET_DEPENDENCY</text>
+      <line x1="1947" x2="2292" y1="789" y2="789" stroke="#0080c0" stroke-width="1"/>
+      <text x="1952" y="799" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">FACT_PHYSICAL_ASSET_LINEAGE_KEY</text>
+      <text x="1952" y="812" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="1952" y="825" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">PHYSICAL_ASSET_GUID_BK</text>
+      <text x="1952" y="838" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IMPACTED_ASSET_GUID_BK</text>
+      <text x="1952" y="851" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DEPENDENT_PHYSICAL_ASSET_BK</text>
+      <text x="1952" y="864" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="1952" y="877" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="1952" y="890" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="2163" y="799" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2163" y="812" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2163" y="825" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="2163" y="838" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="2163" y="851" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="2163" y="864" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="2163" y="877" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="2163" y="890" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="2250" y="799" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="2250" y="812" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full147.htm#3163">
+      <rect x="2677" y="808" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient14" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="2677" y="808" fill="url(#Gradient14)" width="335" height="88" stroke="#0080c0" stroke-width="1"/>
+      <text x="2844" y="819" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="2844" y="834" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_LINEAGE</text>
+      <line x1="2677" x2="3012" y1="840" y2="840" stroke="#0080c0" stroke-width="1"/>
+      <text x="2682" y="850" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">FACT_PHYSICAL_ASSET_LINEAGE_KEY</text>
+      <text x="2682" y="863" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ASSET_GUID_BK</text>
+      <text x="2682" y="876" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">IMPACTED_ASSET_GUID_BK</text>
+      <text x="2682" y="889" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">LINEAGE_POSITION</text>
+      <text x="2893" y="850" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2893" y="863" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="2893" y="876" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="2893" y="889" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(1024)</text>
+      <text x="2980" y="850" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full149.htm#3258">
+      <rect x="801" y="1539" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient15" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="801" y="1539" fill="url(#Gradient15)" width="307" height="75" stroke="#0080c0" stroke-width="1"/>
+      <text x="954" y="1550" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="954" y="1567" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_OWNERSHIP_METADATA_</text>
+      <text x="954" y="1577" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">BUSINESS_SME</text>
+      <line x1="801" x2="1108" y1="1584" y2="1584" stroke="#0080c0" stroke-width="1"/>
+      <text x="806" y="1594" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="806" y="1607" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_OWNERSHIP_METADATA_KEY</text>
+      <text x="992" y="1594" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="992" y="1607" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1067" y="1594" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="1067" y="1607" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full117.htm#1155">
+      <rect x="673" y="2125" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient16" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="673" y="2125" fill="url(#Gradient16)" width="297" height="101" stroke="#0080c0" stroke-width="1"/>
+      <text x="821" y="2136" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="821" y="2151" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_OWNERSHIP_METADATA</text>
+      <line x1="673" x2="970" y1="2157" y2="2157" stroke="#0080c0" stroke-width="1"/>
+      <text x="678" y="2167" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_OWNERSHIP_METADATA_KEY</text>
+      <text x="678" y="2180" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">OWNERSHIP_METADATA_BK</text>
+      <text x="678" y="2193" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="678" y="2206" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="678" y="2219" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="864" y="2167" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="864" y="2180" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(32)</text>
+      <text x="864" y="2193" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="864" y="2206" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="864" y="2219" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="939" y="2167" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full143.htm#2999">
+      <rect x="30" y="1216" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient17" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="30" y="1216" fill="url(#Gradient17)" width="365" height="88" stroke="#0080c0" stroke-width="1"/>
+      <text x="212" y="1227" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="212" y="1244" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_DATA_QUALITY_VALIDATION_DEFINED_</text>
+      <text x="212" y="1254" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">BUSINESS_RULE</text>
+      <line x1="30" x2="395" y1="1261" y2="1261" stroke="#0080c0" stroke-width="1"/>
+      <text x="35" y="1271" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="35" y="1284" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_DATA_QUALITY_VALIDATION_DEFINED_</text>
+      <text x="271" y="1271" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="271" y="1284" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="346" y="1271" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk1&gt;</text>
+      <text x="346" y="1284" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk2&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full112.htm#482">
+      <rect x="15" y="1805" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient18" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="15" y="1805" fill="url(#Gradient18)" width="349" height="127" stroke="#0080c0" stroke-width="1"/>
+      <text x="189" y="1816" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="189" y="1831" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_DATA_QUALITY_VALIDATION_DEFINED_BUSINESS_RULE</text>
+      <line x1="15" x2="364" y1="1837" y2="1837" stroke="#0080c0" stroke-width="1"/>
+      <text x="20" y="1847" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_DATA_QUALITY_VALIDATION_DEFINED_</text>
+      <text x="20" y="1857" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">BUSINESS_RULE_KEY</text>
+      <text x="20" y="1873" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_DEFINED_</text>
+      <text x="20" y="1883" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BUSINESS_RULE_BK</text>
+      <text x="20" y="1899" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="20" y="1912" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="20" y="1925" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="256" y="1847" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="256" y="1873" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(32)</text>
+      <text x="256" y="1899" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="256" y="1912" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="256" y="1925" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="331" y="1847" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full142.htm#2960">
+      <rect x="1786" y="1002" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient19" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1786" y="1002" fill="url(#Gradient19)" width="363" height="75" stroke="#0080c0" stroke-width="1"/>
+      <text x="1967" y="1013" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="1967" y="1030" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_DATA_QUALITY_VALIDATION_BUSINESS_</text>
+      <text x="1967" y="1040" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">KEY</text>
+      <line x1="1786" x2="2149" y1="1047" y2="1047" stroke="#0080c0" stroke-width="1"/>
+      <text x="1791" y="1057" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DATA_QUALITY_VALIDATION_BUSINESS_KEY</text>
+      <text x="1791" y="1070" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="2031" y="1057" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2031" y="1070" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2106" y="1057" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="2106" y="1070" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full111.htm#416">
+      <rect x="2238" y="1015" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient20" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="2238" y="1015" fill="url(#Gradient20)" width="373" height="101" stroke="#0080c0" stroke-width="1"/>
+      <text x="2424" y="1026" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="2424" y="1041" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">DIM_DATA_QUALITY_VALIDATION_BUSINESS_KEY</text>
+      <line x1="2238" x2="2611" y1="1047" y2="1047" stroke="#0080c0" stroke-width="1"/>
+      <text x="2243" y="1057" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DATA_QUALITY_VALIDATION_BUSINESS_KEY</text>
+      <text x="2243" y="1070" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DATA_QUALITY_VALIDATION_BUSINESS_KEY_BK</text>
+      <text x="2243" y="1083" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_FROM</text>
+      <text x="2243" y="1096" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VALID_TO</text>
+      <text x="2243" y="1109" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">ACTIVE_FLAG</text>
+      <text x="2503" y="1057" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2503" y="1070" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">VARCHAR(32)</text>
+      <text x="2503" y="1083" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="2503" y="1096" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">TIMESTAMP</text>
+      <text x="2503" y="1109" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">BOOLEAN</text>
+      <text x="2578" y="1057" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full150.htm#3297">
+      <rect x="1104" y="1718" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient21" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1104" y="1718" fill="url(#Gradient21)" width="307" height="75" stroke="#0080c0" stroke-width="1"/>
+      <text x="1257" y="1729" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="1257" y="1746" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_OWNERSHIP_METADATA_DATA_</text>
+      <text x="1257" y="1756" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">ARCHITECT</text>
+      <line x1="1104" x2="1411" y1="1763" y2="1763" stroke="#0080c0" stroke-width="1"/>
+      <text x="1109" y="1773" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="1109" y="1786" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_OWNERSHIP_METADATA_KEY</text>
+      <text x="1295" y="1773" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1295" y="1786" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1370" y="1773" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="1370" y="1786" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full155.htm#3492">
+      <rect x="1511" y="1664" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient22" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1511" y="1664" fill="url(#Gradient22)" width="307" height="75" stroke="#0080c0" stroke-width="1"/>
+      <text x="1664" y="1675" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="1664" y="1692" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_OWNERSHIP_METADATA_DATA_</text>
+      <text x="1664" y="1702" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">STEWARD</text>
+      <line x1="1511" x2="1818" y1="1709" y2="1709" stroke="#0080c0" stroke-width="1"/>
+      <text x="1516" y="1719" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="1516" y="1732" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_OWNERSHIP_METADATA_KEY</text>
+      <text x="1702" y="1719" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1702" y="1732" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1777" y="1719" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="1777" y="1732" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full156.htm#3531">
+      <rect x="576" y="855" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient23" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="576" y="855" fill="url(#Gradient23)" width="307" height="75" stroke="#0080c0" stroke-width="1"/>
+      <text x="729" y="866" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="729" y="883" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_OWNERSHIP_METADATA_</text>
+      <text x="729" y="893" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">EXECUTIVE_DATA_OWNER</text>
+      <line x1="576" x2="883" y1="900" y2="900" stroke="#0080c0" stroke-width="1"/>
+      <text x="581" y="910" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="581" y="923" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_OWNERSHIP_METADATA_KEY</text>
+      <text x="767" y="910" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="767" y="923" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="842" y="910" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="842" y="923" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full151.htm#3336">
+      <rect x="1329" y="1991" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient24" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="1329" y="1991" fill="url(#Gradient24)" width="307" height="75" stroke="#0080c0" stroke-width="1"/>
+      <text x="1482" y="2002" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="1482" y="2019" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_OWNERSHIP_METADATA_DATA_</text>
+      <text x="1482" y="2029" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">CUSTODIAN</text>
+      <line x1="1329" x2="1636" y1="2036" y2="2036" stroke="#0080c0" stroke-width="1"/>
+      <text x="1334" y="2046" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="1334" y="2059" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_OWNERSHIP_METADATA_KEY</text>
+      <text x="1520" y="2046" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1520" y="2059" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="1595" y="2046" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="1595" y="2059" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full154.htm#3453">
+      <rect x="305" y="1474" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient25" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="305" y="1474" fill="url(#Gradient25)" width="307" height="74" stroke="#0080c0" stroke-width="1"/>
+      <text x="458" y="1485" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="458" y="1502" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_OWNERSHIP_METADATA_DATA_</text>
+      <text x="458" y="1512" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">OWNER</text>
+      <line x1="305" x2="612" y1="1519" y2="1519" stroke="#0080c0" stroke-width="1"/>
+      <text x="310" y="1529" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="310" y="1542" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_OWNERSHIP_METADATA_KEY</text>
+      <text x="496" y="1529" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="496" y="1542" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="571" y="1529" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="571" y="1542" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full152.htm#3375">
+      <rect x="2587" y="1216" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient26" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="2587" y="1216" fill="url(#Gradient26)" width="307" height="75" stroke="#0080c0" stroke-width="1"/>
+      <text x="2740" y="1227" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="2740" y="1244" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_OWNERSHIP_METADATA_DATA_</text>
+      <text x="2740" y="1254" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">ENGINEER</text>
+      <line x1="2587" x2="2894" y1="1261" y2="1261" stroke="#0080c0" stroke-width="1"/>
+      <text x="2592" y="1271" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="2592" y="1284" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_OWNERSHIP_METADATA_KEY</text>
+      <text x="2778" y="1271" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2778" y="1284" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="2853" y="1271" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="2853" y="1284" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+   <a target="_parent" xlink:href="Full153.htm#3414">
+      <rect x="665" y="1139" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <defs>
+         <linearGradient id="Gradient27" x1="0%" x2="100%" y1="0%" y2="100%" gradientUnits="objectBoundingBox">
+            <stop offset="5%" stop-color="#ffffff"/>
+            <stop offset="95%" stop-color="#b2d6fc"/>
+         </linearGradient>
+      </defs>
+      <rect x="665" y="1139" fill="url(#Gradient27)" width="307" height="75" stroke="#0080c0" stroke-width="1"/>
+      <text x="818" y="1150" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="818" y="1167" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">FACT_PHYSICAL_ASSET_OWNERSHIP_METADATA_DATA_</text>
+      <text x="818" y="1177" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">GOVERNANCE_MANAGER</text>
+      <line x1="665" x2="972" y1="1184" y2="1184" stroke="#0080c0" stroke-width="1"/>
+      <text x="670" y="1194" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_PHYSICAL_ASSET_KEY</text>
+      <text x="670" y="1207" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_OWNERSHIP_METADATA_KEY</text>
+      <text x="856" y="1194" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="856" y="1207" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">VARCHAR(32)</text>
+      <text x="931" y="1194" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+      <text x="931" y="1207" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">&lt;pk,fk&gt;</text>
+   </a>
+</svg>
