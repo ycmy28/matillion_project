@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GCTS Matillion Pipeline Assessment</title>
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --card: #fffdf8;
+      --ink: #1f2a2e;
+      --muted: #5d6a70;
+      --line: #d9d0c3;
+      --accent: #0f766e;
+      --accent-2: #b45309;
+      --code: #efe8db;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(180, 83, 9, 0.12), transparent 30%),
+        linear-gradient(180deg, #f8f4ed 0%, var(--bg) 100%);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.92), rgba(22, 101, 52, 0.86));
+      color: #fff;
+      padding: 32px;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(31, 42, 46, 0.15);
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: 2.4rem;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      font-size: 1.05rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(31, 42, 46, 0.06);
+    }
+
+    h2 {
+      margin-top: 0;
+      color: var(--accent);
+      font-size: 1.4rem;
+    }
+
+    h3 {
+      color: var(--accent-2);
+      margin-bottom: 8px;
+    }
+
+    ul, ol {
+      padding-left: 22px;
+    }
+
+    code, pre {
+      font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+    }
+
+    pre {
+      background: var(--code);
+      padding: 16px;
+      border-radius: 14px;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      white-space: pre-wrap;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      margin-top: 12px;
+      font-size: 0.92rem;
+    }
+
+    .note {
+      border-left: 5px solid var(--accent-2);
+      padding-left: 14px;
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f4ebde;
+    }
+
+    .footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>GCTS Matillion Pipeline Assessment</h1>
+      <p>
+        Assessment of the exported Matillion JSON file <code>GCTS.json</code>, focused on the
+        master orchestrator and the visible ingestion / transformation components behind the
+        GCTS end-to-end flow.
+      </p>
+      <div class="pill">Confirmed master pipeline: <code>pipe_e2e_master_gcts</code></div>
+    </section>
+
+    <div class="grid">
+      <section class="card">
+        <h2>Executive Summary</h2>
+        <p>
+          <code>pipe_e2e_master_gcts</code> is the top-level entry point in the export. Its
+          confirmed sequence is simple: start, run <code>orc_ingestion_gcts</code>, then on
+          success run <code>orc_harmonization_pipeline_gcts</code>.
+        </p>
+        <p>
+          This confirms the end-to-end intent: ingest GCTS data first, then harmonize it.
+          The export does not include the full internal definitions of those two GCTS-specific
+          jobs, so the detailed business mapping is only partially visible.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Confirmed Flow</h2>
+        <pre>ROOT
+└── 01_PIPELINE_ORC
+    └── 01_MASTER_PIPELINE
+        └── CONS_GCTS_Pipeline
+            └── pipe_e2e_master_gcts
+
+Start
+  |
+  v
+orc_ingestion_gcts
+  |
+  v
+orc_harmonization_pipeline_gcts</pre>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top: 20px;">
+      <h2>What Is Included In The Export</h2>
+      <p>
+        The export contains the master GCTS pipeline plus shared framework jobs under
+        <code>05_TEMPLATE_JOBS/09_INGESTION</code>. These templates show how the platform handles:
+      </p>
+      <ul>
+        <li>S3 or external-stage ingestion</li>
+        <li>raw/load/stage movement</li>
+        <li>metadata-driven iteration by table or file</li>
+        <li>soft delete and historization support</li>
+      </ul>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Included Job Group</th>
+            <th>What It Shows</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>orc_ingestion_s3_main</code>, <code>orc_ingestion_s3_main_v2</code></td>
+            <td>Top-level metadata-driven iteration over source objects</td>
+          </tr>
+          <tr>
+            <td><code>sub_orc_ingestion_s3</code>, <code>sub_orc_ingestion_s3_v2</code></td>
+            <td>Create load tables, manage file iteration, decide stage mode, and trigger file loads</td>
+          </tr>
+          <tr>
+            <td><code>sub_orc_ingestion_s3_load_data</code>, <code>_v2</code></td>
+            <td>Per-file load logic for CSV and JSON into raw/load tables</td>
+          </tr>
+          <tr>
+            <td><code>sub_orc_ingestion_s3_stage_layer</code>, <code>_v2</code></td>
+            <td>Promote processed data into stage layer and optionally clean up files</td>
+          </tr>
+          <tr>
+            <td><code>orc_load_stage_objects</code>, <code>orc_run_group_calc</code>, <code>orc_update_indicator</code></td>
+            <td>Soft-delete / history handling for staged data</td>
+          </tr>
+          <tr>
+            <td><code>tmpt_trn_create_history_table</code></td>
+            <td>Helper transformation that writes selected records into a delete/history table</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" style="margin-top: 20px;">
+      <h2>Inferred Data Flow</h2>
+      <p>
+        Based on the included templates, the GCTS package most likely uses the following operating pattern:
+      </p>
+      <pre>GCTS source files
+  -> raw load table creation
+  -> load-layer insert
+  -> ETL metadata enrichment
+  -> stage-layer load
+  -> soft-delete / historization handling
+  -> harmonization pipeline
+  -> curated downstream outputs</pre>
+
+      <h3>File Handling Pattern</h3>
+      <p>
+        The reusable load-data jobs support both CSV and JSON. The default file type variable in the
+        included template is <code>json</code>, and the flow branches between:
+      </p>
+      <ul>
+        <li>CSV from default stage</li>
+        <li>CSV from external stage</li>
+        <li>JSON from external stage</li>
+      </ul>
+    </section>
+
+    <section class="card" style="margin-top: 20px;">
+      <h2>Soft Delete And Historization Logic</h2>
+      <p>
+        The included <code>Partial Delete</code> framework jobs dynamically build SQL to compare source
+        and target records, detect business keys, separate varchar vs non-varchar comparison logic, and then:
+      </p>
+      <ul>
+        <li>mark existing records as deleted using <code>_ETL_RECORD_INDICATOR = 'D'</code>, or</li>
+        <li>delete and recreate records when load timestamps indicate a newer source version</li>
+      </ul>
+      <p>
+        This confirms that the framework is designed for incremental, history-aware stage maintenance.
+      </p>
+    </section>
+
+    <section class="card" style="margin-top: 20px;">
+      <h2>What Cannot Be Confirmed From This Export</h2>
+      <p class="note">
+        The full definitions of <code>orc_ingestion_gcts</code> and
+        <code>orc_harmonization_pipeline_gcts</code> are not embedded in the JSON, so the export is
+        not sufficient for a complete source-to-target GCTS mapping.
+      </p>
+      <ul>
+        <li>Exact GCTS staging tables are not exposed</li>
+        <li>Exact harmonization target tables or views are not exposed</li>
+        <li>Column-level mapping and business rules are not exposed</li>
+        <li>Any GCTS-specific joins, filters, or calculations are not exposed</li>
+      </ul>
+    </section>
+
+    <section class="card" style="margin-top: 20px;">
+      <h2>Important Evidence The Export Is Generic Framework + Master Wrapper</h2>
+      <p>
+        Several defaults inside the included template jobs reference unrelated domains such as
+        <code>IXOPAY</code>, <code>POSTBUY</code>, <code>E2OPEN</code>, and sample objects like
+        <code>T_LOAD_AW_CUSTOMER</code>. That is strong evidence that the export includes shared
+        reusable ingestion framework jobs rather than the full GCTS-specific implementation.
+      </p>
+    </section>
+
+    <section class="card" style="margin-top: 20px;">
+      <h2>Final Conclusion</h2>
+      <p>
+        Yes, the main pipeline is <code>pipe_e2e_master_gcts</code>. From the exported JSON, it clearly
+        acts as an orchestrator that runs GCTS ingestion first and then runs GCTS harmonization.
+      </p>
+      <p>
+        The visible data flow is best understood as framework-based ingestion into Snowflake staging,
+        followed by downstream harmonization. A full GCTS transformation assessment would require a more
+        complete Matillion export that includes the internal definitions of the two referenced GCTS jobs.
+      </p>
+    </section>
+
+    <p class="footer">
+      Generated from local assessment of <code>/Users/ycmy28/Documents/Matillion_PMI/GCTS_Project/GCTS.json</code>.
+    </p>
+  </div>
+</body>
+</html>
