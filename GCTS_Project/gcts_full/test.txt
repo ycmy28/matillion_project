@@ -1,0 +1,35 @@
+Before adjusting the 2 dims and the fact, we should do these first:
+
+Confirm the new staging contract.
+Decide what “keep historical data” means for GCTS:
+append-only
+or keep history but still use active flags
+confirm whether _ETL_LOAD_DATETIME is the main versioning field
+Identify and plan the staging delete bypass.
+Trace how orc_ingestion_gcts uses:
+orc_load_stage_objects
+orc_run_group_calc
+orc_update_indicator
+and decide how GCTS will stop deleting/updating stage rows.
+Capture baseline counts and behavior.
+Before any change, save current counts for:
+stage tables
+integration views
+presentation tables
+_ETL_LOAD_DATETIME distributions
+response counts by YEAR, MONTH, COUNTRYCATEGORYID
+Confirm the exact business rule for each target.
+Especially:
+trn_v_int_dim_gcts_question: latest global batch or latest per business key?
+trn_v_int_dim_gcts_option: same question
+trn_v_int_fact_gcts_response: confirm the 2026-04-01 cutoff behavior
+Decide how unit tests must change.
+Current tests assume active staging counts should match PL counts. That may not be true once staging keeps history.
+So the short answer is: before editing the 2 dims and the fact, we first need to lock the new staging behavior, stop or bypass GCTS stage deletion logic, and capture a clean baseline.
+
+This is documented in:
+gcts_staging_history_prerequisites.md
+and
+gcts_recommended_implementation_sequence.md
+
+If you want, I can turn that into a very short “do this first / then this / then this” checklist for your meeting notes.
