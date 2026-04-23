@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta content="TX18_HTM 18.0.402.500" name="GENERATOR" />
+<title></title>
+</head>
+<body style="font-family:'Arial';font-size:12pt;text-align:left;">
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">--------------------------------------------------------------------------</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">Dim will base on:</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">  select * from DB_CONS_STG_DEV.STG_GCTS.V_GCTS_OPTIONS where _ETL_ACTIVE_FLAG=true</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">---------------------------------------------------------------------------</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">Unique row will be defined by:<br />
+  variableid+COUNTRYCATEGORYID+RESPONSENAME on source side</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">  variableid_bk+COUNTRYCATEGORYID_BK+RESPONSENAME_BK  on target side</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;"> </span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">---------------------------------------------------------------------------<br />
+Columns mapping:<br />
+DIM_GCTS_OPTIONS_KEY&lt;- MD5(variableid||COUNTRYCATEGORYID||RESPONSENAME)</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">variableid_bk &lt;- variableid</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">COUNTRYCATEGORYID_BK  &lt;- COUNTRYCATEGORYID<br />
+RESPONSENAME_BK &lt;- RESPONSENAME</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">Other: 1:1</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;"> </span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">SCD1, unique business key: variableid+COUNTRYCATEGORYID+RESPONSENAME</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;"></span></p>
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GCTS Pipeline Assessment</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.45; margin: 32px; color: #222; }
+h1, h2, h3, h4 { color: #0f3b63; }
+code { background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
+pre { background: #f7f7f7; padding: 12px; border: 1px solid #ddd; overflow-x: auto; }
+ul, ol { margin-top: 0.4em; margin-bottom: 0.8em; }
+li { margin: 0.2em 0; }
+p { margin: 0.5em 0; }
+</style>
+</head>
+<body>
+<h1>GCTS Pipeline Assessment</h1>
+<h2>Purpose</h2>
+<p>This file reassesses the GCTS pipeline using the fuller Matillion export:</p>
+<ul><li><code>gcts_full.json</code>
+</li><li><code>ticket_requirement.txt</code>
+</li><li><code>GCTS Data Model/Full Physical Report.html</code>
+</li></ul>
+<p>It also reuses the intent and open questions captured earlier in:</p>
+<ul><li><code>GCTS_PIPELINE_ASSESSMENT.md</code>
+</li><li><code>GCTS_CHANGE_READINESS_ASSESSMENT.md</code>
+</li><li><code>GCTS_IMPLEMENTATION_CHECKLIST_AND_SQL_DRAFT.md</code>
+</li><li><code>GCTS_MATILLION_COMPONENT_ORIENTED_DESIGN.md</code>
+</li><li><code>GCTS_DEVELOPER_HANDOFF.md</code>
+</li><li><code>GCTS_SUMMARY_AND_EFFORT_ESTIMATE.md</code>
+</li></ul>
+<p>The main difference is that <code>gcts_full.json</code> now includes the actual GCTS-specific staging, integration, harmonization, and unit-test jobs that were missing from the earlier <code>GCTS.json</code>.</p>
+<h2>Jira Context</h2>
+<p>The current assessment task is:</p>
+<ul><li><code>DODECOM-7399</code> - Assess GCTS pipeline
+</li></ul>
+<p>The assessment sits under:</p>
+<ul><li><code>DODECOM-7398</code> - Historical data of GCTS
+</li></ul>
+<p>And it is intended to prepare the next implementation tickets:</p>
+<ul><li><code>DODECOM-7400</code> - Adjust <code>trn_v_int_dim_gcts_question</code>
+</li><li><code>DODECOM-7401</code> - Adjust <code>trn_v_int_dim_gcts_option</code>
+</li><li><code>DODECOM-7402</code> - Adjust <code>trn_v_int_fact_gcts_response</code>
+</li></ul>
+<p>So the main success criterion for this document is not only to describe the pipeline, but to answer the ticket question:</p>
+<ul><li>what should be done first before the dim/fact adjustment work begins?
+</li></ul>
+<h2>Additional Resources Used</h2>
+<p>Besides the Matillion export, this assessment now also uses:</p>
+<h3>1. Jira ticket requirement text</h3>
+<p>The supplied ticket text adds these business clarifications:</p>
+<ul><li>the overall goal is to keep all GCTS data sent by Kantar available
+</li><li>no more deletion activity should happen in Staging Layer
+</li><li>Presentation Layer should remain as-is
+</li><li>the expected follow-up change is to adjust question, option, and fact logic
+</li><li>Kantar pushes 4 tables:
+<ul><li>Responses
+</li><li>Options
+</li><li>Question Map
+</li><li>Country Category
+</li></ul>
+</li><li>each push cycle should contain 1 file per table
+</li><li>there may be more than 1 push cycle in a month
+</li><li>the ticket text explicitly states:
+<ul><li>Responses = Delta
+</li><li>Options = Full
+</li><li>Question Map = Full
+</li></ul>
+</li><li>the provided text appears truncated for the Country Category availability-type line, so that specific point should be reconfirmed from Jira / Confluence
+</li></ul>
+<h3>2. Data model report</h3>
+<p>The latest PowerDesigner physical report adds useful cross-checks:</p>
+<ul><li>GCTS has a modeled star shape around:
+<ul><li><code>DIM_GCTS_OPTION</code>
+</li><li><code>DIM_GCTS_QUESTION</code>
+</li><li><code>FACT_GCTS_RESPONSE</code>
+</li></ul>
+</li><li>model notes still reference stage views such as:
+<ul><li><code>V_GCTS_OPTIONS</code>
+</li><li><code>V_GCTS_QUESTION_MAP</code>
+</li><li><code>V_GCTS_COUNTRY_CATEGORY</code>
+</li><li><code>V_GCTS_RESPONSE</code>
+</li></ul>
+</li><li>model notes explicitly show <code>_ETL_ACTIVE_FLAG=true</code> in some documented source SQL
+</li><li>model notes show the same key-generation logic seen in the Matillion jobs:
+<ul><li>question key from <code>MD5(variableid||COUNTRYCATEGORYID)</code>
+</li><li>option key from <code>MD5(variableid||COUNTRYCATEGORYID||RESPONSENAME)</code>
+</li></ul>
+</li></ul>
+<p>This is important because it confirms that the original design was view-based and active-row-oriented, which matches the current staging delete / update framework.</p>
+<h2>Executive Summary</h2>
+<p>The earlier conclusion that the GCTS export was too incomplete for meaningful job-level assessment is no longer true for <code>gcts_full.json</code>.</p>
+<p>With the fuller export, we can now confirm:</p>
+<ol><li>The real end-to-end controller is still:
+<ul><li><code>pipe_e2e_master_gcts</code>
+</li><li><code>orc_ingestion_gcts</code>
+</li><li><code>orc_harmonization_pipeline_gcts</code>
+</li></ul>
+</li><li>The requested GCTS transformation jobs are present:
+<ul><li><code>trn_v_int_dim_gcts_question</code>
+</li><li><code>trn_v_int_dim_gcts_option</code>
+</li><li><code>trn_v_int_fact_gcts_response</code>
+</li></ul>
+</li><li>GCTS staging still appears tied to the shared soft-delete / indicator-update framework:
+<ul><li><code>orc_load_stage_objects</code>
+</li><li><code>orc_run_group_calc</code>
+</li><li><code>orc_update_indicator</code>
+</li></ul>
+</li><li>The current implementation does <strong>not</strong> fully match the requested business change:
+<ul><li>question is already deduplicated by latest load, but only per generated key
+</li><li>option does not filter by latest <code>_ETL_LOAD_DATETIME</code>
+</li><li>fact does not implement the <code>2026-04-01</code> mixed old/new logic
+</li><li>stage deletion/update handling still appears active
+</li></ul>
+</li><li>The ticket and data model both reinforce that the old GCTS design was built around active/current stage views, not retained full history stage behavior.
+</li></ol>
+<h2>Confirmed Job Inventory</h2>
+<h3>Master pipeline</h3>
+<ul><li><code>pipe_e2e_master_gcts</code>
+</li></ul>
+<h3>Staging</h3>
+<ul><li><code>orc_ingestion_gcts</code>
+</li><li><code>trn_backup_gcts_data_ocean</code>
+</li><li><code>trn_load_gcts_from_do</code>
+</li></ul>
+<h3>Integration</h3>
+<ul><li><code>trn_v_int_dim_gcts_country</code>
+</li><li><code>trn_v_int_dim_gcts_question</code>
+</li><li><code>trn_v_int_dim_gcts_option</code>
+</li><li><code>trn_v_int_fact_gcts_response</code>
+</li></ul>
+<h3>Presentation / orchestration</h3>
+<ul><li><code>orc_harmonization_pipeline_gcts</code>
+</li><li><code>orc_unit_test_gcts</code>
+</li></ul>
+<h2>Actual End-To-End Flow</h2>
+<h3>1. Master controller</h3>
+<p>The top-level flow is exactly:</p>
+<pre><code>Start
+  -&gt; orc_ingestion_gcts
+  -&gt; orc_harmonization_pipeline_gcts</code></pre>
+<p>So the platform still follows the same high-level contract identified in the earlier assessment:</p>
+<ul><li>ingest first
+</li><li>harmonize and publish after ingestion succeeds
+</li></ul>
+<h3>2. Staging orchestration</h3>
+<p><code>orc_ingestion_gcts</code> is more complex than the old export suggested.</p>
+<p>Confirmed components:</p>
+<ul><li>sets S3 path dynamically from environment
+</li><li>runs <code>orc_ingestion_s3_main</code> for <code>RESPONSE</code>
+</li><li>runs <code>orc_ingestion_s3_main_v2</code> for:
+<ul><li><code>QUESTION_MAP</code>
+</li><li><code>OPTIONS</code>
+</li><li><code>COUNTRY_CATEGORY</code>
+</li></ul>
+</li><li>calls <code>orc_load_stage_objects</code>
+</li><li>adds <code>OCDI_SOURCE_FILE_NAME</code> columns to several stage tables
+</li><li>also contains an inactive initial-load path with:
+<ul><li><code>trn_load_gcts_from_do</code>
+</li><li><code>Get the list of source files</code>
+</li><li><code>Load Stage Layer - Node</code>
+</li></ul>
+</li></ul>
+<h2>Important Architectural Finding</h2>
+<p>There appear to be <strong>two response-related paths</strong> inside <code>orc_ingestion_gcts</code>, but only one should be considered active for normal scheduled execution.</p>
+<ol><li>an active S3-template path for <code>RESPONSE</code>
+</li><li>a separate initial-load path built around:
+<ul><li><code>trn_load_gcts_from_do</code>
+</li><li><code>Get the list of source files</code>
+</li><li><code>Load Stage Layer - Node</code>
+</li></ul>
+</li></ol>
+<p>However, the fuller export confirms that the second path is explicitly disabled:</p>
+<ul><li><code>trn_load_gcts_from_do</code> -&gt; <code>activationStatus: DISABLED</code>
+</li><li><code>Get the list of source files</code> -&gt; <code>activationStatus: DISABLED</code>
+</li><li><code>Load Stage Layer - Node</code> -&gt; <code>activationStatus: DISABLED</code>
+</li></ul>
+<p>The export also contains a note above that path:</p>
+<ul><li><code><strong> Only run this to get initial data for GCTS </strong></code>
+</li></ul>
+<p>So for assessment purposes, the safest interpretation is:</p>
+<ul><li>this path exists for initial-load or special-case use
+</li><li>it is not part of the current normal scheduled run path
+</li><li>it should be excluded from the primary operational assessment unless the team plans to reactivate it
+</li></ul>
+<h2>Staging Delete / Soft-Delete Assessment</h2>
+<p>The earlier assessment suspected that GCTS might still be using the shared delete/update framework. <code>gcts_full.json</code> now confirms that suspicion more strongly.</p>
+<p><code>orc_ingestion_gcts</code> explicitly calls:</p>
+<ul><li><code>orc_load_stage_objects</code>
+</li></ul>
+<p>That job iterates into:</p>
+<ul><li><code>orc_run_group_calc</code>
+</li></ul>
+<p>Which in turn iterates into:</p>
+<ul><li><code>orc_update_indicator</code>
+</li></ul>
+<p>And <code>orc_update_indicator</code> contains components such as:</p>
+<ul><li><code>Delete records from Stage table</code>
+</li><li><code>Create queries to delete and insert records</code>
+</li><li><code>Check track changes</code>
+</li><li><code>tmpt_trn_create_history_table</code>
+</li></ul>
+<p>So from a control-flow perspective, the current GCTS ingestion still appears connected to stage update / delete / historization logic.</p>
+<h3>Updated conclusion on staging behavior</h3>
+<p>Based on the fuller export, the prior recommendation still stands and is now stronger:</p>
+<ul><li>if the business requirement is to keep all Kantar data in staging
+</li><li>and stop deletion activity in staging
+</li></ul>
+<p>then GCTS staging behavior almost certainly needs adjustment in the ingestion layer, not only in the 3 integration transformations.</p>
+<h2>Data Model Cross-Check</h2>
+<p>The data model report helps validate which parts of the pipeline are long-standing design choices versus recent implementation details.</p>
+<h3>What aligns between data model and Matillion export</h3>
+<ul><li>the same core downstream objects are present:
+<ul><li><code>DIM_GCTS_QUESTION</code>
+</li><li><code>DIM_GCTS_OPTION</code>
+</li><li><code>FACT_GCTS_RESPONSE</code>
+</li></ul>
+</li><li>the same key derivation rules appear in both the model notes and current jobs
+</li><li>the fact design depends on the question and option dimensions
+</li></ul>
+<h3>What the data model suggests about historical behavior</h3>
+<p>The model documentation still references stage <strong>views</strong> and active-row filtering rather than a retained-history raw stage pattern.</p>
+<p>Examples from the report:</p>
+<ul><li><code>select * from ... STG_GCTS.V_GCTS_OPTIONS where _ETL_ACTIVE_FLAG=true</code>
+</li><li>question logic based on <code>V_GCTS_QUESTION_MAP</code>
+</li><li>response logic based on <code>V_GCTS_RESPONSE</code>
+</li></ul>
+<p>This strongly suggests the modeled design assumed:</p>
+<ul><li>stage views represent current active rows
+</li><li>downstream dims/fact consume curated active-stage outputs
+</li></ul>
+<p>That is consistent with the delete/update framework seen in Matillion, and it explains why a retained-history staging requirement now creates design tension.</p>
+<h3>Implementation implication</h3>
+<p>If the new requirement is to keep history in staging, then one of these must happen:</p>
+<ol><li>the stage views must still expose the correct active/current subset while raw history is retained underneath
+</li><li>or the downstream transformations must take over the responsibility of selecting the correct current/latest subset
+</li></ol>
+<p>The Jira follow-up tickets point toward the second option for question, option, and fact.</p>
+<h2>Transformation Assessment</h2>
+<h2>1. <code>trn_v_int_dim_gcts_question</code></h2>
+<h3>What it does now</h3>
+<p>The current transformation reads:</p>
+<ul><li><code>STG_GCTS.T_GCTS_QUESTION_MAP</code>
+</li><li><code>STG_GCTS.T_GCTS_COUNTRY_CATEGORY</code>
+</li><li>shared <code>DIM_COUNTRY</code>
+</li></ul>
+<p>Then it:</p>
+<ul><li>generates <code>DIM_GCTS_QUESTION_MAP_KEY</code>
+</li><li>joins question rows to country metadata
+</li><li>applies <code>ROW_NUMBER()</code>
+</li><li>partitions by <code>DIM_GCTS_QUESTION_MAP_KEY</code>
+</li><li>orders by <code>_ETL_LOAD_DATETIME DESC</code>
+</li><li>keeps only <code>RN = 1</code>
+</li><li>unions fixed unknown / not-applicable rows
+</li><li>creates <code>V_INT_DIM_GCTS_QUESTION</code>
+</li></ul>
+<h3>Assessment against request</h3>
+<p>This job is <strong>partially aligned</strong> with the requested change, but not exactly the same.</p>
+<p>It already applies latest-load logic, but the logic is:</p>
+<ul><li>latest <code>_ETL_LOAD_DATETIME</code> per generated key
+</li></ul>
+<p>not:</p>
+<ul><li>latest <code>_ETL_LOAD_DATETIME</code> for the whole source table
+</li></ul>
+<p>That is an important distinction.</p>
+<h3>Additional design observation</h3>
+<p>The generated key is based on:</p>
+<ul><li><code>VARIABLEID</code>
+</li><li><code>COUNTRYCATEGORYID</code>
+</li></ul>
+<p>But the metadata description suggests the business identity may also involve things like:</p>
+<ul><li><code>QUESTIONCODE</code>
+</li><li><code>FIRSTLEVELITERATOR</code>
+</li><li><code>SECONDLEVELITERATOR</code>
+</li></ul>
+<p>If that broader grain is truly required, the current dedup key may be too coarse. That should be validated before any change is finalized.</p>
+<h2>2. <code>trn_v_int_dim_gcts_option</code></h2>
+<h3>What it does now</h3>
+<p>The current transformation reads:</p>
+<ul><li><code>STG_GCTS.T_GCTS_OPTIONS</code>
+</li></ul>
+<p>Then it:</p>
+<ul><li>filters out rows where all important fields are null
+</li><li>generates <code>DIM_GCTS_OPTION_KEY</code>
+</li><li>reorders columns
+</li><li>unions fixed unknown / not-applicable rows
+</li><li>creates <code>V_INT_DIM_GCTS_OPTION</code>
+</li></ul>
+<h3>Assessment against request</h3>
+<p>This job is <strong>not yet aligned</strong> with the requested change.</p>
+<p>There is no visible:</p>
+<ul><li><code>_ETL_LOAD_DATETIME</code> source column
+</li><li>latest-load filter
+</li><li><code>ROW_NUMBER()</code> logic
+</li><li>grouped max-load logic
+</li></ul>
+<p>So based on the export, <code>trn_v_int_dim_gcts_option</code> still exposes all currently available stage rows, not latest-load-only rows.</p>
+<h2>3. <code>trn_v_int_fact_gcts_response</code></h2>
+<h3>What it does now</h3>
+<p>The current transformation reads:</p>
+<ul><li><code>STG_GCTS.T_GCTS_RESPONSE</code>
+</li></ul>
+<p>Then it joins to:</p>
+<ul><li><code>PL_MARKETRESEARCH.DIM_GCTS_QUESTION</code>
+</li><li><code>PL_MARKETRESEARCH.DIM_GCTS_OPTION</code>
+</li><li>country mapping from <code>T_GCTS_COUNTRY_CATEGORY</code> and <code>DIM_COUNTRY</code>
+</li><li><code>DIM_MARKET_SDD</code>
+</li></ul>
+<p>Then it calculates:</p>
+<ul><li><code>DIM_DATE_KEY</code>
+</li><li>dimension foreign keys with <code>-1</code> / <code>-2</code> handling
+</li><li>numeric conversions for weights
+</li><li><code>OPEN_ANSWER</code>
+</li></ul>
+<p>Finally it creates:</p>
+<ul><li><code>V_INT_FACT_GCTS_RESPONSE</code>
+</li></ul>
+<h3>Assessment against request</h3>
+<p>This job is <strong>not aligned</strong> with the requested fact rule.</p>
+<p>The requested rule was:</p>
+<ul><li>before <code>2026-04-01</code>: keep old historical behavior
+</li><li>on or after <code>2026-04-01</code>: keep latest load only by <code>YEAR, MONTH, COUNTRYCATEGORYID</code>
+</li></ul>
+<p>But the current transformation shows no visible logic for:</p>
+<ul><li><code>_ETL_LOAD_DATETIME</code>
+</li><li>max-load grouping
+</li><li>cutoff comparison with <code>2026-04-01</code>
+</li><li>split old/new branch
+</li><li><code>UNION ALL</code> of historical branch and latest-only branch
+</li></ul>
+<p>So the mixed-era fact behavior is not implemented in the current export.</p>
+<h2>Data Ocean / Response Preparation Assessment</h2>
+<p><code>trn_load_gcts_from_do</code> is still useful context because it reveals response-specific logic kept in the project, but it should not be treated as part of the active scheduled pipeline.</p>
+<p>The disabled job:</p>
+<ul><li>reads <code>FACT_DPAAS_NCPT_RESPONSE</code>
+</li><li>restricts to country categories where <code>CATEGORY = &#x27;Prevalence&#x27;</code> and <code>_ETL_ACTIVE_FLAG = TRUE</code>
+</li><li>keeps max source file by <code>COUNTRYCATEGORYID, YEAR, QUARTER</code>
+</li><li>also filters to available <code>SCMQY</code>
+</li><li>ranks latest answer by <code>ID DESC</code>
+</li><li>keeps <code>rn = 1</code>
+</li><li>adds ETL fields
+</li><li>rewrites <code>STG_LOAD_GCTS.T_LOAD_GCTS_RESPONSE</code>
+</li></ul>
+<h3>Why this still matters</h3>
+<p>This logic shows how an initial-load or edge-case response preparation path was designed.</p>
+<p>For normal scheduled-run assessment, it can be excluded. Still, if the team ever plans to re-enable it, the final requested business change for <code>FACT_GCTS_RESPONSE</code> should not be implemented blindly without checking how this logic interacts with:</p>
+<ul><li>stage-layer retention
+</li><li><code>_ETL_LOAD_DATETIME</code>
+</li><li>file-based replacement behavior
+</li><li>the <code>2026-04-01</code> cutoff requirement
+</li></ul>
+<h2>Harmonization / Presentation Assessment</h2>
+<p><code>orc_harmonization_pipeline_gcts</code> confirms the publish sequence:</p>
+<pre><code>Start
+  -&gt; trn_v_int_dim_gcts_question
+  -&gt; DIM_GCTS_QUESTION
+  -&gt; trn_v_int_dim_gcts_option
+  -&gt; DIM_GCTS_OPTION
+  -&gt; trn_v_int_fact_gcts_response
+  -&gt; FACT_GCTS_RESPONSE</code></pre>
+<p>Plus:</p>
+<ul><li><code>trn_v_int_dim_gcts_country</code>
+</li><li><code>DIM_GCTS_COUNTRY</code>
+</li><li>one-off <code>ALTER TABLE</code> for <code>FACT_GCTS_RESPONSE.OPEN_ANSWER</code>
+</li></ul>
+<p>This means the PL layer is still driven by the integration views, which is good for the requested change. It supports the earlier design idea:</p>
+<ul><li>keep PL load wrappers largely unchanged
+</li><li>change the source-side logic in integration and staging
+</li></ul>
+<h2>Unit Test Assessment</h2>
+<p>The fuller export also includes <code>orc_unit_test_gcts</code>.</p>
+<p>Current tests compare:</p>
+<ul><li>active staging counts vs PL counts for:
+<ul><li><code>DIM_GCTS_OPTION</code>
+</li><li><code>DIM_GCTS_QUESTION</code>
+</li><li><code>FACT_GCTS_RESPONSE</code>
+</li></ul>
+</li><li>duplicate-key checks in PL objects
+</li></ul>
+<h3>Important implication</h3>
+<p>If the requested business change is implemented:</p>
+<ul><li>latest-only for question
+</li><li>latest-only for option
+</li><li>mixed old/new logic for fact
+</li></ul>
+<p>then the current unit tests may no longer be valid, because they assume target row counts should match current active staging counts.</p>
+<p>So unit-test adjustment should be part of the implementation scope.</p>
+<h2>Fit-Gap Against The Business Request</h2>
+<h2>Request 1. Keep all Kantar data in staging</h2>
+<p>Current status:</p>
+<ul><li><strong>not confirmed / likely not satisfied</strong>
+</li></ul>
+<p>Reason:</p>
+<ul><li>GCTS still calls <code>orc_load_stage_objects</code>
+</li><li>that leads into <code>orc_update_indicator</code>
+</li><li>and that framework includes delete/update/historization behavior
+</li></ul>
+<h2>Request 2. Stop deletion activity in staging</h2>
+<p>Current status:</p>
+<ul><li><strong>likely not satisfied</strong>
+</li></ul>
+<p>Reason:</p>
+<ul><li>explicit stage delete/update components are still present in the called framework
+</li></ul>
+<h2>Request 3. Keep presentation behavior unchanged</h2>
+<p>Current status:</p>
+<ul><li><strong>mostly achievable</strong>
+</li></ul>
+<p>Reason:</p>
+<ul><li>PL load wrappers can probably remain as-is
+</li><li>but unit tests and source row-count assumptions may need revision
+</li></ul>
+<h2>Request 4. <code>trn_v_int_dim_gcts_question</code> should use latest <code>_ETL_LOAD_DATETIME</code></h2>
+<p>Current status:</p>
+<ul><li><strong>partially satisfied</strong>
+</li></ul>
+<p>Reason:</p>
+<ul><li>current job already keeps latest <code>_ETL_LOAD_DATETIME</code> per generated key
+</li><li>but this is not the same as a global latest-load filter
+</li></ul>
+<h2>Request 5. <code>trn_v_int_dim_gcts_option</code> should use latest <code>_ETL_LOAD_DATETIME</code></h2>
+<p>Current status:</p>
+<ul><li><strong>not satisfied</strong>
+</li></ul>
+<p>Reason:</p>
+<ul><li>no visible latest-load logic in the current job
+</li></ul>
+<h2>Request 6. <code>trn_v_int_fact_gcts_response</code> should apply mixed old/new logic from <code>2026-04-01</code></h2>
+<p>Current status:</p>
+<ul><li><strong>not satisfied</strong>
+</li></ul>
+<p>Reason:</p>
+<ul><li>no visible cutoff logic
+</li><li>no visible <code>_ETL_LOAD_DATETIME</code>-based branch
+</li></ul>
+<h2>Revised Key Conclusions</h2>
+<p>Compared with the old assessment, the new position is:</p>
+<ol><li>We now <strong>do have</strong> the real GCTS jobs needed for detailed assessment.
+</li><li>The earlier “missing job definition” warning is obsolete for <code>gcts_full.json</code>.
+</li><li>The staging-delete concern was valid and remains a major issue.
+</li><li>The requested transformation changes are only partially present today:
+<ul><li>question: partly there
+</li><li>option: not there
+</li><li>fact: not there
+</li></ul>
+</li><li>The response ingestion design includes a separate <code>trn_load_gcts_from_do</code> preparation path, but that path is currently disabled and should be treated as inactive for normal scheduled-run assessment.
+</li><li>The Jira requirement and the data model both indicate that the main architectural tension is this:
+<ul><li>old design assumption = active/current stage views
+</li><li>new requirement = historical stage retention with unchanged PL outcomes
+</li></ul>
+</li></ol>
+<h2>Recommended Next Steps</h2>
+<ol><li>Trace exactly how GCTS uses <code>orc_load_stage_objects</code> and decide how to bypass or disable stage delete/update behavior for this pipeline.
+</li><li>Clarify whether question latest-load logic should be:
+<ul><li>global latest batch
+</li><li>or latest row per business key
+</li></ul>
+</li><li>Update <code>trn_v_int_dim_gcts_option</code> to include explicit latest-load logic.
+</li><li>Update <code>trn_v_int_fact_gcts_response</code> to implement the <code>2026-04-01</code> cutoff rule by <code>YEAR, MONTH, COUNTRYCATEGORYID</code>.
+</li><li>Update <code>orc_unit_test_gcts</code> so tests reflect the new business behavior rather than simple active-stage-to-PL row parity.
+</li><li>Only if the initial-load path is ever reactivated, reassess <code>trn_load_gcts_from_do</code> together with the new fact rule so logic is not duplicated or contradicted.
+</li></ol>
+<h2>Final Conclusion</h2>
+<p><code>gcts_full.json</code> gives a much clearer and more actionable picture than the earlier <code>GCTS.json</code>.</p>
+<p>The current GCTS pipeline is real, specific, and assessable. It also shows that the requested business change is <strong>not</strong> just a small SQL tweak in one place. The real implementation scope is:</p>
+<ul><li>staging-retention behavior
+</li><li>option transformation logic
+</li><li>fact transformation logic
+</li><li>likely question-grain confirmation
+</li><li>unit-test updates
+</li></ul>
+<p>For <code>DODECOM-7399</code>, the main answer is now clear:</p>
+<ul><li>the first thing to do is not to jump directly into the 3 transformation tickets
+</li><li>the first thing to do is to define how GCTS staging will stop deleting data while still allowing downstream logic to expose the intended current/latest result set
+</li></ul>
+<p>So the refreshed assessment is:</p>
+<ul><li>the earlier documentation was directionally useful
+</li><li>but <code>gcts_full.json</code> shows the actual implementation gap more precisely
+</li><li>the Jira text clarifies the exact successor tickets and source-data behavior
+</li><li>the data model confirms that the original design was built around active-view consumption
+</li><li>and confirms that both staging and integration layers need attention
+</li></ul>
+</body>
+</html>

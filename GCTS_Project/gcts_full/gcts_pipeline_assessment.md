@@ -5,6 +5,8 @@
 This file reassesses the GCTS pipeline using the fuller Matillion export:
 
 - `gcts_full.json`
+- `ticket_requirement.txt`
+- `GCTS Data Model/Full Physical Report.html`
 
 It also reuses the intent and open questions captured earlier in:
 
@@ -16,6 +18,71 @@ It also reuses the intent and open questions captured earlier in:
 - `GCTS_SUMMARY_AND_EFFORT_ESTIMATE.md`
 
 The main difference is that `gcts_full.json` now includes the actual GCTS-specific staging, integration, harmonization, and unit-test jobs that were missing from the earlier `GCTS.json`.
+
+## Jira Context
+
+The current assessment task is:
+
+- `DODECOM-7399` - Assess GCTS pipeline
+
+The assessment sits under:
+
+- `DODECOM-7398` - Historical data of GCTS
+
+And it is intended to prepare the next implementation tickets:
+
+- `DODECOM-7400` - Adjust `trn_v_int_dim_gcts_question`
+- `DODECOM-7401` - Adjust `trn_v_int_dim_gcts_option`
+- `DODECOM-7402` - Adjust `trn_v_int_fact_gcts_response`
+
+So the main success criterion for this document is not only to describe the pipeline, but to answer the ticket question:
+
+- what should be done first before the dim/fact adjustment work begins?
+
+## Additional Resources Used
+
+Besides the Matillion export, this assessment now also uses:
+
+### 1. Jira ticket requirement text
+
+The supplied ticket text adds these business clarifications:
+
+- the overall goal is to keep all GCTS data sent by Kantar available
+- no more deletion activity should happen in Staging Layer
+- Presentation Layer should remain as-is
+- the expected follow-up change is to adjust question, option, and fact logic
+- Kantar pushes 4 tables:
+  - Responses
+  - Options
+  - Question Map
+  - Country Category
+- each push cycle should contain 1 file per table
+- there may be more than 1 push cycle in a month
+- the ticket text explicitly states:
+  - Responses = Delta
+  - Options = Full
+  - Question Map = Full
+- the provided text appears truncated for the Country Category availability-type line, so that specific point should be reconfirmed from Jira / Confluence
+
+### 2. Data model report
+
+The latest PowerDesigner physical report adds useful cross-checks:
+
+- GCTS has a modeled star shape around:
+  - `DIM_GCTS_OPTION`
+  - `DIM_GCTS_QUESTION`
+  - `FACT_GCTS_RESPONSE`
+- model notes still reference stage views such as:
+  - `V_GCTS_OPTIONS`
+  - `V_GCTS_QUESTION_MAP`
+  - `V_GCTS_COUNTRY_CATEGORY`
+  - `V_GCTS_RESPONSE`
+- model notes explicitly show `_ETL_ACTIVE_FLAG=true` in some documented source SQL
+- model notes show the same key-generation logic seen in the Matillion jobs:
+  - question key from `MD5(variableid||COUNTRYCATEGORYID)`
+  - option key from `MD5(variableid||COUNTRYCATEGORYID||RESPONSENAME)`
+
+This is important because it confirms that the original design was view-based and active-row-oriented, which matches the current staging delete / update framework.
 
 ## Executive Summary
 
@@ -40,6 +107,7 @@ With the fuller export, we can now confirm:
    - option does not filter by latest `_ETL_LOAD_DATETIME`
    - fact does not implement the `2026-04-01` mixed old/new logic
    - stage deletion/update handling still appears active
+5. The ticket and data model both reinforce that the old GCTS design was built around active/current stage views, not retained full history stage behavior.
 
 ## Confirmed Job Inventory
 
@@ -160,6 +228,45 @@ Based on the fuller export, the prior recommendation still stands and is now str
 - and stop deletion activity in staging
 
 then GCTS staging behavior almost certainly needs adjustment in the ingestion layer, not only in the 3 integration transformations.
+
+## Data Model Cross-Check
+
+The data model report helps validate which parts of the pipeline are long-standing design choices versus recent implementation details.
+
+### What aligns between data model and Matillion export
+
+- the same core downstream objects are present:
+  - `DIM_GCTS_QUESTION`
+  - `DIM_GCTS_OPTION`
+  - `FACT_GCTS_RESPONSE`
+- the same key derivation rules appear in both the model notes and current jobs
+- the fact design depends on the question and option dimensions
+
+### What the data model suggests about historical behavior
+
+The model documentation still references stage **views** and active-row filtering rather than a retained-history raw stage pattern.
+
+Examples from the report:
+
+- `select * from ... STG_GCTS.V_GCTS_OPTIONS where _ETL_ACTIVE_FLAG=true`
+- question logic based on `V_GCTS_QUESTION_MAP`
+- response logic based on `V_GCTS_RESPONSE`
+
+This strongly suggests the modeled design assumed:
+
+- stage views represent current active rows
+- downstream dims/fact consume curated active-stage outputs
+
+That is consistent with the delete/update framework seen in Matillion, and it explains why a retained-history staging requirement now creates design tension.
+
+### Implementation implication
+
+If the new requirement is to keep history in staging, then one of these must happen:
+
+1. the stage views must still expose the correct active/current subset while raw history is retained underneath
+2. or the downstream transformations must take over the responsibility of selecting the correct current/latest subset
+
+The Jira follow-up tickets point toward the second option for question, option, and fact.
 
 ## Transformation Assessment
 
@@ -441,6 +548,9 @@ Compared with the old assessment, the new position is:
    - option: not there
    - fact: not there
 5. The response ingestion design includes a separate `trn_load_gcts_from_do` preparation path, but that path is currently disabled and should be treated as inactive for normal scheduled-run assessment.
+6. The Jira requirement and the data model both indicate that the main architectural tension is this:
+   - old design assumption = active/current stage views
+   - new requirement = historical stage retention with unchanged PL outcomes
 
 ## Recommended Next Steps
 
@@ -465,8 +575,15 @@ The current GCTS pipeline is real, specific, and assessable. It also shows that 
 - likely question-grain confirmation
 - unit-test updates
 
+For `DODECOM-7399`, the main answer is now clear:
+
+- the first thing to do is not to jump directly into the 3 transformation tickets
+- the first thing to do is to define how GCTS staging will stop deleting data while still allowing downstream logic to expose the intended current/latest result set
+
 So the refreshed assessment is:
 
 - the earlier documentation was directionally useful
 - but `gcts_full.json` shows the actual implementation gap more precisely
+- the Jira text clarifies the exact successor tickets and source-data behavior
+- the data model confirms that the original design was built around active-view consumption
 - and confirms that both staging and integration layers need attention

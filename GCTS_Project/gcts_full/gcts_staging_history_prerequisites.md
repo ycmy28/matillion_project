@@ -10,10 +10,65 @@ This note answers two questions:
 This note is based on the fuller export:
 
 - `gcts_full.json`
+- `ticket_requirement.txt`
+- `GCTS Data Model/Full Physical Report.html`
 
 and should be read together with:
 
 - `gcts_pipeline_assessment.md`
+
+## Jira Context
+
+This note supports:
+
+- `DODECOM-7399` - Assess GCTS pipeline
+
+and prepares the follow-up implementation tickets:
+
+- `DODECOM-7400` - Adjust `trn_v_int_dim_gcts_question`
+- `DODECOM-7401` - Adjust `trn_v_int_dim_gcts_option`
+- `DODECOM-7402` - Adjust `trn_v_int_fact_gcts_response`
+
+The parent business objective from `DODECOM-7398` is:
+
+- keep historical GCTS data available
+- stop deletion activity in staging
+- preserve Presentation Layer behavior as much as possible
+
+## Extra Context From The Ticket And Data Model
+
+The ticket text adds these useful operating assumptions:
+
+- Kantar pushes 4 tables:
+  - Responses
+  - Options
+  - Question Map
+  - Country Category
+- each push cycle should contain 1 file per table
+- more than 1 push cycle can happen in a month
+- the supplied ticket text describes:
+  - Responses = Delta
+  - Options = Full
+  - Question Map = Full
+- the Country Category availability-type line appears incomplete in the provided text and should be reconfirmed
+
+The data model adds an important architectural clue:
+
+- the original modeled downstream design was based on active/current stage views such as:
+  - `V_GCTS_OPTIONS`
+  - `V_GCTS_QUESTION_MAP`
+  - `V_GCTS_RESPONSE`
+- model notes also reference `_ETL_ACTIVE_FLAG=true`
+
+That means the original design assumption was closer to:
+
+- active-view-based staging consumption
+
+not:
+
+- full historical retained staging consumption
+
+This explains why the new requirement creates an architectural change, not just a small SQL update.
 
 ## Part 1. Why Previous Engineering Likely Used Delete Logic In Staging
 
@@ -46,6 +101,8 @@ Inside `orc_update_indicator`, the export includes components such as:
 - `tmpt_trn_create_history_table`
 
 That is not the pattern of a simple append-only landing zone. It is the pattern of a managed staging framework that compares source and target and then decides how to keep the stage layer aligned.
+
+The data model supports this interpretation as well, because the modeled downstream logic was documented against active stage views and `_ETL_ACTIVE_FLAG=true`, which is exactly the kind of design that often depends on stage update/delete handling.
 
 ## Most Likely Original Design Intent
 
@@ -132,6 +189,13 @@ Otherwise there is a real risk that:
 - but the 3 transformations still interpret the data incorrectly
 - or Presentation Layer row counts change unexpectedly
 
+This matters even more because the Jira requirement suggests mixed source behavior:
+
+- Responses behave like delta data
+- Options and Question Map behave like full data
+
+So the retained-history design may not have the same downstream handling rule for every object.
+
 ## Recommended Prerequisites
 
 ## 1. Confirm The New Staging Contract
@@ -183,6 +247,8 @@ Possible outcome:
 - historical retention may be needed for all four
 - or only for response
 - or only for question / option / response
+
+This point is important because the Jira text suggests the table-delivery behavior is not uniform across all 4 Kantar objects.
 
 This matters because the transformation changes are targeted to question, option, and response only.
 

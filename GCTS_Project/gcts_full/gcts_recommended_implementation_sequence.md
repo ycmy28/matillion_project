@@ -15,6 +15,57 @@ This should be read together with:
 
 - `gcts_pipeline_assessment.md`
 - `gcts_staging_history_prerequisites.md`
+- `ticket_requirement.txt`
+- `GCTS Data Model/Full Physical Report.html`
+
+## Jira Context
+
+This implementation sequence is intended to support:
+
+- `DODECOM-7399` - Assess GCTS pipeline
+
+and prepare the next change tickets:
+
+- `DODECOM-7400` - Adjust `trn_v_int_dim_gcts_question`
+- `DODECOM-7401` - Adjust `trn_v_int_dim_gcts_option`
+- `DODECOM-7402` - Adjust `trn_v_int_fact_gcts_response`
+
+The parent business objective from `DODECOM-7398` is:
+
+- keep historical GCTS data from Kantar available
+- stop deletion activity in staging
+- keep Presentation Layer behavior as stable as possible
+
+## Extra Source Context
+
+Besides the Matillion export, this delivery sequence is informed by:
+
+### 1. Jira requirement text
+
+The supplied ticket text adds these operational assumptions:
+
+- Kantar pushes 4 GCTS tables:
+  - Responses
+  - Options
+  - Question Map
+  - Country Category
+- each push cycle should contain 1 file per table
+- there may be multiple push cycles in one month
+- source data behavior is described as:
+  - Responses = Delta
+  - Options = Full
+  - Question Map = Full
+- the Country Category availability-type line appears incomplete in the provided text and should be reconfirmed
+
+### 2. Data model report
+
+The latest PowerDesigner report shows that the original modeled downstream design was built around:
+
+- active/current stage views such as `V_GCTS_OPTIONS`, `V_GCTS_QUESTION_MAP`, and `V_GCTS_RESPONSE`
+- `_ETL_ACTIVE_FLAG=true` usage in documented source SQL
+- the same key-generation patterns currently implemented in Matillion
+
+This matters because the implementation sequence is not just about adding latest-load filters. It is about shifting from an old active-view staging model toward retained stage history without breaking downstream expectations.
 
 ## Scope
 
@@ -48,6 +99,19 @@ The team should avoid:
 
 because either approach can create a temporary mismatch between stage meaning and downstream logic.
 
+## What This Sequence Is Solving
+
+This plan is specifically designed to resolve the gap identified in the assessment:
+
+- the current pipeline was built around active/current stage consumption
+- the requested business change wants historical stage retention
+- the downstream dims/fact must still present the intended current or mixed-era result set
+
+So this sequence assumes the team must manage both:
+
+- upstream staging behavior
+- downstream visibility logic
+
 ## Recommended Phases
 
 ## Phase 1. Confirm Design Decisions
@@ -72,6 +136,7 @@ Lock the business and technical rules before editing jobs.
 5. Confirm fact cutoff interpretation:
    - `< '2026-04-01'`
    - `>= '2026-04-01'`
+6. Confirm whether the old active-view logic should remain available through stage views, or whether the 3 target transformations will become the main place where current/latest visibility is enforced.
 6. Confirm whether the inactive initial-load path will remain excluded:
    - `trn_load_gcts_from_do`
    - `Get the list of source files`
@@ -174,6 +239,8 @@ Prefer the smallest change that isolates GCTS from stage deletion behavior witho
 
 After this change, new loads should preserve historical rows in staging instead of deleting or superseding them physically.
 
+At the same time, the downstream pipeline must still be able to expose the correct consumer-facing current/latest result.
+
 ## Phase 4. Prepare Transformation Redesign
 
 ### Goal
@@ -216,6 +283,8 @@ Recommended pattern:
   - latest global batch
   - or latest per approved business grain
 
+This is especially important because the Jira requirement explicitly asks for `MAX(_ETL_LOAD_DATETIME)`-based filtering for this dimension.
+
 ### Job 3. `trn_v_int_fact_gcts_response`
 
 Current state:
@@ -229,6 +298,8 @@ Required action:
   - historical branch for groups with `MAX(_ETL_LOAD_DATETIME) < '2026-04-01'`
   - latest-only branch for groups with `MAX(_ETL_LOAD_DATETIME) >= '2026-04-01'`
 - combine results with `UNION ALL`
+
+This directly reflects the Jira rule for `DODECOM-7402`, and should be validated against the Kantar delivery pattern where Responses are described as delta data and monthly combinations may receive more than one push cycle.
 
 ### Important design rule
 
@@ -411,3 +482,8 @@ The best chance of preserving Presentation Layer output while keeping history in
 - push visibility rules into integration
 - validate with baseline comparisons
 - release the package together
+
+In other words, the implementation sequence should follow the business-ticket order logically, but not literally:
+
+- assess and define staging behavior first
+- then implement the dim/fact adjustments with that staging contract in mind

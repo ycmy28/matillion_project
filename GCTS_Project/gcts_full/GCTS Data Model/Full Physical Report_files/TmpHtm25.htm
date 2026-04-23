@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta content="TX18_HTM 18.0.402.500" name="GENERATOR" />
+<title></title>
+</head>
+<body style="font-family:'Arial';font-size:12pt;text-align:left;">
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">---------------------------------------------------------------------------</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">Fakt table will base on feed:</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;"> </span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">select * from DB_CONS_STG_DEV.STG_GCTS.V_GCTS_RESPONSE r</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">join DB_CONS_STG_DEV.STG_GCTS.V_GCTS_COUNTRY_CATEGORY cc on r.COUNTRYCATEGORYID=cc.COUNTRYCATEGORYID</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">where r._ETL_ACTIVE_FLAG=true and cc._ETL_ACTIVE_FLAG=true</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">---------------------------------------------------------------------------</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">Unique row will be defined by:<br />
+ID_+ variableid + crountrycodeid + responsename - on source side<br />
+ID + DIM_GCTS_QUESTION_MAP_KEY + DIM_GCTS_OPTIONS_KEY - on fact side<br />
+<br />
+---------------------------------------------------------------------------<br />
+Columns mapping:</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">DIM_GCTS_QUESTION_MAP_KEY &lt;- MD5(variableid||COUNTRYCATEGORYID )<br />
+DIM_GCTS_COUNTRY_KEY &lt;- country - column available after joining with country category</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">DIM_GCTS_OPTIONS_KEY &lt;- MD5(variableid||COUNTRYCATEGORYID||RESPONSENAME)</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">DIM_DATE_KEY &lt;- calculated, to integer 01mmyyyy, based on month and year columns</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;">other 1:1</span></p>
+<p style="margin-top:0pt;margin-bottom:0pt;"><span style="font-family:'Times New Roman';font-size:10pt;"></span></p>
+</body>
+</html>

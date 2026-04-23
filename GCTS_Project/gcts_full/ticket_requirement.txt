@@ -1,0 +1,54 @@
+Historical data of GCTS
+https://jira.app.pconnect.biz/browse/DODECOM-7398
+As the user of GCTS data, I want to keep all data sent by Kantar to Consumer Node available, no more deletion activity in Staging Layer, but keep the Presentation layer as-is
+
+7398 is parent of:
+
+1. Assess GCTS pipeline
+https://jira.app.pconnect.biz/browse/DODECOM-7399
+Assess GCTS matillion pipeline to understand the data flow.
+Matillion pipeline name: pipe_e2e_master_gcts
+expected from this assessment is to know what to do first in order to execute the next following task (adjustment of dim & fact tables)
+
+2. Adjust GCTS Harmonization pipeline - DIM_GCTS_QUESTION
+https://jira.app.pconnect.biz/browse/DODECOM-7400
+Adjust matillion transformation job: trn_v_int_dim_gcts_question
+Embed new logic for data that we get from T_GCTS_* to get only the data with MAX(_ETL_LOAD_DATETIME).
+e.g.
+select A,B,C from T_GCTS_QUESTION_MAP where _ETL_LOAD_DATETIME = ( select MAX(_ETL_LOAD_DATETIME) from T_GCTS_QUESTION_MAP)
+
+
+3. Adjust GCTS Harmonization pipeline - DIM_GCTS_OPTION
+https://jira.app.pconnect.biz/browse/DODECOM-7401
+Adjust matillion transformation job: trn_v_int_dim_gcts_option
+Embed new logic for data that we get from T_GCTS_* to get only the data with MAX(_ETL_LOAD_DATETIME).
+e.g.
+select A,B,C from T_GCTS_OPTION where _ETL_LOAD_DATETIME = ( select MAX(_ETL_LOAD_DATETIME) from T_GCTS_QUESTION_MAP)
+
+
+4. Adjust GCTS Harmonization pipeline - FACT_GCTS_RESPONSE
+https://jira.app.pconnect.biz/browse/DODECOM-7402
+Adjust matillion transformation job: trn_v_int_fact_gcts_response
+Adjust how to get data from T_GCTS_RESPONSE:
+Check MAX(_ETL_LOAD_DATETIME) for group by YEAR,MONTH,COUNTRYCATEGORYID
+If YEAR,MONTH,COUNTRYCATEGORYID has MAX(_ETL_LOAD_DATETIME) < '2026-04-01' then get the data as is from T_GCTS_RESPONSE.
+If YEAR,MONTH,COUNTRYCATEGORYID has MAX(_ETL_LOAD_DATETIME) >= '2026-04-01' then only get the data from T_GCTS_RESPONSE based on MAX(_ETL_LOAD_DATETIME)
+union point 2 and 3.
+Point 2 explanation:
+In old data that we get from Kantar - we might have multiple ETL_LOAD_DATETIME for 1 combination of YEAR,MONTH,COUNTRYCATEGORYID, and we need to keep it like that.
+For the new data from Kantar - based on the ingestion process - each YEAR,MONTH,COUNTRYCATEGORYID will be replaced with the new data that came from Kantar, hence we only need the latest data.
+
+
+- another information from confluence page
+1. There are 4 tables that will be pushed by Kantar team for GCTS data
+    a. Responses
+    b. Options
+    c. Question Map
+    d. Country Category
+2. Each push cycle, they should only push 1 file for each table.
+3. In 1 month, there could be more than 1 push cycle.
+4. Data availability type for each table for each push cycle:
+a. Responses - Delta
+    b. Options - Full
+    c. Question Map - Full
+    d. Country Category

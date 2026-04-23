@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="359mm" xmlns="http://www.w3.org/2000/svg" height="184mm" version="1.1" viewBox="0 0 1358 699" xmlns:xlink="http://www.w3.org/1999/xlink">
+   <rect x="57" y="31" rx="11" ry="11" fill="#ffffff" width="166" height="90" stroke="#0000ff" stroke-width="1"/>
+   <text x="142" y="39" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">Physical Data Model</text>
+   <text x="61" y="54" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Model: GCTS</text>
+   <text x="61" y="69" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Package: </text>
+   <text x="61" y="84" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Diagram: GCTS</text>
+   <text x="61" y="99" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Author: rkulawin</text>
+   <text x="223" y="99" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="end">Date: 10/2/2023 </text>
+   <text x="61" y="114" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">Version: </text>
+   <line x1="57" x2="223" y1="106" y2="106" stroke="#0000ff" stroke-width="1"/>
+   <line x1="57" x2="223" y1="91" y2="91" stroke="#0000ff" stroke-width="1"/>
+   <line x1="57" x2="223" y1="76" y2="76" stroke="#0000ff" stroke-width="1"/>
+   <line x1="57" x2="223" y1="61" y2="61" stroke="#0000ff" stroke-width="1"/>
+   <line x1="57" x2="223" y1="46" y2="46" stroke="#0000ff" stroke-width="1"/>
+   <a target="_parent" xlink:href="Full9.htm#4">
+      <polyline fill="none" points="646,161 646,128 632,128 632,94" stroke="#584ab5" stroke-width="1"/>
+      <polygon fill="#584ab5" points="632,94 635,108 629,108" stroke="#584ab5" stroke-width="1" stroke-linejoin="miter"/>
+      <text x="639" y="131" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">R_1</text>
+   </a>
+   <a target="_parent" xlink:href="Full10.htm#9">
+      <polyline fill="none" points="766,359 928,359 928,349 1077,349" stroke="#584ab5" stroke-width="1"/>
+      <polygon fill="#584ab5" points="1077,349 1063,352 1063,346" stroke="#584ab5" stroke-width="1" stroke-linejoin="miter"/>
+      <text x="928" y="365" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">R_2</text>
+   </a>
+   <a target="_parent" xlink:href="Full11.htm#14">
+      <polyline fill="none" points="230,362 376,362 376,356 526,356" stroke="#584ab5" stroke-width="1"/>
+      <polygon fill="#584ab5" points="230,362 243,359 243,365" stroke="#584ab5" stroke-width="1" stroke-linejoin="miter"/>
+      <text x="376" y="354" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">R_4</text>
+   </a>
+   <a target="_parent" xlink:href="Full12.htm#19">
+      <polyline fill="none" points="648,565 648,604" stroke="#584ab5" stroke-width="1"/>
+      <polygon fill="#584ab5" points="648,604 645,591 651,591" stroke="#584ab5" stroke-width="1" stroke-linejoin="miter"/>
+      <text x="648" y="588" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="middle">R_5</text>
+   </a>
+   <a target="_parent" xlink:href="Full21.htm#260">
+      <rect x="526" y="161" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="526" y="161" fill="#eedfff" width="240" height="404" stroke="#000000" stroke-width="1"/>
+      <text x="646" y="176" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">&lt;&lt;Fact Table&gt;&gt;</text>
+      <text x="646" y="201" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">FACT_GCTS_RESPONSE</text>
+      <line x1="526" x2="766" y1="210" y2="210" stroke="#000000" stroke-width="1"/>
+      <text x="530" y="220" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DIM_DATE_KEY</text>
+      <text x="530" y="233" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DIM_GCTS_QUESTION_MAP_KEY</text>
+      <text x="530" y="246" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DIM_GCTS_OPTIONS_KEY</text>
+      <text x="530" y="259" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">DIM_COUNTRY_KEY</text>
+      <text x="530" y="279" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">ID</text>
+      <text x="530" y="302" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">SERIAL</text>
+      <text x="530" y="325" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">RESPONSELABEL</text>
+      <text x="530" y="348" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">WEIGHT</text>
+      <text x="530" y="371" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">D_WEIGHT1</text>
+      <text x="530" y="394" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">D_WEIGHT2</text>
+      <text x="530" y="417" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">D_WEIGHT3</text>
+      <text x="530" y="440" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">WAVE</text>
+      <text x="530" y="463" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CMQY</text>
+      <text x="530" y="486" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">SCMQY</text>
+      <text x="530" y="509" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">_ETL_LOAD_DATETIME</text>
+      <text x="530" y="532" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">_etl_run_id</text>
+      <text x="530" y="555" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">_etl_job_id</text>
+   </a>
+   <a target="_parent" xlink:href="Full20.htm#138">
+      <rect x="1077" y="93" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="1077" y="93" fill="#f1dfb4" width="266" height="513" stroke="#000000" stroke-width="1"/>
+      <text x="1210" y="108" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="1210" y="133" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">DIM_GCTS_QUESTION</text>
+      <line x1="1077" x2="1343" y1="142" y2="142" stroke="#000000" stroke-width="1"/>
+      <text x="1081" y="159" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">DIM_GCTS_QUESTION_MAP_KEY</text>
+      <text x="1081" y="182" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VARIABLEID_BK</text>
+      <text x="1081" y="205" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COUNTRYCATEGORYID_BK</text>
+      <text x="1081" y="228" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">QUESTIONCODE</text>
+      <text x="1081" y="251" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">TOPLEVELFIELD</text>
+      <text x="1081" y="274" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">FIRSTLEVELITERATOR</text>
+      <text x="1081" y="297" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">FIRSTLEVELFLD</text>
+      <text x="1081" y="320" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">FIRSTLEVELLABEL</text>
+      <text x="1081" y="343" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">SECONDLEVELITERATOR</text>
+      <text x="1081" y="366" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">SECONDLEVELFLD</text>
+      <text x="1081" y="389" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">SECONDLEVELLABEL</text>
+      <text x="1081" y="412" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">DATAPATTERN</text>
+      <text x="1081" y="435" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COUNTRYDISPLAYNAME</text>
+      <text x="1081" y="458" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CATEGORY</text>
+      <text x="1081" y="481" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COUNTRY</text>
+      <text x="1081" y="504" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">CATEGORYDISPLAYNAME</text>
+      <text x="1081" y="527" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">STATUS</text>
+      <text x="1081" y="550" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">_ETL_LOAD_DATETIME</text>
+      <text x="1081" y="573" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">_etl_run_id</text>
+      <text x="1081" y="596" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">_etl_job_id</text>
+   </a>
+   <a target="_parent" xlink:href="Full19.htm#71">
+      <rect x="15" y="232" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="15" y="232" fill="#f1dfb4" width="215" height="260" stroke="#000000" stroke-width="1"/>
+      <text x="122" y="247" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="122" y="272" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">DIM_GCTS_OPTION</text>
+      <line x1="15" x2="230" y1="281" y2="281" stroke="#000000" stroke-width="1"/>
+      <text x="20" y="298" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start" text-decoration="underline">DIM_GCTS_OPTIONS_KEY</text>
+      <text x="20" y="321" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">VARIABLEID_BK</text>
+      <text x="20" y="344" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">COUNTRYCATEGORYID_BK</text>
+      <text x="20" y="367" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">RESPONSENAME_BK</text>
+      <text x="20" y="390" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">QUESTIONCODE</text>
+      <text x="20" y="413" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">RESPONSELABEL</text>
+      <text x="20" y="436" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">_ETL_LOAD_DATETIME</text>
+      <text x="20" y="459" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">_etl_run_id</text>
+      <text x="20" y="482" fill="#000000" font-size="18" font-family="'Arial Unicode MS','Franklin Gothic Book'" text-anchor="start">_etl_job_id</text>
+   </a>
+   <a target="_parent" xlink:href="Full18.htm#39">
+      <rect x="574" y="15" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="574" y="15" fill="#f1dfb4" width="115" height="79" stroke="#000000" stroke-width="1"/>
+      <text x="631" y="30" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="631" y="55" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">DIM_DATE</text>
+      <line x1="574" x2="689" y1="64" y2="64" stroke="#000000" stroke-width="1"/>
+      <text x="579" y="74" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_DATE_KEY</text>
+      <text x="579" y="87" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">CALENDAR_DATE</text>
+   </a>
+   <a target="_parent" xlink:href="Full17.htm#7">
+      <rect x="542" y="604" fill="#ffffff" width="0" height="0" stroke="none" stroke-width="0"/>
+      <rect x="542" y="604" fill="#f1dfb4" width="212" height="80" stroke="#000000" stroke-width="1"/>
+      <text x="648" y="619" fill="#000000" font-size="13" font-family="'Arial Unicode MS','Franklin Gothic Medium Cond'" text-anchor="middle">&lt;&lt;Dimension Table&gt;&gt;</text>
+      <text x="648" y="644" fill="#000000" font-size="21" font-family="'Arial Unicode MS','Franklin Gothic Book'" font-weight="bold" text-anchor="middle">DIM_COUNTRY</text>
+      <line x1="542" x2="754" y1="653" y2="653" stroke="#000000" stroke-width="1"/>
+      <text x="547" y="663" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start" text-decoration="underline">DIM_COUNTRY_KEY</text>
+      <text x="547" y="676" fill="#000000" font-size="10" font-family="'Arial Unicode MS','Arial'" text-anchor="start">country</text>
+   </a>
+</svg>

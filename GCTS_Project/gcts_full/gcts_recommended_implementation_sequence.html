@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GCTS Recommended Implementation Sequence</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.45; margin: 32px; color: #222; }
+h1, h2, h3, h4 { color: #0f3b63; }
+code { background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
+pre { background: #f7f7f7; padding: 12px; border: 1px solid #ddd; overflow-x: auto; }
+ul, ol { margin-top: 0.4em; margin-bottom: 0.8em; }
+li { margin: 0.2em 0; }
+p { margin: 0.5em 0; }
+</style>
+</head>
+<body>
+<h1>GCTS Recommended Implementation Sequence</h1>
+<h2>Purpose</h2>
+<p>This document turns the current GCTS assessment into a practical delivery sequence for the team.</p>
+<p>It is designed for the specific goal of:</p>
+<ul><li>keeping historical Kantar data in staging
+</li><li>stopping GCTS staging deletion behavior
+</li><li>preserving Presentation Layer results as much as possible
+</li><li>updating the 3 targeted transformations safely
+</li></ul>
+<p>This should be read together with:</p>
+<ul><li><code>gcts_pipeline_assessment.md</code>
+</li><li><code>gcts_staging_history_prerequisites.md</code>
+</li><li><code>ticket_requirement.txt</code>
+</li><li><code>GCTS Data Model/Full Physical Report.html</code>
+</li></ul>
+<h2>Jira Context</h2>
+<p>This implementation sequence is intended to support:</p>
+<ul><li><code>DODECOM-7399</code> - Assess GCTS pipeline
+</li></ul>
+<p>and prepare the next change tickets:</p>
+<ul><li><code>DODECOM-7400</code> - Adjust <code>trn_v_int_dim_gcts_question</code>
+</li><li><code>DODECOM-7401</code> - Adjust <code>trn_v_int_dim_gcts_option</code>
+</li><li><code>DODECOM-7402</code> - Adjust <code>trn_v_int_fact_gcts_response</code>
+</li></ul>
+<p>The parent business objective from <code>DODECOM-7398</code> is:</p>
+<ul><li>keep historical GCTS data from Kantar available
+</li><li>stop deletion activity in staging
+</li><li>keep Presentation Layer behavior as stable as possible
+</li></ul>
+<h2>Extra Source Context</h2>
+<p>Besides the Matillion export, this delivery sequence is informed by:</p>
+<h3>1. Jira requirement text</h3>
+<p>The supplied ticket text adds these operational assumptions:</p>
+<ul><li>Kantar pushes 4 GCTS tables:
+<ul><li>Responses
+</li><li>Options
+</li><li>Question Map
+</li><li>Country Category
+</li></ul>
+</li><li>each push cycle should contain 1 file per table
+</li><li>there may be multiple push cycles in one month
+</li><li>source data behavior is described as:
+<ul><li>Responses = Delta
+</li><li>Options = Full
+</li><li>Question Map = Full
+</li></ul>
+</li><li>the Country Category availability-type line appears incomplete in the provided text and should be reconfirmed
+</li></ul>
+<h3>2. Data model report</h3>
+<p>The latest PowerDesigner report shows that the original modeled downstream design was built around:</p>
+<ul><li>active/current stage views such as <code>V_GCTS_OPTIONS</code>, <code>V_GCTS_QUESTION_MAP</code>, and <code>V_GCTS_RESPONSE</code>
+</li><li><code>_ETL_ACTIVE_FLAG=true</code> usage in documented source SQL
+</li><li>the same key-generation patterns currently implemented in Matillion
+</li></ul>
+<p>This matters because the implementation sequence is not just about adding latest-load filters. It is about shifting from an old active-view staging model toward retained stage history without breaking downstream expectations.</p>
+<h2>Scope</h2>
+<p>Primary target jobs:</p>
+<ul><li><code>orc_ingestion_gcts</code>
+</li><li><code>trn_v_int_dim_gcts_question</code>
+</li><li><code>trn_v_int_dim_gcts_option</code>
+</li><li><code>trn_v_int_fact_gcts_response</code>
+</li><li><code>orc_unit_test_gcts</code>
+</li></ul>
+<p>Shared framework area to assess carefully:</p>
+<ul><li><code>orc_load_stage_objects</code>
+</li><li><code>orc_run_group_calc</code>
+</li><li><code>orc_update_indicator</code>
+</li></ul>
+<h2>Delivery Principle</h2>
+<p>The safest way to deliver this change is:</p>
+<ol><li>define the new staging behavior first
+</li><li>prepare transformation logic that preserves downstream behavior intentionally
+</li><li>validate with baseline comparisons
+</li><li>release ingestion and transformation changes as one controlled package
+</li></ol>
+<p>The team should avoid:</p>
+<ul><li>changing only ingestion first
+</li><li>or changing only the 3 transformations first
+</li></ul>
+<p>because either approach can create a temporary mismatch between stage meaning and downstream logic.</p>
+<h2>What This Sequence Is Solving</h2>
+<p>This plan is specifically designed to resolve the gap identified in the assessment:</p>
+<ul><li>the current pipeline was built around active/current stage consumption
+</li><li>the requested business change wants historical stage retention
+</li><li>the downstream dims/fact must still present the intended current or mixed-era result set
+</li></ul>
+<p>So this sequence assumes the team must manage both:</p>
+<ul><li>upstream staging behavior
+</li><li>downstream visibility logic
+</li></ul>
+<h2>Recommended Phases</h2>
+<h2>Phase 1. Confirm Design Decisions</h2>
+<h3>Goal</h3>
+<p>Lock the business and technical rules before editing jobs.</p>
+<h3>Required decisions</h3>
+<ol><li>Confirm the new GCTS staging contract:
+<ul><li>append-only
+</li><li>or append-with-active-flag
+</li></ul>
+</li><li>Confirm whether <code>_ETL_ACTIVE_FLAG</code> will still be meaningful after history retention is enabled.
+</li><li>Confirm whether <code>_ETL_LOAD_DATETIME</code> is the official selector for:
+<ul><li>latest question data
+</li><li>latest option data
+</li><li>response cutoff behavior
+</li></ul>
+</li><li>Confirm question rule precisely:
+<ul><li>latest global batch
+</li><li>or latest per business key
+</li></ul>
+</li><li>Confirm fact cutoff interpretation:
+<ul><li><code>&lt; &#x27;2026-04-01&#x27;</code>
+</li><li><code>&gt;= &#x27;2026-04-01&#x27;</code>
+</li></ul>
+</li><li>Confirm whether the old active-view logic should remain available through stage views, or whether the 3 target transformations will become the main place where current/latest visibility is enforced.
+</li><li>Confirm whether the inactive initial-load path will remain excluded:
+<ul><li><code>trn_load_gcts_from_do</code>
+</li><li><code>Get the list of source files</code>
+</li><li><code>Load Stage Layer - Node</code>
+</li></ul>
+</li></ol>
+<h3>Deliverable</h3>
+<p>A short signed-off rules summary before development starts.</p>
+<h2>Phase 2. Baseline Capture</h2>
+<h3>Goal</h3>
+<p>Capture the current behavior before changing anything.</p>
+<h3>Capture these baselines</h3>
+<h4>Staging</h4>
+<ul><li>row counts for:
+<ul><li><code>T_GCTS_QUESTION_MAP</code>
+</li><li><code>T_GCTS_OPTIONS</code>
+</li><li><code>T_GCTS_COUNTRY_CATEGORY</code>
+</li><li><code>T_GCTS_RESPONSE</code>
+</li></ul>
+</li><li>counts by <code>_ETL_LOAD_DATETIME</code>
+</li><li>counts by <code>_ETL_ACTIVE_FLAG</code>
+</li><li>counts of duplicate business keys across multiple loads
+</li></ul>
+<h4>Integration</h4>
+<ul><li>current row counts for:
+<ul><li><code>V_INT_DIM_GCTS_QUESTION</code>
+</li><li><code>V_INT_DIM_GCTS_OPTION</code>
+</li><li><code>V_INT_FACT_GCTS_RESPONSE</code>
+</li></ul>
+</li></ul>
+<h4>Presentation</h4>
+<ul><li>current row counts for:
+<ul><li><code>DIM_GCTS_QUESTION</code>
+</li><li><code>DIM_GCTS_OPTION</code>
+</li><li><code>FACT_GCTS_RESPONSE</code>
+</li></ul>
+</li><li>duplicate-key checks
+</li><li>sample reconciliation extracts for known business slices
+</li></ul>
+<h4>Fact-specific</h4>
+<ul><li>counts by:
+<ul><li><code>YEAR</code>
+</li><li><code>MONTH</code>
+</li><li><code>COUNTRYCATEGORYID</code>
+</li><li><code>_ETL_LOAD_DATETIME</code>
+</li></ul>
+</li><li>number of groups with multiple loads before <code>2026-04-01</code>
+</li><li>number of groups with multiple loads on or after <code>2026-04-01</code>
+</li></ul>
+<h3>Deliverable</h3>
+<p>A baseline evidence pack that can be compared after the change.</p>
+<h2>Phase 3. Ingestion / Staging Design Adjustment</h2>
+<h3>Goal</h3>
+<p>Define how GCTS keeps history in stage without continuing the old delete behavior.</p>
+<h3>Main work</h3>
+<p>Inspect how <code>orc_ingestion_gcts</code> passes data into:</p>
+<ul><li><code>orc_load_stage_objects</code>
+</li><li><code>orc_run_group_calc</code>
+</li><li><code>orc_update_indicator</code>
+</li></ul>
+<h3>Decision options</h3>
+<h4>Option A. Bypass delete/update framework for GCTS</h4>
+<p>This is the cleanest option if GCTS no longer wants current-state stage behavior.</p>
+<p>Use this if:</p>
+<ul><li>the framework is primarily for delete/update synchronization
+</li><li>GCTS now wants retained stage history
+</li></ul>
+<h4>Option B. Add GCTS-specific conditional behavior in the framework</h4>
+<p>Use this if:</p>
+<ul><li>the framework must remain shared
+</li><li>bypassing it would be too disruptive
+</li><li>GCTS needs a special mode such as:
+<ul><li>no delete
+</li><li>no indicator update
+</li><li>append-only
+</li></ul>
+</li></ul>
+<h3>Recommended direction</h3>
+<p>Prefer the smallest change that isolates GCTS from stage deletion behavior without breaking the shared framework for other pipelines.</p>
+<h3>Validation target</h3>
+<p>After this change, new loads should preserve historical rows in staging instead of deleting or superseding them physically.</p>
+<p>At the same time, the downstream pipeline must still be able to expose the correct consumer-facing current/latest result.</p>
+<h2>Phase 4. Prepare Transformation Redesign</h2>
+<h3>Goal</h3>
+<p>Make integration responsible for controlling what remains visible downstream.</p>
+<h3>Job 1. <code>trn_v_int_dim_gcts_question</code></h3>
+<p>Current state:</p>
+<ul><li>already uses <code>ROW_NUMBER()</code>
+</li><li>already uses <code>_ETL_LOAD_DATETIME DESC</code>
+</li><li>already keeps one row per generated key
+</li></ul>
+<p>Required action:</p>
+<ul><li>confirm whether current per-key latest logic already satisfies the business rule
+</li><li>if not, adjust it to the approved rule
+</li></ul>
+<p>Possible outcomes:</p>
+<ul><li>no logic change needed, only validation
+</li><li>small key-grain adjustment needed
+</li><li>global latest-batch filter needed
+</li></ul>
+<h3>Job 2. <code>trn_v_int_dim_gcts_option</code></h3>
+<p>Current state:</p>
+<ul><li>no visible latest-load filtering
+</li></ul>
+<p>Required action:</p>
+<ul><li>add latest-load logic explicitly
+</li></ul>
+<p>Recommended pattern:</p>
+<ul><li>use <code>_ETL_LOAD_DATETIME</code>
+</li><li>apply either:
+<ul><li>latest global batch
+</li><li>or latest per approved business grain
+</li></ul>
+</li></ul>
+<p>This is especially important because the Jira requirement explicitly asks for <code>MAX(_ETL_LOAD_DATETIME)</code>-based filtering for this dimension.</p>
+<h3>Job 3. <code>trn_v_int_fact_gcts_response</code></h3>
+<p>Current state:</p>
+<ul><li>no visible cutoff logic
+</li><li>no visible <code>_ETL_LOAD_DATETIME</code> branch
+</li></ul>
+<p>Required action:</p>
+<ul><li>implement two-branch logic:
+<ul><li>historical branch for groups with <code>MAX(_ETL_LOAD_DATETIME) &lt; &#x27;2026-04-01&#x27;</code>
+</li><li>latest-only branch for groups with <code>MAX(_ETL_LOAD_DATETIME) &gt;= &#x27;2026-04-01&#x27;</code>
+</li></ul>
+</li><li>combine results with <code>UNION ALL</code>
+</li></ul>
+<p>This directly reflects the Jira rule for <code>DODECOM-7402</code>, and should be validated against the Kantar delivery pattern where Responses are described as delta data and monthly combinations may receive more than one push cycle.</p>
+<h3>Important design rule</h3>
+<p>Do not redesign the PL load wrappers if it can be avoided.</p>
+<p>Keep:</p>
+<ul><li><code>orc_harmonization_pipeline_gcts</code>
+</li><li>publish/load components for PL
+</li></ul>
+<p>as stable as possible.</p>
+<h2>Phase 5. Unit Test Redesign</h2>
+<h3>Goal</h3>
+<p>Make validation match the new intended behavior.</p>
+<h3>Why this is needed</h3>
+<p>Current <code>orc_unit_test_gcts</code> compares active stage counts to PL counts.</p>
+<p>That assumption may no longer hold once staging retains historical data.</p>
+<h3>Required changes</h3>
+<p>Update tests so they validate:</p>
+<ul><li>question output follows approved latest rule
+</li><li>option output follows approved latest rule
+</li><li>fact output follows the cutoff rule
+</li><li>PL counts match expected integration results, not raw retained stage counts
+</li></ul>
+<h3>Suggested test categories</h3>
+<ol><li>Count parity between integration output and PL target
+</li><li>Duplicate-key check in PL
+</li><li>Latest-load check for question
+</li><li>Latest-load check for option
+</li><li>Cutoff-logic check for fact
+</li></ol>
+<h2>Phase 6. Lower-Environment Implementation</h2>
+<h3>Goal</h3>
+<p>Deploy the full package safely in non-production first.</p>
+<h3>Recommended implementation order</h3>
+<ol><li>update ingestion / stage-retention behavior
+</li><li>update <code>trn_v_int_dim_gcts_question</code> if needed
+</li><li>update <code>trn_v_int_dim_gcts_option</code>
+</li><li>update <code>trn_v_int_fact_gcts_response</code>
+</li><li>update <code>orc_unit_test_gcts</code>
+</li><li>run end-to-end lower-environment test
+</li></ol>
+<h3>Why this order</h3>
+<ul><li>stage behavior must reflect the new future reality
+</li><li>integration logic should then be tested against that new reality
+</li><li>tests should be updated before final signoff
+</li></ul>
+<h2>Phase 7. Validation And Signoff</h2>
+<h3>Goal</h3>
+<p>Prove that the change preserves intended PL behavior while keeping historical stage data.</p>
+<h3>Required validation</h3>
+<h4>Staging validation</h4>
+<ul><li>historical rows remain present after a new load
+</li><li>no unintended stage delete behavior occurs
+</li><li>metadata fields remain populated correctly
+</li></ul>
+<h4>Integration validation</h4>
+<ul><li>question result matches approved latest rule
+</li><li>option result matches approved latest rule
+</li><li>fact result matches approved cutoff rule
+</li></ul>
+<h4>Presentation validation</h4>
+<ul><li>no unexpected drift in:
+<ul><li>row counts
+</li><li>duplicate rates
+</li><li>key coverage
+</li></ul>
+</li><li>known sample business slices still reconcile
+</li></ul>
+<h3>Business validation</h3>
+<p>Review sample outputs with stakeholders for:</p>
+<ul><li>old-period response behavior
+</li><li>new-period response behavior
+</li><li>question / option dimensional correctness
+</li></ul>
+<h2>Phase 8. Production Release</h2>
+<h3>Goal</h3>
+<p>Deploy with low regression risk.</p>
+<h3>Recommended release package</h3>
+<p>Release these together:</p>
+<ul><li>ingestion/staging change
+</li><li>3 transformation changes
+</li><li>unit-test update
+</li></ul>
+<p>Avoid splitting these into separate releases unless there is a very strong operational reason.</p>
+<h2>Rollback Strategy</h2>
+<h3>Goal</h3>
+<p>Make sure the team can recover if outputs drift unexpectedly.</p>
+<h3>Minimum rollback preparation</h3>
+<p>Before release:</p>
+<ol><li>snapshot existing job definitions
+</li><li>keep baseline count evidence
+</li><li>record current unit-test outputs
+</li><li>identify whether any post-release backfill would be needed
+</li></ol>
+<h3>Rollback approach</h3>
+<p>If results are wrong after release:</p>
+<ol><li>revert transformation logic to prior version
+</li><li>revert ingestion/staging behavior to prior version if required
+</li><li>rebuild affected integration and presentation objects
+</li><li>compare back to baseline counts
+</li></ol>
+<h2>Suggested Team Task Breakdown</h2>
+<h3>Data / business owner</h3>
+<ul><li>approve latest-load definition
+</li><li>approve cutoff rule interpretation
+</li><li>approve expected PL behavior
+</li></ul>
+<h3>Matillion engineer</h3>
+<ul><li>adjust ingestion orchestration behavior
+</li><li>update the 3 transformation jobs
+</li><li>update unit tests
+</li></ul>
+<h3>QA / analyst</h3>
+<ul><li>capture baseline
+</li><li>compare before/after counts
+</li><li>validate sample business outputs
+</li></ul>
+<h2>Short Implementation Checklist</h2>
+<p>If the team wants the shortest possible actionable checklist, use this:</p>
+<ol><li>Freeze business rules and staging contract.
+</li><li>Capture baseline counts in stage, integration, and presentation.
+</li><li>Disable or bypass GCTS stage delete behavior.
+</li><li>Confirm the exact latest-rule for question.
+</li><li>Implement latest-rule for option.
+</li><li>Implement cutoff-rule for fact.
+</li><li>Update unit tests to target integration/PL expectations, not raw stage counts.
+</li><li>Validate end-to-end in lower environment.
+</li><li>Release ingestion + transformations + tests together.
+</li></ol>
+<h2>Final Recommendation</h2>
+<p>Treat this as one coordinated GCTS behavior change, not three isolated transformation edits.</p>
+<p>The best chance of preserving Presentation Layer output while keeping history in stage is:</p>
+<ul><li>stabilize the ingestion contract first
+</li><li>push visibility rules into integration
+</li><li>validate with baseline comparisons
+</li><li>release the package together
+</li></ul>
+<p>In other words, the implementation sequence should follow the business-ticket order logically, but not literally:</p>
+<ul><li>assess and define staging behavior first
+</li><li>then implement the dim/fact adjustments with that staging contract in mind
+</li></ul>
+</body>
+</html>
