@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1080" viewBox="0 0 1600 1080">
+  <defs>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #123b5d; }
+      .subtitle { font: 400 16px Arial, sans-serif; fill: #4b5b68; }
+      .section { font: 700 18px Arial, sans-serif; fill: #123b5d; }
+      .label { font: 600 15px Arial, sans-serif; fill: #1f2933; }
+      .text { font: 400 14px Arial, sans-serif; fill: #2d3741; }
+      .small { font: 400 13px Arial, sans-serif; fill: #44515c; }
+      .box-blue { fill: #eaf4fb; stroke: #3b82b3; stroke-width: 2; }
+      .box-green { fill: #eef8ee; stroke: #4b9b5f; stroke-width: 2; }
+      .box-yellow { fill: #fff8e6; stroke: #c78f1e; stroke-width: 2; }
+      .box-red { fill: #fff1f1; stroke: #c45b5b; stroke-width: 2; }
+      .box-gray { fill: #f6f8fa; stroke: #8a98a6; stroke-width: 2; }
+      .arrow { stroke: #5a6a78; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #8a98a6; stroke-width: 2; stroke-dasharray: 8 6; fill: none; marker-end: url(#arrow); }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5a6a78"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="1080" fill="#ffffff"/>
+
+  <text x="50" y="55" class="title">GCTS Strategy Implementation Diagram</text>
+  <text x="50" y="82" class="subtitle">Recommended target approach: historical retention in Snowflake + controlled current-facing layer + targeted dim/fact changes</text>
+
+  <rect x="40" y="120" width="1520" height="140" rx="12" class="box-yellow"/>
+  <text x="60" y="150" class="section">Business Drivers</text>
+  <text x="60" y="180" class="text">1. Keep all Kantar-delivered GCTS data historically available</text>
+  <text x="60" y="205" class="text">2. Stop staging delete/update behavior that removes or supersedes retained history</text>
+  <text x="60" y="230" class="text">3. Keep Presentation Layer behavior as stable as possible</text>
+
+  <rect x="70" y="320" width="300" height="150" rx="10" class="box-blue"/>
+  <text x="90" y="350" class="section">Source Landing</text>
+  <text x="90" y="380" class="label">Kantar files in S3</text>
+  <text x="90" y="405" class="text">Responses = Delta</text>
+  <text x="90" y="430" class="text">Options = Full</text>
+  <text x="90" y="455" class="text">Question Map = Full</text>
+
+  <rect x="440" y="300" width="340" height="190" rx="10" class="box-red"/>
+  <text x="460" y="330" class="section">Current Risk Area</text>
+  <text x="460" y="360" class="label">Existing staging logic</text>
+  <text x="460" y="385" class="text">`orc_ingestion_gcts`</text>
+  <text x="460" y="410" class="text">`orc_load_stage_objects`</text>
+  <text x="460" y="435" class="text">`orc_run_group_calc`</text>
+  <text x="460" y="460" class="text">`orc_update_indicator`</text>
+  <text x="460" y="485" class="small">Delete/update framework conflicts with retained-history goal</text>
+
+  <rect x="860" y="285" width="320" height="220" rx="10" class="box-green"/>
+  <text x="880" y="315" class="section">Recommended New Historical Layer</text>
+  <text x="880" y="345" class="label">Snowflake retained history tables</text>
+  <text x="880" y="375" class="text">HL_GCTS_RESPONSE</text>
+  <text x="880" y="400" class="text">HL_GCTS_OPTIONS</text>
+  <text x="880" y="425" class="text">HL_GCTS_QUESTION_MAP</text>
+  <text x="880" y="450" class="text">HL_GCTS_COUNTRY_CATEGORY</text>
+  <text x="880" y="480" class="small">Append history, do not delete superseded loads</text>
+
+  <rect x="1260" y="300" width="270" height="190" rx="10" class="box-blue"/>
+  <text x="1280" y="330" class="section">Controlled Current Layer</text>
+  <text x="1280" y="360" class="label">Current-facing stage views/tables</text>
+  <text x="1280" y="390" class="text">Expose active/latest slice only</text>
+  <text x="1280" y="415" class="text">Preserve current-consumption pattern</text>
+  <text x="1280" y="440" class="small">Bridge between retained history and downstream use</text>
+
+  <rect x="120" y="610" width="1360" height="220" rx="12" class="box-gray"/>
+  <text x="145" y="640" class="section">Targeted Transformation Adjustments</text>
+
+  <rect x="155" y="670" width="390" height="120" rx="10" class="box-blue"/>
+  <text x="175" y="700" class="label">1. `trn_v_int_dim_gcts_question`</text>
+  <text x="175" y="730" class="text">Validate current latest-per-key behavior</text>
+  <text x="175" y="755" class="text">Adjust only if ticket rule requires different grain</text>
+
+  <rect x="605" y="670" width="390" height="120" rx="10" class="box-blue"/>
+  <text x="625" y="700" class="label">2. `trn_v_int_dim_gcts_option`</text>
+  <text x="625" y="730" class="text">Add explicit latest `_ETL_LOAD_DATETIME` logic</text>
+  <text x="625" y="755" class="text">Use approved grain: global or per business key</text>
+
+  <rect x="1055" y="670" width="390" height="120" rx="10" class="box-blue"/>
+  <text x="1075" y="700" class="label">3. `trn_v_int_fact_gcts_response`</text>
+  <text x="1075" y="730" class="text">Apply cutoff rule by YEAR, MONTH, COUNTRYCATEGORYID</text>
+  <text x="1075" y="755" class="text">&lt; 2026-04-01 keep as-is | &gt;= 2026-04-01 latest only</text>
+
+  <rect x="350" y="900" width="900" height="110" rx="12" class="box-green"/>
+  <text x="375" y="932" class="section">Outcome</text>
+  <text x="375" y="962" class="text">Historical data is preserved in Snowflake staging/history</text>
+  <text x="375" y="987" class="text">Integration controls what is visible downstream</text>
+  <text x="375" y="1012" class="text">Presentation Layer remains stable with controlled, testable behavior</text>
+
+  <path d="M370 395 L440 395" class="arrow"/>
+  <path d="M780 395 L860 395" class="arrow"/>
+  <path d="M1180 395 L1260 395" class="arrow"/>
+
+  <path d="M1020 505 L1020 575" class="arrow"/>
+  <path d="M1020 575 L350 575 L350 670" class="dash"/>
+  <path d="M1020 575 L800 575 L800 670" class="dash"/>
+  <path d="M1020 575 L1250 575 L1250 670" class="dash"/>
+
+  <path d="M350 790 L350 845 L800 845 L800 900" class="arrow"/>
+  <path d="M800 790 L800 900" class="arrow"/>
+  <path d="M1250 790 L1250 845 L800 845" class="arrow"/>
+
+  <text x="60" y="1050" class="small">Recommended implementation pattern: hybrid strategy (history tables + controlled current-facing layer)</text>
+</svg>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>GCTS Historical Staging Options</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.45; margin: 32px; color: #222; }
+h1, h2, h3, h4 { color: #0f3b63; }
+code { background: #f3f4f6; padding: 1px 4px; border-radius: 4px; }
+pre { background: #f7f7f7; padding: 12px; border: 1px solid #ddd; overflow-x: auto; }
+ul, ol { margin-top: 0.4em; margin-bottom: 0.8em; }
+li { margin: 0.2em 0; }
+p { margin: 0.5em 0; }
+</style>
+</head>
+<body>
+<h1>GCTS Historical Staging Options</h1>
+<h2>Purpose</h2>
+<p>This document compares the main design options for keeping historical GCTS data in Snowflake staging while still supporting the current and future implementation plan.</p>
+<p>It is intended to align with the existing documents in <code>gcts_full</code>, especially:</p>
+<ul><li><code>gcts_pipeline_assessment.md</code>
+</li><li><code>gcts_staging_history_prerequisites.md</code>
+</li><li><code>gcts_recommended_implementation_sequence.md</code>
+</li></ul>
+<h2>Context</h2>
+<p>The current GCTS pipeline was originally designed around:</p>
+<ul><li>active/current stage behavior
+</li><li>stage views such as <code>V_GCTS_*</code>
+</li><li>shared stage delete/update logic
+</li><li>downstream integration and presentation jobs that expect curated current-state inputs
+</li></ul>
+<p>The new business requirement changes that direction:</p>
+<ul><li>keep historical GCTS data
+</li><li>stop deletion activity in staging
+</li><li>keep Presentation Layer behavior as stable as possible
+</li></ul>
+<p>That means the team needs a staging-history strategy that works for both:</p>
+<ul><li>current implementation constraints
+</li><li>future adjustment of:
+<ul><li><code>trn_v_int_dim_gcts_question</code>
+</li><li><code>trn_v_int_dim_gcts_option</code>
+</li><li><code>trn_v_int_fact_gcts_response</code>
+</li></ul>
+</li></ul>
+<h2>Important Constraint</h2>
+<p>S3 should not be treated as the guaranteed long-term history store.</p>
+<p>Reason:</p>
+<ul><li>the GCTS pipeline uses S3 ingestion templates
+</li><li>some template behavior can delete processed source files
+</li><li>even if not every GCTS path deletes source files today, the pipeline is not designed as a durable archive mechanism
+</li></ul>
+<p>So if historical retention is required, the safest place to preserve it is Snowflake.</p>
+<h2>Option 1. Append History Directly Into Existing <code>T_GCTS_*</code> Stage Tables</h2>
+<h3>Description</h3>
+<p>Use the current GCTS stage tables as both:</p>
+<ul><li>the retained history store
+</li><li>the source for downstream current/latest logic
+</li></ul>
+<p>In this design, the existing <code>T_GCTS_*</code> tables become multi-version tables that contain all historical loads.</p>
+<h3>How it fits the current pipeline</h3>
+<ul><li>requires the smallest physical-model change
+</li><li>reuses current stage table names
+</li><li>requires the largest logical change in downstream interpretation
+</li></ul>
+<h3>Pros</h3>
+<ul><li>simplest object design
+</li><li>lowest additional storage footprint
+</li><li>no need to create a second layer of historical tables
+</li><li>fastest to start implementing
+</li></ul>
+<h3>Cons</h3>
+<ul><li>highest downstream regression risk
+</li><li>changes the meaning of existing stage tables immediately
+</li><li>all stage consumers must now handle historical versions correctly
+</li><li>current views and tests may stop representing the right business state
+</li><li>fact/dim transformations become more sensitive to filtering mistakes
+</li><li>harder to rollback cleanly
+</li></ul>
+<h3>Current implementation impact</h3>
+<ul><li>high
+</li><li>stage meaning changes immediately
+</li><li>hidden dependencies on <code>T_GCTS_*</code> may break
+</li></ul>
+<h3>Future implementation impact</h3>
+<ul><li>high
+</li><li>the 3 target jobs must carry more responsibility for correcting upstream history accumulation
+</li><li>any missed filter could change Presentation Layer outputs
+</li></ul>
+<h3>Cost / performance view</h3>
+<ul><li>lowest storage cost
+</li><li>potentially higher compute/query cost over time as stage tables grow
+</li><li>higher engineering/support cost due to regression risk
+</li></ul>
+<h3>Best use case</h3>
+<p>Use only if:</p>
+<ul><li>the team wants the smallest physical design change
+</li><li>downstream dependencies are fully known
+</li><li>and the team accepts higher implementation risk
+</li></ul>
+<h2>Option 2. Create Separate Historical Load Tables (<code>HL</code>) And Keep Current Stage Logic Separate</h2>
+<h3>Description</h3>
+<p>Create a dedicated historical layer or table set for GCTS, for example:</p>
+<ul><li><code>HL_GCTS_RESPONSE</code>
+</li><li><code>HL_GCTS_OPTIONS</code>
+</li><li><code>HL_GCTS_QUESTION_MAP</code>
+</li><li><code>HL_GCTS_COUNTRY_CATEGORY</code>
+</li></ul>
+<p>These tables become the retained history store, while the existing stage/current objects continue to represent the active/current version.</p>
+<h3>How it fits the current pipeline</h3>
+<ul><li>preserves the old current-stage assumption better
+</li><li>introduces a new layer specifically for retention
+</li><li>makes history explicit and isolated
+</li></ul>
+<h3>Pros</h3>
+<ul><li>lowest downstream regression risk
+</li><li>preserves current-state consumption pattern more easily
+</li><li>easier rollback
+</li><li>easier to validate history separately from current-state logic
+</li><li>easier to optimize historical storage independently
+</li></ul>
+<h3>Cons</h3>
+<ul><li>more objects to manage
+</li><li>more storage usage
+</li><li>ingestion design becomes more complex
+</li><li>team must maintain both current-state and historical paths
+</li></ul>
+<h3>Current implementation impact</h3>
+<ul><li>medium
+</li><li>current jobs can often stay closer to existing behavior
+</li><li>staging retention becomes a separate concern
+</li></ul>
+<h3>Future implementation impact</h3>
+<ul><li>medium
+</li><li>the 3 target jobs can be adjusted in a controlled way
+</li><li>history can be validated separately before changing downstream logic
+</li></ul>
+<h3>Cost / performance view</h3>
+<ul><li>higher storage cost than Option 1
+</li><li>lower downstream compute pressure if current-state objects stay lean
+</li><li>lower engineering/support risk cost
+</li></ul>
+<h3>Best use case</h3>
+<p>Use if:</p>
+<ul><li>preserving current downstream behavior is a priority
+</li><li>the team wants a safer migration path
+</li><li>history needs to be retained clearly and explicitly
+</li></ul>
+<h2>Option 3. Hybrid: Historical Tables Plus Controlled Current Views Or Current Tables</h2>
+<h3>Description</h3>
+<p>This is the recommended balance.</p>
+<p>In this design:</p>
+<ul><li>historical rows are retained in dedicated history tables
+</li><li>current-stage views or current-stage tables expose the active/latest business slice
+</li><li>the 3 target transformations apply the approved visibility rules intentionally
+</li></ul>
+<p>In practice, this means:</p>
+<ol><li>retain all history in Snowflake
+</li><li>stop GCTS-specific delete/remove behavior for historical storage
+</li><li>keep a current-facing layer for downstream jobs
+</li><li>update the 3 target jobs where the business rule explicitly requires it
+</li></ol>
+<h3>How it fits the current pipeline</h3>
+<ul><li>aligns best with the old active-view design
+</li><li>allows the new historical requirement without breaking everything at once
+</li><li>gives the team a clear separation between:
+<ul><li>retained history
+</li><li>current/latest consumption
+</li></ul>
+</li></ul>
+<h3>Pros</h3>
+<ul><li>best balance of safety and flexibility
+</li><li>preserves history in Snowflake
+</li><li>keeps downstream current-state access cleaner
+</li><li>aligns with the modeled <code>V_GCTS_*</code> style of consumption
+</li><li>easier to test current-state and historical-state logic separately
+</li><li>lower long-term total cost of ownership than forcing all logic into current stage tables
+</li></ul>
+<h3>Cons</h3>
+<ul><li>more design effort than Option 1
+</li><li>more objects than Option 1
+</li><li>requires clear governance for:
+<ul><li>what counts as historical
+</li><li>what counts as current
+</li><li>where each consumer should read from
+</li></ul>
+</li></ul>
+<h3>Current implementation impact</h3>
+<ul><li>medium
+</li><li>current pipeline can evolve with less disruption
+</li><li>easier to map old behavior to new behavior
+</li></ul>
+<h3>Future implementation impact</h3>
+<ul><li>best controlled impact
+</li><li><code>trn_v_int_dim_gcts_question</code> can apply approved latest logic
+</li><li><code>trn_v_int_dim_gcts_option</code> can apply latest logic cleanly
+</li><li><code>trn_v_int_fact_gcts_response</code> can apply the <code>2026-04-01</code> mixed rule cleanly
+</li></ul>
+<h3>Cost / performance view</h3>
+<ul><li>higher storage cost than Option 1
+</li><li>usually better downstream query performance than Option 1
+</li><li>better total delivery efficiency when testing, support, and rollback are considered
+</li></ul>
+<h3>Best use case</h3>
+<p>Use if:</p>
+<ul><li>the team wants the safest practical solution
+</li><li>Presentation Layer stability matters
+</li><li>historical retention must be reliable
+</li><li>the team wants current and historical behavior to be understandable
+</li></ul>
+<h2>Option 4. Keep Current Stage Design, But Rely On S3 As The History Store</h2>
+<h3>Description</h3>
+<p>Do not retain full history in Snowflake staging. Instead, rely on the source files in S3 as the historical archive.</p>
+<h3>Pros</h3>
+<ul><li>lowest Snowflake storage impact
+</li><li>minimal Snowflake design change
+</li></ul>
+<h3>Cons</h3>
+<ul><li>not reliable for this pipeline
+</li><li>processed S3 files may be deleted
+</li><li>retrieval/replay becomes operationally difficult
+</li><li>history is outside the warehouse where transformations run
+</li><li>not aligned with the business request to keep data available operationally
+</li></ul>
+<h3>Current implementation impact</h3>
+<ul><li>low short-term change
+</li><li>high future operational risk
+</li></ul>
+<h3>Future implementation impact</h3>
+<ul><li>poor
+</li><li>makes debugging, replay, and validation harder
+</li><li>does not give stable warehouse-side historical access
+</li></ul>
+<h3>Cost / performance view</h3>
+<ul><li>low Snowflake storage cost
+</li><li>poor operational efficiency
+</li><li>high support/recovery risk
+</li></ul>
+<h3>Recommendation</h3>
+<ul><li>not recommended
+</li></ul>
+<h2>Comparison Summary</h2>
+<h3>Option 1. Append history into existing <code>T_GCTS_*</code></h3>
+<ul><li>Storage cost: Low
+</li><li>Query/performance risk: Medium to High over time
+</li><li>Engineering risk: High
+</li><li>Regression risk: High
+</li><li>Rollback ease: Low
+</li></ul>
+<h3>Option 2. Separate <code>HL</code> history tables</h3>
+<ul><li>Storage cost: Medium
+</li><li>Query/performance risk: Low to Medium
+</li><li>Engineering risk: Medium
+</li><li>Regression risk: Low to Medium
+</li><li>Rollback ease: High
+</li></ul>
+<h3>Option 3. Hybrid: <code>HL</code> + controlled current layer</h3>
+<ul><li>Storage cost: Medium
+</li><li>Query/performance risk: Low
+</li><li>Engineering risk: Medium
+</li><li>Regression risk: Low
+</li><li>Rollback ease: High
+</li></ul>
+<h3>Option 4. Rely on S3 history</h3>
+<ul><li>Storage cost in Snowflake: Low
+</li><li>Operational risk: High
+</li><li>Reliability: Low
+</li><li>Recommended: No
+</li></ul>
+<h2>Recommended Strategy</h2>
+<p>The recommended strategy is:</p>
+<ul><li>Option 3: Hybrid historical tables plus controlled current views/tables
+</li></ul>
+<h3>Why this is the best fit</h3>
+<p>It aligns best with both:</p>
+<ul><li>the current implementation
+</li><li>the future dim/fact adjustment tasks
+</li></ul>
+<p>It works because:</p>
+<ol><li>the old pipeline was designed around active/current stage consumption
+</li><li>the new business request requires historical retention
+</li><li>the 3 follow-up tickets require controlled visibility rules, not uncontrolled raw accumulation
+</li></ol>
+<h3>Practical target architecture</h3>
+<p>Recommended direction:</p>
+<ol><li>retain all GCTS history in Snowflake history tables
+</li><li>stop GCTS-specific delete behavior against the historical store
+</li><li>expose current/latest logic through controlled stage views or current-state tables
+</li><li>update the 3 target transformations to enforce the approved business rules
+</li><li>keep Presentation Layer load wrappers as stable as possible
+</li></ol>
+<h2>Recommendation For The 3 Follow-Up Tasks</h2>
+<p>If Option 3 is chosen:</p>
+<h3><code>trn_v_int_dim_gcts_question</code></h3>
+<ul><li>validate whether current latest-per-key behavior is enough
+</li><li>if not, adjust to the approved latest-selection rule
+</li></ul>
+<h3><code>trn_v_int_dim_gcts_option</code></h3>
+<ul><li>add explicit latest-load logic
+</li></ul>
+<h3><code>trn_v_int_fact_gcts_response</code></h3>
+<ul><li>implement the cutoff rule:
+<ul><li>old groups before <code>2026-04-01</code> kept as-is
+</li><li>new groups on or after <code>2026-04-01</code> filtered to latest <code>_ETL_LOAD_DATETIME</code>
+</li></ul>
+</li></ul>
+<p>This gives the team the cleanest separation:</p>
+<ul><li>staging retains history
+</li><li>integration controls visibility
+</li><li>presentation remains stable
+</li></ul>
+<h2>Final Conclusion</h2>
+<p>The practical design options are not all equal.</p>
+<p>If the team wants:</p>
+<ul><li>the lowest pure storage cost
+</li></ul>
+<p>then Option 1 is cheaper.</p>
+<p>If the team wants:</p>
+<ul><li>the best balance of cost, performance, implementation safety, and alignment with the current pipeline
+</li></ul>
+<p>then Option 3 is the strongest choice.</p>
+<p>For GCTS, the best-fit recommendation is:</p>
+<ul><li>retain history in separate historical tables
+</li><li>keep a controlled current-facing layer
+</li><li>adjust the 3 target transformations intentionally
+</li></ul>
+<p>That approach fits both the current assessment and the future implementation plan better than turning the existing stage tables directly into raw historical multi-version tables.</p>
+</body>
+</html>
