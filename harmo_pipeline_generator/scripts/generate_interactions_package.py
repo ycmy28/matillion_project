@@ -50,6 +50,7 @@ DATA_TYPE_MAPPING = {
     "datetime": "TIMESTAMP_NTZ",
     "Date": "DATE",
     "DATE": "DATE",
+    "date": "DATE",
     "Time": "TIMESTAMP_NTZ",
 }
 
