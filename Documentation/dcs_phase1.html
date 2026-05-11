@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DCS Phase 1 (Users) Pipeline Documentation</title>
+<style>
+body { font-family: Arial, Helvetica, sans-serif; line-height: 1.5; margin: 40px auto; max-width: 1100px; padding: 0 24px; color: #1f2937; }
+h1, h2, h3 { color: #0f172a; }
+h1 { border-bottom: 3px solid #cbd5e1; padding-bottom: 12px; }
+h2 { margin-top: 36px; border-bottom: 1px solid #e5e7eb; padding-bottom: 6px; }
+pre { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 8px; padding: 16px; overflow-x: auto; white-space: pre-wrap; }
+code { font-family: Menlo, Consolas, monospace; }
+table { border-collapse: collapse; width: 100%; margin: 16px 0 24px; font-size: 14px; }
+th, td { border: 1px solid #d1d5db; text-align: left; padding: 10px; vertical-align: top; }
+th { background: #f3f4f6; }
+ul { margin: 8px 0 16px 24px; }
+p { margin: 10px 0; }
+hr { border: 0; border-top: 1px solid #d1d5db; margin: 28px 0; }
+</style>
+</head>
+<body>
+
+<h1>DCS Phase 1 (Users) Data Pipeline Documentation</h1>
+<p>End-to-End Pipeline: DCS User Harmonization to Snowflake Presentation Layer</p>
+
+<h2>Table of Contents</h2>
+<p>1. Pipeline Overview</p>
+<p>2. Architecture</p>
+<p>3. Master Pipeline</p>
+<p>4. Ingestion Layer</p>
+<p>5. Integration Layer (INT)</p>
+<p>6. MDE Transformation Logic</p>
+<p>7. RDE Transformation Logic</p>
+<p>8. Presentation Layer (PL)</p>
+<p>9. Data Flow</p>
+<p>10. Configuration</p>
+<p>11. Error Handling</p>
+<p>12. Tables and Views</p>
+<p>13. Business Use Cases</p>
+<p>14. Dependencies</p>
+<p>15. Maintenance and Operations</p>
+<p>16. Contact and Support</p>
+
+<hr>
+
+<h2>Pipeline Overview</h2>
+
+<p>Pipeline Name: orc_master_e2e_dcs_lz_pipeline </p>
+<p>Source System: DCS (Digital Commerce System) market-specific staging tables in Snowflake</p>
+<p>Target System: Snowflake presentation layer</p>
+<p>Data Domain: Consumer identity / user profiles</p>
+<p>Deployment Status: DEV ✅ &nbsp; QAS ✅ &nbsp; PRD ❌ (not yet deployed to PROD)</p>
+
+<h3>Purpose</h3>
+<p>This pipeline harmonizes DCS user data from multiple market-specific staging tables into curated integration views and presentation-layer tables. The documented scope covers consumer identity and user profile entities across 14 markets (AU, CA, DK, GR, IL, IT, KZ, LT, NL, NZ, PT, RO, SE, UA).</p>
+
+<p>The pipeline produces:</p>
+<ul>
+<li>A consolidated user profile table (MDE_DCS_USER)</li>
+<li>An extended user attributes table (MDE_DCS_USER_EXTRA)</li>
+<li>A guest user table for Canada market (MDE_DCS_GUEST_USER)</li>
+<li>A profile field reference table (RDE_DCS_PROFILE_FIELD)</li>
+<li>Unit-test orchestration jobs for each published object</li>
+</ul>
+
+<hr>
+
+<h2>Architecture</h2>
+
+<h3>Layer Structure</h3>
+
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                       MASTER PIPELINE                          │
+│              orc_master_e2e_dcs_lz_pipeline                   │
+└──────────────────────┬──────────────────────────────────────────┘
+                       │
+          ┌────────────┴────────────┐
+          │                         │
+          ▼                         ▼
+┌───────────────────┐   ┌──────────────────────────┐
+│  INGESTION FLOW   │   │   HARMONIZATION LAYER    │
+│  (LZ/STG load)    │   │   (INT -> PL)            │
+└───────────────────┘   └──────────────────────────┘
+                                    │
+                       ┌────────────┴────────────┐
+                       │                         │
+                       ▼                         ▼
+                ┌────────────┐          ┌────────────┐
+                │INTEGRATION │          │PRESENTATION│
+                │   (INT)    │          │   (PL)     │
+                └────────────┘          └────────────┘</code></pre>
+
+<h3>Data Layers</h3>
+
+<table>
+<tr><th>Layer</th><th>Database</th><th>Schema</th><th>Purpose</th></tr>
+<tr><td>Staging</td><td>${ev_database_10_staging}</td><td>STG_DCS</td><td>Raw DCS user objects loaded per market</td></tr>
+<tr><td>Integration</td><td>${ev_database_20_integration}</td><td>${ev_data_foundation_schema_20_integration}</td><td>Standardized user views with deduplication and historization</td></tr>
+<tr><td>Presentation</td><td>${ev_database_30_presentation}</td><td>PL_IDENTITY</td><td>Business-ready SCD2-style curated tables</td></tr>
+<tr><td>DQ Support</td><td>${ev_database_30_presentation}</td><td>PL_COMMON_LAYER_DQ</td><td>Data-quality companion targets referenced by create-table jobs</td></tr>
+</table>
+
+<hr>
+
+<h2>Master Pipeline</h2>
+
+<h3>File Location</h3>
+
+<pre><code>ROOT/01_PIPELINE_ORC/01_MASTER_PIPELINE/CONS_DCS_LZ_PIPELINE/
+└── orc_master_e2e_dcs_lz_pipeline.ORCHESTRATION</code></pre>
+
+<h3>Pipeline Flow</h3>
+
+<pre><code>Start
+  │
+  ├─► Query Tag Start
+  │   └─ ALTER SESSION SET query_tag = '${job_name}-${run_history_id}'
+  │
+  ├─► DISP Ingestion - CONS 1
+  │   ├─ jv_source_name = dcs
+  │   ├─ jv_output_tenant_name = edp_consumer
+  │   └─ triggers downstream DCS harmonization based on ingestion outcomes
+  │
+  └─► Task History Load
+      └─ logs execution status and completes the run</code></pre>
+
+<h3>Key Observations</h3>
+<ul>
+<li>The master job sets a Snowflake query tag for traceability.</li>
+<li>It dispatches ingestion through a reusable orchestrator component.</li>
+<li>It finishes with task-history logging.</li>
+<li>DCS-specific harmonization jobs are called downstream from the ingestion dispatch.</li>
+</ul>
+
+<hr>
+
+<h2>Ingestion Layer</h2>
+
+<h3>What Is Visible in the Export</h3>
+<p>The master orchestration dispatches ingestion through the DISP Ingestion - CONS 1 component. DCS market-specific tables are loaded into the STG_DCS schema in the staging database.</p>
+
+<h3>Inferred Ingestion Role</h3>
+<p>Based on the orchestration metadata, the ingestion layer:</p>
+<ul>
+<li>Loads DCS user entities per market into staging (e.g., T_DCS_AU_USERS, T_DCS_CA_USERS, etc.)</li>
+<li>Drives harmonization by passing downstream orchestration mappings</li>
+<li>Supports selective processing by source table or object</li>
+</ul>
+
+<h3>Staging Objects Used by the DCS Phase 1 Package</h3>
+<p>The integration transformations read from these staging tables in STG_DCS:</p>
+
+<h4>Users (14 markets)</h4>
+<ul>
+<li>T_DCS_AU_USERS, T_DCS_CA_USERS, T_DCS_DK_USERS, T_DCS_GR_USERS, T_DCS_IL_USERS, T_DCS_IT_USERS, T_DCS_KZ_USERS</li>
+<li>T_DCS_LT_USERS, T_DCS_NL_USERS, T_DCS_NZ_USERS, T_DCS_PT_USERS, T_DCS_RO_USERS, T_DCS_SE_USERS, T_DCS_UA_USERS</li>
+</ul>
+
+<h4>UsersExtra (14 markets)</h4>
+<ul>
+<li>T_DCS_AU_USERSEXTRA, T_DCS_CA_USERSEXTRA, T_DCS_DK_USERSEXTRA, T_DCS_GR_USERSEXTRA, T_DCS_IL_USERSEXTRA, T_DCS_IT_USERSEXTRA, T_DCS_KZ_USERSEXTRA</li>
+<li>T_DCS_LT_USERSEXTRA, T_DCS_NL_USERSEXTRA, T_DCS_NZ_USERSEXTRA, T_DCS_PT_USERSEXTRA, T_DCS_RO_USERSEXTRA, T_DCS_SE_USERSEXTRA, T_DCS_UA_USERSEXTRA</li>
+</ul>
+
+<h4>Guests (1 market — Canada only)</h4>
+<ul>
+<li>T_DCS_CA_GUESTS</li>
+</ul>
+
+<h4>ProfileFields (13 markets — no RO)</h4>
+<ul>
+<li>T_DCS_AU_PROFILEFIELDS, T_DCS_CA_PROFILEFIELDS, T_DCS_DK_PROFILEFIELDS, T_DCS_GR_PROFILEFIELDS, T_DCS_IL_PROFILEFIELDS, T_DCS_IT_PROFILEFIELDS, T_DCS_KZ_PROFILEFIELDS</li>
+<li>T_DCS_LT_PROFILEFIELDS, T_DCS_NL_PROFILEFIELDS, T_DCS_NZ_PROFILEFIELDS, T_DCS_PT_PROFILEFIELDS, T_DCS_SE_PROFILEFIELDS, T_DCS_UA_PROFILEFIELDS</li>
+</ul>
+
+<hr>
+
+<h2>Integration Layer (INT)</h2>
+
+<h3>File Location</h3>
+
+<pre><code>ROOT/02_DATA_WAREHOUSE/02_INTEGRATION/DCS/
+├── MDE/
+│   ├── trn_v_int_mde_dcs_guest_user.TRANSFORMATION
+│   ├── trn_v_int_mde_dcs_user.TRANSFORMATION
+│   └── trn_v_int_mde_dcs_user_extra.TRANSFORMATION
+└── RDE/
+    └── trn_v_int_rde_dcs_profile_field.TRANSFORMATION
+</code></pre>
+
+<h3>Integration Job Inventory</h3>
+
+<table>
+<tr><th>Category</th><th>Transformation Job</th><th>Staging Source(s)</th><th>Integration Output</th></tr>
+<tr><td>MDE</td><td>trn_v_int_mde_dcs_user</td><td>STG_DCS.T_DCS_*_USERS (14 markets)</td><td>V_INT_MDE_DCS_USER</td></tr>
+<tr><td>MDE</td><td>trn_v_int_mde_dcs_user_extra</td><td>STG_DCS.T_DCS_*_USERSEXTRA (14 markets)</td><td>V_INT_MDE_DCS_USER_EXTRA</td></tr>
+<tr><td>MDE</td><td>trn_v_int_mde_dcs_guest_user</td><td>STG_DCS.T_DCS_CA_GUESTS (1 market)</td><td>V_INT_MDE_DCS_GUEST_USER</td></tr>
+<tr><td>RDE</td><td>trn_v_int_rde_dcs_profile_field</td><td>STG_DCS.T_DCS_*_PROFILEFIELDS (13 markets)</td><td>V_INT_RDE_DCS_PROFILE_FIELD</td></tr>
+</table>
+
+<h3>Common Transformation Pattern</h3>
+<p>All four DCS Phase 1 transformations follow the same core pattern:</p>
+
+<pre><code>Market-Specific Staging Tables
+  │
+  ├─► UNION ALL across markets (with schema alignment)
+  ├─► Filter - Bad Data Quality
+  ├─► Add Dedup Columns (COUNT / ROW_NUMBER)
+  ├─► Calculator - column transformations and type casting
+  ├─► Derive COUNTRY_CODE from __entity_name
+  ├─► Derive VALID_FROM
+  ├─► Select Columns
+  └─► View creation in integration schema</code></pre>
+
+<h3>Shared Transformation Controls</h3>
+<p>Each transformation uses:</p>
+<ul>
+<li>Scalar variable: jv_source_table</li>
+<li>Grid variables: gv_calculator, gv_table_input_column_list</li>
+</ul>
+<p>This indicates a metadata-driven pattern where column lists and output mappings are controlled through Matillion grids rather than hard-coded component definitions.</p>
+
+<h3>DCS-Specific Transformation Rules</h3>
+<p>The data model adds several implementation details specific to DCS Phase 1:</p>
+<ul>
+<li>Source staging tables are per-market under DB_CONS_STG_PRD.STG_DCS</li>
+<li>All four published objects are modeled as SCD2</li>
+<li>All four published objects use Load type: DELTA</li>
+<li>Country code is derived from the staging entity name: <code>UPPER(SPLIT_PART(__entity_name, '_', 2))</code></li>
+<li>Every object applies a timestamp quality rule before publication:
+  <ul><li><code>TRY_TO_TIMESTAMP_NTZ(updated_at) &lt;= __load_ts OR TRY_TO_TIMESTAMP_NTZ(updated_at) IS NULL</code></li></ul>
+</li>
+<li>Every object derives VALID_FROM with the same general rule:
+  <ul>
+    <li>Use the business timestamp (updated_at / Updated_Timestamp) when it is present and the row is the surviving duplicate candidate</li>
+    <li>Otherwise fall back to __load_ts</li>
+  </ul>
+</li>
+<li>Every object uses duplicate handling based on:
+  <ul>
+    <li><code>COUNT(*) OVER (...) AS dup_cnt</code></li>
+    <li><code>ROW_NUMBER() OVER (... ORDER BY __load_ts ASC) AS rn_by_load_ts</code></li>
+  </ul>
+</li>
+</ul>
+
+<h3>Multi-Market UNION ALL Pattern</h3>
+<p>Unlike the Interactions pipeline which reads from single staging tables, DCS Phase 1 unions market-specific tables:</p>
+
+<pre><code>FROM (
+    SELECT * FROM DB_CONS_STG_PRD.STG_DCS.T_DCS_AU_&lt;ENTITY&gt;
+    UNION ALL
+    SELECT * FROM DB_CONS_STG_PRD.STG_DCS.T_DCS_CA_&lt;ENTITY&gt;
+    UNION ALL
+    ...
+    SELECT * FROM DB_CONS_STG_PRD.STG_DCS.T_DCS_UA_&lt;ENTITY&gt;
+) i
+WHERE
+    TRY_TO_TIMESTAMP_NTZ(i.updated_at) &lt;= i.__load_ts
+    OR TRY_TO_TIMESTAMP_NTZ(i.updated_at) IS NULL</code></pre>
+
+<p>Special note for MDE_DCS_USER: The UA market has an extra column <code>cc_coms</code>. All other markets add <code>NULL cc_coms</code> for UNION ALL compatibility. UA uses <code>SELECT * EXCLUDE(cc_coms), cc_coms</code> to ensure column ordering.</p>
+
+<h3>Historization and Deduplication Logic</h3>
+<p>The model shows a consistent historization pattern across all DCS Phase 1 entities:</p>
+
+<pre><code>1. UNION ALL market-specific staging tables from STG_DCS
+2. Parse business timestamp with TRY_TO_TIMESTAMP_NTZ(updated_at)
+3. Exclude records where business timestamp is after ingestion timestamp
+4. Partition by object business keys plus business timestamp
+5. Compute duplicate count and earliest-load row number
+6. Set VALID_FROM to business timestamp when usable
+7. Otherwise set VALID_FROM to __load_ts
+8. Publish as SCD2-ready output with VALID_FROM / VALID_TO / ACTIVE_FLAG</code></pre>
+
+<hr>
+
+<h2>MDE Transformation Logic</h2>
+<p>The MDE layer publishes three user identity entities that capture consumer profiles, extended attributes, and guest form submissions.</p>
+
+<h3>1. User Profile View</h3>
+<p>Job: trn_v_int_mde_dcs_user</p>
+<p>Output: V_INT_MDE_DCS_USER</p>
+
+<p>Data model details:</p>
+<ul>
+<li>Physical sources: DB_CONS_STG_PRD.STG_DCS.T_DCS_*_USERS (14 markets)</li>
+<li>Source-to-target key mapping:
+  <ul><li>user_id → IDENTITY_UNIQUE_IDENTIFIER_BK</li></ul>
+</li>
+<li>Duplicate partition: user_id, updated_at</li>
+<li>Historization type: SCD2</li>
+<li>Load type: DELTA</li>
+<li>Target schema: PL_IDENTITY</li>
+</ul>
+
+<p>Representative output columns include:</p>
+<ul>
+<li>COUNTRY_CODE</li>
+<li>IDENTITY_UNIQUE_IDENTIFIER_BK</li>
+<li>USER_COMPANY_IDENTIFIER</li>
+<li>USER_EMAIL_ADDRESS</li>
+<li>USER_LOGIN_EMAIL_ADDRESS</li>
+<li>USER_TYPE</li>
+<li>USER_GROUP</li>
+<li>USER_STATUS</li>
+<li>USER_LAST_LOGIN_DATETIME</li>
+<li>USER_FIRST_NAME, USER_LAST_NAME, USER_NAME</li>
+<li>USER_BIRTH_DATE</li>
+<li>USER_COMPANY_NAME</li>
+<li>USER_FAX_NUMBER, USER_PHONE_NUMBER, USER_WEBSITE</li>
+<li>USER_TAX_EXEMPT_FLAG</li>
+<li>USER_GENDER</li>
+<li>NOTIFICATION_ACCEPTANCE_FLAG</li>
+<li>USER_REGISTRATION_DATETIME</li>
+<li>USER_LANGUAGE</li>
+<li>USER_BILLING_FIRST_NAME, USER_BILLING_LAST_NAME, USER_BILLING_ADDRESS, USER_BILLING_ADDRESS_SECOND_LINE, USER_BILLING_CITY, USER_BILLING_STATE, USER_BILLING_COUNTRY, USER_BILLING_ZIPCODE, USER_BILLING_PHONE_NUMBER</li>
+<li>USER_SHIPPING_FIRST_NAME, USER_SHIPPING_LAST_NAME, USER_SHIPPING_ADDRESS, USER_SHIPPING_ADDRESS_SECOND_LINE, USER_SHIPPING_CITY, USER_SHIPPING_STATE, USER_SHIPPING_COUNTRY, USER_SHIPPING_ZIPCODE, USER_SHIPPING_PHONE_NUMBER</li>
+<li>STORE_IDENTIFIER, RETAILER_TYPE, POS_NUMBER</li>
+<li>MARKETING_RESEARCH_FLAG, CONSUMER_TYPE, CONSUMER_SOURCE, TOUCHPOINT_NAME</li>
+<li>HOSTESS_IDENTIFIER, HOSTESS_FIRSTNAME, HOSTESS_LASTNAME, POS_CODE, HOSTESS_CATEGORY</li>
+<li>USER_CATEGORY, USER_PROFILE_STATUS, USER_PROFILE_UPDATE_DATETIME</li>
+<li>USER_REFERENCE, ACS_SYSTEM_USER_EMAIL_ADDRESS</li>
+<li>USER_DEREGISTRATION_DATETIME</li>
+<li>USER_DOCUMENT_NUMBER, USER_DOCUMENT_TYPE</li>
+<li>CIGARETTE_SMOKED_DAILY_QUANTITY</li>
+<li>SPICE_IDENTIFIER, PRIMARY_BRAND_FEATURE, PRIMARY_BRAND_VARIANT, DCS_IDENTIFIER</li>
+<li>USER_FIRST_LOGIN_DATETIME</li>
+<li>USER_VISIT_COUNT_TOTAL, USER_CURRENT_YEAR_VISIT_COUNT, USER_LAST_THREE_MONTHS_VISIT_COUNT, USER_CURRENT_MONTH_VISIT_COUNT, USER_CURRENT_WEEK_VISIT_COUNT, USER_CURRENT_DAY_VISIT_COUNT</li>
+<li>USER_MEMBER_TYPE, RETAILER_IDENTIFIER</li>
+<li>EXPERT_NAME, EXPERT_DESCRIPTION</li>
+<li>USER_TERM_CONDITION_ACKNOWLEDGMENT, USER_OPT_IN_TOKEN</li>
+<li>USER_IQOS_EMAIL_OPT_IN_FLAG, USER_IQOS_PHONE_OPT_IN_FLAG, USER_IQOS_SMS_OPT_IN_FLAG</li>
+<li>USER_CIVIL_STATE, USER_REGISTRATION_RETAILER_POS</li>
+<li>USER_PERSONALIZED_COMMUNICATION_CONSENT_FLAG, USER_PERSONALIZED_EXPERIENCE_CONSENT_FLAG</li>
+<li>HOSTESS_POS, USER_PROFILE_COMPLETION_DATETIME</li>
+<li>IQOS_FIELD, USER_PHONE_NUMBER_VALIDATION_STATUS, USER_PHONE_NUMBER_VALIDATION_DATE</li>
+<li>USER_AGE_VERIFICATION_FLAG</li>
+<li>REPORTING_DATETIME, USER_UPDATE_DATETIME, CC_COM</li>
+<li>VALID_FROM, VALID_TO, ACTIVE_FLAG</li>
+</ul>
+
+<p>Selected source-to-target examples from the model:</p>
+<ul>
+<li>UserEmail → USER_EMAIL_ADDRESS</li>
+<li>Login → USER_LOGIN_EMAIL_ADDRESS</li>
+<li>UserType → USER_TYPE</li>
+<li>Registration_date → USER_REGISTRATION_DATETIME</li>
+<li>Billing__first_name → USER_BILLING_FIRST_NAME</li>
+<li>Shipping__country → USER_SHIPPING_COUNTRY</li>
+<li>DCS_ID → DCS_IDENTIFIER</li>
+<li>updated_at → USER_UPDATE_DATETIME</li>
+</ul>
+
+<p>Additional model-backed notes:</p>
+<ul>
+<li>VALID_FROM uses the shared timestamp-or-load-ts rule based on updated_at</li>
+<li>The physical table is modeled with a non-enforced primary key on IDENTITY_UNIQUE_IDENTIFIER_BK</li>
+<li>Historization: SCD Type 2 (use COALESCE(USER_UPDATE_DATETIME, __load_ts) as reference for record versioning)</li>
+<li>UA market requires special UNION ALL handling for the cc_coms column</li>
+</ul>
+
+<h3>2. User Extra View</h3>
+<p>Job: trn_v_int_mde_dcs_user_extra</p>
+<p>Output: V_INT_MDE_DCS_USER_EXTRA</p>
+
+<p>Data model details:</p>
+<ul>
+<li>Physical sources: DB_CONS_STG_PRD.STG_DCS.T_DCS_*_USERSEXTRA (14 markets)</li>
+<li>Source-to-target key mapping:
+  <ul>
+    <li>id → USER_EXTRA_UNIQUE_IDENTIFIER_BK</li>
+    <li>user_id → IDENTITY_UNIQUE_IDENTIFIER_BK</li>
+  </ul>
+</li>
+<li>Duplicate partition: id, user_id, updated_at</li>
+<li>Historization type: SCD2</li>
+<li>Load type: DELTA</li>
+<li>Target schema: PL_IDENTITY</li>
+</ul>
+
+<p>Key mapped columns include:</p>
+<ul>
+<li>COUNTRY_CODE</li>
+<li>USER_EXTRA_UNIQUE_IDENTIFIER_BK</li>
+<li>IDENTITY_UNIQUE_IDENTIFIER_BK</li>
+<li>USER_LAST_ACTIVITY</li>
+<li>USER_RECORD_DATETIME</li>
+<li>DEREGISTRATION_RESPONSIBLE_USER</li>
+<li>USER_WARNING_EMAIL_COUNT, USER_WARNING_EMAIL_DISABLE_COUNT</li>
+<li>USER_ANONYMIZATION_REASON</li>
+<li>USER_OPT_OUT_FLAG</li>
+<li>GIFTER_ACCOUNT_INDICATOR_FLAG</li>
+<li>OPT_IN_USER_TYPE</li>
+<li>USER_SELF_REGISTRATION_QR_CODE</li>
+<li>USER_LAST_ACTIVITY_DATETIME</li>
+<li>USER_GODFATHER_PLATFORM</li>
+<li>RETAILER_CODE</li>
+<li>USER_PERSONAL_PROMOTION</li>
+<li>USER_REPORT_DATETIME</li>
+<li>USER_IQOS_CLUB_MEMBER_STATUS, USER_IQOS_CLUB_MEMBER_TIER</li>
+<li>USER_URN_CODE</li>
+<li>USER_BRAND</li>
+<li>USER_LAST_EMAIL_CLICK_DATETIME</li>
+<li>USER_COMMUNICATION_EXCLUSION_FLAG</li>
+<li>USER_LOYALTY_GRADE_STATUS</li>
+<li>USER_VEEBA_OPT_IN_FLAG</li>
+<li>USER_TRADE_IN_COUNT, USER_PURCHASED_HEETS</li>
+<li>USER_SOFT_MARKETING_CONSENT, USER_SEGMENTATION_CONSENT</li>
+<li>USER_CREATION_DATETIME, USER_UPDATE_DATETIME</li>
+<li>USER_ZYN_MARKETING_OPT_IN</li>
+<li>USER_IQOS_CLUB_ELIGIBILITY, USER_IQOS_CLUB_ELIGIBILITY_DATETIME</li>
+<li>USER_IQOS_CLUB_IDENTIFIER, USER_IQOS_CLUB_LAST_LOGIN_DATETIME</li>
+<li>USER_SALESFORCE_USER_ID</li>
+<li>USER_LEAD_REFERENCE</li>
+<li>FLS_IDENTIFIER</li>
+<li>USED_PROMOTIONAL_FLOW</li>
+<li>IQOS_CLUB_CONSENT_DATETIME, IQOS_MASS_COMMUNICATION_DATETIME</li>
+<li>VALID_FROM, VALID_TO, ACTIVE_FLAG</li>
+</ul>
+
+<p>Additional model-backed notes:</p>
+<ul>
+<li>The physical table is modeled with a non-enforced primary key on USER_EXTRA_UNIQUE_IDENTIFIER_BK, IDENTITY_UNIQUE_IDENTIFIER_BK</li>
+<li>Historization: SCD Type 2 (use COALESCE(USER_UPDATE_DATETIME, __load_ts) as reference for record versioning)</li>
+<li>VALID_FROM uses the shared timestamp-or-load-ts rule</li>
+</ul>
+
+<h3>3. Guest User View</h3>
+<p>Job: trn_v_int_mde_dcs_guest_user</p>
+<p>Output: V_INT_MDE_DCS_GUEST_USER</p>
+
+<p>Data model details:</p>
+<ul>
+<li>Physical source: DB_CONS_STG_PRD.STG_DCS.T_DCS_CA_GUESTS (Canada only)</li>
+<li>Source-to-target key mapping:
+  <ul><li>id → IDENTITY_UNIQUE_IDENTIFIER_BK</li></ul>
+</li>
+<li>Duplicate partition: id, Updated_Timestamp</li>
+<li>Historization type: SCD2</li>
+<li>Load type: DELTA</li>
+<li>Target schema: PL_IDENTITY</li>
+</ul>
+
+<p>Key mapped columns include:</p>
+<ul>
+<li>COUNTRY_CODE</li>
+<li>IDENTITY_UNIQUE_IDENTIFIER_BK</li>
+<li>RECORD_DATETIME</li>
+<li>GUEST_CREATION_DATETIME</li>
+<li>COMPANY_IDENTIFIER</li>
+<li>STORE_IDENTIFIER</li>
+<li>GUEST_EMAIL_ADDRESS</li>
+<li>GUEST_FIRST_NAME, GUEST_LAST_NAME</li>
+<li>GUEST_BIRTH_DATE</li>
+<li>GUEST_PHONE_NUMBER</li>
+<li>LANGUAGE_CODE</li>
+<li>GUEST_OPT_IN_FLAG</li>
+<li>GUEST_TOKEN</li>
+<li>GUEST_UPDATE_DATETIME</li>
+<li>VALID_FROM, VALID_TO, ACTIVE_FLAG</li>
+</ul>
+
+<p>Additional model-backed notes:</p>
+<ul>
+<li>A guest is not a User — guests have no account or profile. This table only captures guest form submissions.</li>
+<li>Guests flow is only used by Canada market.</li>
+<li>No multi-market UNION ALL is needed (single source table).</li>
+<li>The dedup CTE is named DEDUP (not DEDUP_UNION_MARKET) since there is only one source table.</li>
+<li>The physical table is modeled with a non-enforced primary key on IDENTITY_UNIQUE_IDENTIFIER_BK</li>
+<li>Historization: SCD Type 2 (use COALESCE(GUEST_UPDATE_DATETIME, __load_ts) as reference for record versioning)</li>
+</ul>
+
+<hr>
+
+<h2>RDE Transformation Logic</h2>
+
+<h3>Profile Field View</h3>
+<p>Job: trn_v_int_rde_dcs_profile_field</p>
+<p>Output: V_INT_RDE_DCS_PROFILE_FIELD</p>
+
+<p>This transformation creates a reference data view that links consumers, devices, and orders with their profile information via key-value style attributes.</p>
+
+<p>Data model details:</p>
+<ul>
+<li>Physical sources: DB_CONS_STG_PRD.STG_DCS.T_DCS_*_PROFILEFIELDS (13 markets — no RO)</li>
+<li>Source-to-target key mapping:
+  <ul><li>id → PROFILE_FIELD_UNIQUE_IDENTIFIER_BK</li></ul>
+</li>
+<li>Duplicate partition: id, updated_at</li>
+<li>Historization type: SCD2</li>
+<li>Load type: DELTA</li>
+<li>Target schema: PL_IDENTITY</li>
+</ul>
+
+<p>Key mapped columns include:</p>
+<ul>
+<li>COUNTRY_CODE</li>
+<li>PROFILE_FIELD_UNIQUE_IDENTIFIER_BK</li>
+<li>IDENTITY_UNIQUE_IDENTIFIER (TRY_TO_NUMBER(user_id))</li>
+<li>ORDER_IDENTIFIER (TRY_TO_NUMBER(order_id))</li>
+<li>PROFILE_IDENTIFIER (TRY_TO_NUMBER(profile_id))</li>
+<li>FIELD_NAME</li>
+<li>FIELD_VALUE</li>
+<li>PROFILE_UPDATE_DATETIME (CAST(updated_at AS TIMESTAMP_NTZ))</li>
+<li>VALID_FROM, VALID_TO, ACTIVE_FLAG</li>
+</ul>
+
+<p>Additional model-backed notes:</p>
+<ul>
+<li>The physical table is modeled with a non-enforced primary key on PROFILE_FIELD_UNIQUE_IDENTIFIER_BK</li>
+<li>Historization: SCD Type 2 (use COALESCE(PROFILE_UPDATE_DATETIME, __load_ts) as reference for record versioning)</li>
+<li>Romania (RO) does not have a PROFILEFIELDS staging table</li>
+</ul>
+
+<hr>
+
+<h2>Presentation Layer (PL)</h2>
+
+<h3>File Location</h3>
+
+<pre><code>ROOT/02_DATA_WAREHOUSE/03_PRESENTATION/DCS/
+├── MDE/
+│   ├── orc_harmonization_mde_dcs_guest_user.ORCHESTRATION
+│   ├── orc_harmonization_mde_dcs_user.ORCHESTRATION
+│   ├── orc_harmonization_mde_dcs_user_extra.ORCHESTRATION
+│   └── Unit Test/
+│       ├── orc_unit_test_mde_dcs_guest_user.ORCHESTRATION
+│       ├── orc_unit_test_mde_dcs_user.ORCHESTRATION
+│       └── orc_unit_test_mde_dcs_user_extra.ORCHESTRATION
+└── RDE/
+    ├── orc_harmonization_rde_dcs_profile_field.ORCHESTRATION
+    └── Unit Test/
+        └── orc_unit_test_rde_dcs_profile_field.ORCHESTRATION</code></pre>
+
+<h3>Harmonization Pattern</h3>
+<p>Each presentation orchestration follows a similar flow:</p>
+
+<pre><code>Start
+  │
+  ├─► Get Staging Column List
+  ├─► Retry - Initial
+  ├─► Create Table - &lt;target presentation object&gt;
+  │   └─ Loading type = SCD2_DELTA_V3
+  ├─► trn_v_int_&lt;...&gt;
+  ├─► Truncate Table &lt;target&gt;
+  ├─► Delete Transient table 3
+  ├─► Delete Tables 0
+  └─► On failure: Send an Email with HTML Body type</code></pre>
+
+<h3>Presentation Objects</h3>
+
+<table>
+<tr><th>Category</th><th>Harmonization Job</th><th>Source Integration View</th><th>Target Table</th><th>Schema</th><th>Primary Business Keys</th></tr>
+<tr><td>MDE</td><td>orc_harmonization_mde_dcs_user</td><td>V_INT_MDE_DCS_USER</td><td>MDE_DCS_USER</td><td>PL_IDENTITY</td><td>IDENTITY_UNIQUE_IDENTIFIER_BK</td></tr>
+<tr><td>MDE</td><td>orc_harmonization_mde_dcs_user_extra</td><td>V_INT_MDE_DCS_USER_EXTRA</td><td>MDE_DCS_USER_EXTRA</td><td>PL_IDENTITY</td><td>USER_EXTRA_UNIQUE_IDENTIFIER_BK, IDENTITY_UNIQUE_IDENTIFIER_BK</td></tr>
+<tr><td>MDE</td><td>orc_harmonization_mde_dcs_guest_user</td><td>V_INT_MDE_DCS_GUEST_USER</td><td>MDE_DCS_GUEST_USER</td><td>PL_IDENTITY</td><td>IDENTITY_UNIQUE_IDENTIFIER_BK</td></tr>
+<tr><td>RDE</td><td>orc_harmonization_rde_dcs_profile_field</td><td>V_INT_RDE_DCS_PROFILE_FIELD</td><td>RDE_DCS_PROFILE_FIELD</td><td>PL_IDENTITY</td><td>PROFILE_FIELD_UNIQUE_IDENTIFIER_BK</td></tr>
+</table>
+
+<h3>Table Descriptions</h3>
+<ul>
+<li><strong>MDE_DCS_USER</strong> — Main table containing primary user attributes, including identity identifiers, personal profile information, contact details, registration and activity timestamps, consent and opt-in flags, company and store affiliations, and lifecycle status indicators.</li>
+<li><strong>MDE_DCS_USER_EXTRA</strong> — Contains additional and supplementary information related to users, capturing attributes that extend the core user profile, such as activity details, consent and opt-in indicators, marketing preferences, anonymization context, and other user-specific metadata.</li>
+<li><strong>MDE_DCS_GUEST_USER</strong> — Table that holds information from the guests form from Canada market. A guest is not a User, as a Guest has no account or profile.</li>
+<li><strong>RDE_DCS_PROFILE_FIELD</strong> — Table used to link the consumer, device and order with their profile information. Contains key-value style attributes associated with user profiles, such as profile identifiers, field names, field values, and related update timestamps.</li>
+</ul>
+
+<h3>Unit Test Jobs</h3>
+<p>The package includes a unit-test orchestration per published object:</p>
+<ul>
+<li>orc_unit_test_mde_dcs_user</li>
+<li>orc_unit_test_mde_dcs_user_extra</li>
+<li>orc_unit_test_mde_dcs_guest_user</li>
+<li>orc_unit_test_rde_dcs_profile_field</li>
+</ul>
+
+<p>The unit-test jobs share a common structure:</p>
+<ul>
+<li>Start</li>
+<li>Query Result To Grid</li>
+<li>Compare Tests Numbers</li>
+<li>If</li>
+<li>End Success</li>
+<li>End Failure</li>
+</ul>
+
+<hr>
+
+<h2>Data Flow</h2>
+
+<pre><code>DCS Source / Market-Specific Landing Data
+  │
+  ▼
+Snowflake Staging
+STG_DCS.T_DCS_*_USERS / USERSEXTRA / GUESTS / PROFILEFIELDS
+  │
+  ├─► trn_v_int_mde_dcs_user
+  │   └─► V_INT_MDE_DCS_USER
+  │       └─► MDE_DCS_USER
+  │
+  ├─► trn_v_int_mde_dcs_user_extra
+  │   └─► V_INT_MDE_DCS_USER_EXTRA
+  │       └─► MDE_DCS_USER_EXTRA
+  │
+  ├─► trn_v_int_mde_dcs_guest_user
+  │   └─► V_INT_MDE_DCS_GUEST_USER
+  │       └─► MDE_DCS_GUEST_USER
+  │
+  └─► trn_v_int_rde_dcs_profile_field
+      └─► V_INT_RDE_DCS_PROFILE_FIELD
+          └─► RDE_DCS_PROFILE_FIELD</code></pre>
+
+<hr>
+
+<h2>Configuration</h2>
+
+<h3>Environment Variables Referenced</h3>
+
+<table>
+<tr><th>Variable</th><th>Purpose</th></tr>
+<tr><td>ev_database_10_staging</td><td>Staging database</td></tr>
+<tr><td>ev_database_20_integration</td><td>Integration database</td></tr>
+<tr><td>ev_data_foundation_schema_20_integration</td><td>Integration schema</td></tr>
+<tr><td>ev_database_30_presentation</td><td>Presentation database</td></tr>
+<tr><td>ev_harmonization_email_recipient</td><td>Email recipient for failure notifications</td></tr>
+</table>
+
+<h3>Common Orchestration Variables and Grids</h3>
+
+<table>
+<tr><th>Name</th><th>Type</th><th>Purpose</th></tr>
+<tr><td>jv_transient_has_count_check</td><td>Scalar</td><td>Transient row-count / load control flag</td></tr>
+<tr><td>gv_transient_column_list</td><td>Grid</td><td>Captures column metadata from staging</td></tr>
+<tr><td>gv_primary_key_configuration</td><td>Grid</td><td>Defines business-key columns for target tables</td></tr>
+<tr><td>gv_column_classification_configuration</td><td>Grid</td><td>Metadata-driven classification controls</td></tr>
+<tr><td>gv_column_description_configuration</td><td>Grid</td><td>Metadata-driven descriptions for published columns</td></tr>
+</table>
+
+<h3>Transformation Variables and Grids</h3>
+
+<table>
+<tr><th>Name</th><th>Type</th><th>Purpose</th></tr>
+<tr><td>jv_source_table</td><td>Scalar</td><td>Source table identifier</td></tr>
+<tr><td>gv_calculator</td><td>Grid</td><td>Output column calculations and type casting</td></tr>
+<tr><td>gv_table_input_column_list</td><td>Grid</td><td>Input column metadata for dynamic table reads</td></tr>
+</table>
+
+<hr>
+
+<h2>Error Handling</h2>
+
+<p>The presentation orchestration jobs include explicit failure-handling patterns:</p>
+<ul>
+<li>Retry - Initial components before the main create/load step</li>
+<li>End Failure - Presentation table terminal path</li>
+<li>Send an Email with HTML Body type notification component (to ${ev_harmonization_email_recipient})</li>
+<li>Delete Transient table 3 cleanup component</li>
+</ul>
+
+<p>Additional controls visible in the export:</p>
+<ul>
+<li>Unit-test gates validate row-count or test-result expectations</li>
+<li>Query tagging supports troubleshooting in Snowflake history</li>
+<li>Task history loading supports operational monitoring</li>
+</ul>
+
+<hr>
+
+<h2>Tables and Views</h2>
+
+<h3>Staging Tables</h3>
+<ul>
+<li>STG_DCS.T_DCS_*_USERS (14 markets: AU, CA, DK, GR, IL, IT, KZ, LT, NL, NZ, PT, RO, SE, UA)</li>
+<li>STG_DCS.T_DCS_*_USERSEXTRA (14 markets: AU, CA, DK, GR, IL, IT, KZ, LT, NL, NZ, PT, RO, SE, UA)</li>
+<li>STG_DCS.T_DCS_CA_GUESTS (1 market: CA)</li>
+<li>STG_DCS.T_DCS_*_PROFILEFIELDS (13 markets: AU, CA, DK, GR, IL, IT, KZ, LT, NL, NZ, PT, SE, UA)</li>
+</ul>
+
+<h3>Integration Views</h3>
+<ul>
+<li>V_INT_MDE_DCS_USER</li>
+<li>V_INT_MDE_DCS_USER_EXTRA</li>
+<li>V_INT_MDE_DCS_GUEST_USER</li>
+<li>V_INT_RDE_DCS_PROFILE_FIELD</li>
+</ul>
+
+<h3>Presentation Tables</h3>
+<ul>
+<li>PL_IDENTITY.MDE_DCS_USER</li>
+<li>PL_IDENTITY.MDE_DCS_USER_EXTRA</li>
+<li>PL_IDENTITY.MDE_DCS_GUEST_USER</li>
+<li>PL_IDENTITY.RDE_DCS_PROFILE_FIELD</li>
+</ul>
+
+<h3>DQ Companion Targets Referenced by the Loader Pattern</h3>
+<ul>
+<li>PL_COMMON_LAYER_DQ — Equivalent DQ targets are implied for the DCS objects by the same loader framework.</li>
+</ul>
+
+<hr>
+
+<h2>Business Use Cases</h2>
+<ul>
+<li>Build a consolidated consumer identity view across 14 DCS markets</li>
+<li>Enrich consumer profiles with extended attributes (loyalty, consent, marketing preferences)</li>
+<li>Support guest form analysis for Canada market</li>
+<li>Link consumer profiles to devices, orders, and profile field metadata via RDE_DCS_PROFILE_FIELD</li>
+<li>Enable downstream data products that need historized user identity records</li>
+<li>Support row-level security (RLS) filtering by market via RDE_BRIDGE_CONSUMER_RLS (separate pipeline)</li>
+<li>Track consumer lifecycle: registration, activity, deregistration, anonymization</li>
+</ul>
+
+<hr>
+
+<h2>Dependencies</h2>
+
+<h3>Upstream Dependencies</h3>
+<ul>
+<li>DCS ingestion into STG_DCS (market-specific tables per entity)</li>
+<li>Snowflake environment variables and database schemas</li>
+<li>Master-pipeline dispatch logic through DISP Ingestion - CONS 1</li>
+</ul>
+
+<h3>Internal Dependencies</h3>
+<ul>
+<li>Integration views must be created before presentation harmonization runs</li>
+<li>Presentation tables depend on loader metadata grids and primary-key configuration</li>
+<li>Unit tests depend on successful publication of the presentation tables</li>
+<li>RDE_BRIDGE_CONSUMER_RLS (separate pipeline) is required for RLS sharing scripts</li>
+</ul>
+
+<hr>
+
+<h2>Maintenance and Operations</h2>
+
+<h3>Operational Notes</h3>
+<ul>
+<li>Use the query tag ${job_name}-${run_history_id} to trace pipeline execution in Snowflake.</li>
+<li>Validate task-history records after each run.</li>
+<li>Review unit-test results before promoting changes.</li>
+<li>Keep the gv_primary_key_configuration grids aligned with business-key definitions.</li>
+<li>When adding new markets, ensure the UNION ALL in the integration view is updated and column alignment is verified.</li>
+<li>Production deployment is pending — currently available in DEV and QAS only.</li>
+</ul>
+
+<h3>Change Impact Areas</h3>
+<p>Changes to the following areas are likely to affect downstream consumers:</p>
+<ul>
+<li>Staging table structures in STG_DCS (especially when new markets are onboarded)</li>
+<li>Calculator grid expressions in integration transformations</li>
+<li>Primary-key configuration in harmonization jobs</li>
+<li>SCD2 loading behavior in the presentation loader framework</li>
+<li>Column alignment across markets (e.g., cc_coms pattern for MDE_DCS_USER)</li>
+</ul>
+
+<hr>
+
+<h2>Contact and Support</h2>
+<p>Recommended ownership areas for support:</p>
+<ul>
+<li>Matillion orchestration and transformation logic</li>
+<li>Snowflake schema and table-management framework</li>
+<li>DCS source-system ingestion and landing processes</li>
+<li>Data-quality and unit-test ownership for DCS identity datasets</li>
+<li>Data modeler: Aprilianti, Mustika (LDM - DCS Phase 1)</li>
+</ul>
+
+</body>
+</html>
